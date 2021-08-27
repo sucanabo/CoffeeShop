@@ -1,0 +1,400 @@
+import 'package:coffee_shop/models/cart_item.dart';
+import 'package:coffee_shop/models/product.dart';
+import 'package:coffee_shop/screens/product_detail/widgets/bottom_bar.dart';
+import 'package:coffee_shop/screens/product_detail/widgets/heading.dart';
+import 'package:coffee_shop/values/color_theme.dart';
+import 'package:coffee_shop/values/function.dart';
+import 'package:coffee_shop/widgets/product_extend.dart';
+import 'package:coffee_shop/providers/cart_provider.dart';
+import 'package:coffee_shop/widgets/quantity.dart';
+import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
+
+import 'action_button.dart';
+
+class Body extends StatefulWidget {
+  final ProductModel product;
+  final bool cartEdit;
+  final CartItemModel cartItem;
+  const Body({@required this.product, this.cartEdit, this.cartItem});
+
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Map _productExtend;
+  ProductModel _product;
+  TextEditingController _txtMessage = new TextEditingController();
+  double _totalPrice;
+  int _quantity;
+  //Topping is not requied. It can be null
+  void chooseTopping(Map item) {
+    List toppingList = _productExtend['toppings'];
+    //Check is exist in list
+    if (toppingList.contains(item)) {
+      toppingList.remove(item);
+    } else {
+      toppingList.add(item);
+    }
+  }
+
+  //Custom can change option instead default value
+  void changeOption(String key, Map item) {
+    Map optionList = _productExtend['options'];
+    optionList[key] = item;
+  }
+
+  //total price in bottom bar
+  double caculateTotalPrice() {
+    double total = 0.0;
+    //price of product (including discount)
+    double productPrice =
+        caculatePrice(price: _product.price, discount: _product.discount);
+    //caculate product option and topping price
+    double productExtendPrice = 0.0;
+    _productExtend.forEach((key, value) {
+      if (value.isNotEmpty && value != null) {
+        if (value is Map) {
+          value.forEach((optionKey, optionValue) {
+            productExtendPrice += double.parse(optionValue['price']);
+          });
+        } else if (value is List) {
+          value.forEach((toppingValue) {
+            productExtendPrice += toppingValue['price'];
+          });
+        }
+      }
+    });
+    //subtotal
+    total += (productPrice + productExtendPrice) * _quantity;
+    setState(() {
+      _totalPrice = total;
+    });
+    return total;
+  }
+
+  void addToCart() {
+    Provider.of<CartProvider>(context, listen: false).addItem(_product,
+        quickAdd: false,
+        message: _txtMessage.text,
+        quantity: _quantity,
+        price: _totalPrice,
+        productExtend: _productExtend);
+  }
+
+  void editCart() {
+    CartItemModel instance = CartItemModel(
+        key: widget.cartItem.key,
+        product: widget.product,
+        quantity: _quantity,
+        price: _totalPrice,
+        productExtend: _productExtend);
+    Provider.of<CartProvider>(context, listen: false).editItem(instance);
+    showMess(context: context, text: 'Edit item success.');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _product = widget.product;
+    if (widget.cartEdit != true) {
+      _productExtend = {
+        'options': _product.options.isNotEmpty
+            ? Provider.of<CartProvider>(context, listen: false)
+                .setOptionDefault(_product)
+            : {},
+        'toppings': [],
+      };
+      _quantity = 1;
+      _totalPrice = caculateTotalPrice();
+    } else {
+      _productExtend = widget.cartItem.productExtend;
+      _quantity = widget.cartItem.quantity;
+      _totalPrice = widget.cartItem.price;
+      _txtMessage.text = widget.cartItem.message;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Map<String, dynamic> options =
+        _product.options.isNotEmpty ? _product.options : {};
+    List<dynamic> toppings = _product.toppings;
+    var size = MediaQuery.of(context).size;
+    return Stack(
+      children: [
+        Container(
+          height: size.height * .5,
+          width: size.width,
+          child: Hero(
+            tag: widget.product.title,
+            child: ColorFiltered(
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.4), BlendMode.srcATop),
+              child: Image(
+                gaplessPlayback: true,
+                image: base64StringToImage(widget.product.imgPath),
+                fit: BoxFit.fill,
+                alignment: Alignment.center,
+              ),
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 175.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(top: 40.0, bottom: 50.0),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30.0),
+                          topRight: Radius.circular(30.0))),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: ListView(
+                            padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 30.0),
+                            children: [
+                              Text(
+                                widget.product.title,
+                                style: TextStyle(
+                                    fontSize: 32.0,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Price:',
+                                    style: TextStyle(
+                                        fontSize: 18.0,
+                                        color: Colors.grey[500]),
+                                  ),
+                                  SizedBox(width: 5.0),
+                                  widget.product.discount != 0 &&
+                                          widget.product.discount != null
+                                      ? Text(
+                                          convertVND(widget.product.price),
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              color: mutedColor,
+                                              decoration:
+                                                  TextDecoration.lineThrough),
+                                        )
+                                      : Text(
+                                          convertVND(caculatePrice(
+                                              price: widget.product.price,
+                                              discount:
+                                                  widget.product.discount)),
+                                          style: TextStyle(
+                                              color: primaryColor,
+                                              fontSize: 26.0,
+                                              fontWeight: FontWeight.w500)),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  SizedBox(
+                                    height: 20.0,
+                                    width: 20.0,
+                                    child: Icon(
+                                      LineIcons.star,
+                                      size: 18.0,
+                                      color: Colors.yellow[700],
+                                    ),
+                                  ),
+                                  SizedBox(width: 2.0),
+                                  Text(widget.product.star.toString())
+                                ],
+                              ),
+                              if (_product.discount != 0)
+                                Text(
+                                    convertVND(caculatePrice(
+                                        price: widget.product.price,
+                                        discount: widget.product.discount)),
+                                    style: TextStyle(
+                                        color: primaryColor,
+                                        fontSize: 26.0,
+                                        fontWeight: FontWeight.w500)),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 15.0),
+                                child: Text(
+                                  widget.product.content ?? '',
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.symmetric(vertical: 5),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            flex: 6,
+                                            child: Heading(title: 'Quantity'),
+                                          ),
+                                          Expanded(
+                                            flex: 4,
+                                            child: Quantity(
+                                              initValue: _quantity,
+                                              onChange: (value) {
+                                                _quantity = value;
+                                                caculateTotalPrice();
+                                              },
+                                            ),
+                                          )
+                                        ]),
+                                    Heading(title: 'Option'),
+                                    options.isNotEmpty
+                                        ? Column(
+                                            children: options.entries
+                                                .map((e) => ProductExtend(
+                                                    title: e.key
+                                                        .toString()
+                                                        .capitalize(),
+                                                    child: ProductDropDown(
+                                                      initValue: widget.cartEdit
+                                                          ? widget.cartItem
+                                                                  .productExtend[
+                                                              'options'][e.key]
+                                                          : null,
+                                                      data: e.value,
+                                                      handleSelect: (value) {
+                                                        changeOption(
+                                                            e.key, value);
+                                                        caculateTotalPrice();
+                                                      },
+                                                    )))
+                                                .toList(),
+                                          )
+                                        : Text(
+                                            'Product does has not any options.'),
+                                    Heading(title: 'Topping'),
+                                    toppings.isNotEmpty
+                                        ? Column(
+                                            children: toppings
+                                                .map((e) => ProductExtend(
+                                                      title: e['title']
+                                                          .toString()
+                                                          .capitalize(),
+                                                      child: ProductCheckBox(
+                                                        initValue: widget
+                                                                .cartEdit
+                                                            ? widget
+                                                                .cartItem
+                                                                .productExtend[
+                                                                    'toppings']
+                                                                .contains(e)
+                                                            : false,
+                                                        title: e['description'],
+                                                        handleCheck: () {
+                                                          chooseTopping(e);
+                                                          caculateTotalPrice();
+                                                        },
+                                                      ),
+                                                    ))
+                                                .toList())
+                                        : Text(
+                                            'Product does has not any toppings.'),
+                                    SizedBox(height: 10.0),
+                                    Heading(title: 'Message'),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey[500]
+                                                  .withOpacity(0.5),
+                                              offset: Offset(3, 5),
+                                              spreadRadius: 2.0,
+                                              blurRadius: 5.0)
+                                        ],
+                                        color: Colors.white,
+                                      ),
+                                      child: Form(
+                                        key: _formKey,
+                                        child: TextFormField(
+                                          controller: _txtMessage,
+                                          maxLines: 8,
+                                          validator: (value) => value.length >
+                                                  255
+                                              ? 'Message lenght is 255 char.'
+                                              : null,
+                                          decoration: InputDecoration(
+                                              border: InputBorder.none,
+                                              focusedBorder: InputBorder.none,
+                                              enabledBorder: InputBorder.none,
+                                              errorBorder: InputBorder.none,
+                                              disabledBorder: InputBorder.none,
+                                              contentPadding:
+                                                  EdgeInsets.all(10.0),
+                                              hintStyle: TextStyle(
+                                                fontSize: 13.0,
+                                                color: Colors.grey[800],
+                                              ),
+                                              hintText:
+                                                  "Enter your message to special request (not requied)."),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ]),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+        Positioned(
+            top: 150.0,
+            right: 50.0,
+            child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+              ActionButton(
+                  icon: Icon(Icons.favorite),
+                  isActive: widget.product.selfFavourited,
+                  activeColor: Colors.red[300],
+                  type: 'favourite',
+                  productId: widget.product.id),
+              SizedBox(
+                width: 15.0,
+              ),
+              ActionButton(
+                  icon: Icon(
+                    Icons.star_rounded,
+                    size: 30.0,
+                  ),
+                  isActive: widget.product.selfRating.star != 0,
+                  activeColor: Colors.orange[300],
+                  type: 'rating',
+                  productId: widget.product.id),
+            ])),
+        BottomBar(
+          price: _totalPrice,
+          buttonText: widget.cartEdit ? 'Edit item' : 'Add cart',
+          buttonPress: () {
+            if (_formKey.currentState.validate()) {
+              widget.cartEdit ? editCart() : addToCart();
+              Navigator.of(context).pop();
+            }
+          },
+        )
+      ],
+    );
+  }
+}

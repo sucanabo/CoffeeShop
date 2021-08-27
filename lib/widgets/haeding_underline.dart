@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:coffee_shop/services/my_color.dart';
+import 'package:coffee_shop/values/color_theme.dart';
 
 class HeadingUnderline extends StatelessWidget {
   final String text;
@@ -15,9 +15,9 @@ class HeadingUnderline extends StatelessWidget {
                 fontSize: 24.0,
                 fontWeight: FontWeight.w500,
                 letterSpacing: 1.5,
-                color: colorBlack)),
+                color: textColor)),
         SizedBox(
-            height: 3.0, width: 100.0, child: Container(color: colorPrimary))
+            height: 3.0, width: 100.0, child: Container(color: primaryColor))
       ],
     );
   }

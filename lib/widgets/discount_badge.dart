@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DiscountBadge extends StatelessWidget {
-  String discount;
+  final String discount;
   DiscountBadge({this.discount});
 
   @override

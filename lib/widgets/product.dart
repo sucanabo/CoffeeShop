@@ -1,178 +1,231 @@
-import 'package:flutter/material.dart';
-import 'package:coffee_shop/model/product.dart';
-import 'package:coffee_shop/services/my_color.dart';
+import 'package:coffee_shop/models/product.dart';
+import 'package:coffee_shop/providers/cart_provider.dart';
+import 'package:coffee_shop/screens/product_detail/product_detail_screen.dart';
+import 'package:coffee_shop/values/color_theme.dart';
+import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/widgets/discount_badge.dart';
+import 'package:coffee_shop/widgets/rounded_container.dart';
+import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
 
 class ProductWidget extends StatelessWidget {
   final ProductModel product;
   final bool isLarge;
   const ProductWidget({this.product, this.isLarge = false});
+
+  void _navigateToDetail(context) {
+    Navigator.pushNamed(context, ProductDetailScreen.routeName,
+        arguments: {'product_id': product.id});
+  }
+
+  void quickAddCart(CartProvider cart) {
+    Map productExtend = {
+      'options':
+          product.options.isNotEmpty ? cart.setOptionDefault(product) : {},
+      'toppings': [],
+    };
+    cart.addItem(product, quickAdd: true, productExtend: productExtend);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<CartProvider>(context, listen: false);
+
     if (isLarge) {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
         child: InkWell(
           onTap: () {
-            print('hi');
+            _navigateToDetail(context);
           },
           child: Column(children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.0),
-                boxShadow: [
-                  BoxShadow(
-                      offset: Offset(2, 5),
-                      color: Colors.grey.withOpacity(0.3),
-                      blurRadius: 4.0,
-                      spreadRadius: 2.5)
-                ],
-              ),
+            RoundedContainer(
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      flex: 4,
-                      child: Stack(
-                        children: [
-                          Hero(
-                            tag: product.imgPath,
-                            child: Container(
-                              height: 120.0,
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  image: DecorationImage(
-                                      image: AssetImage(product.imgPath),
-                                      fit: BoxFit.cover)),
-                            ),
-                          ),
-                          Positioned(
-                              top: 0,
-                              left: 0,
-                              child: SizedBox(
-                                height: 30.0,
-                                width: 40.0,
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      color: Colors.red[400],
-                                      borderRadius:
-                                          BorderRadius.circular(10.0)),
-                                  child: Text(
-                                    '- ${product.discount.toString()}%',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ))
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 6,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                child: IntrinsicHeight(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: Stack(
                           children: [
-                            Text(
-                              product.title,
-                              style: TextStyle(
-                                  fontSize: 18.0, fontWeight: FontWeight.w500),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            Row(
-                              children: [
-                                Text('price ',
-                                    style: TextStyle(color: colorMuted)),
-                                product.discount != 0
-                                    ? Text(
-                                        product.price.toString(),
-                                        style: TextStyle(
-                                            color: colorMuted,
-                                            decoration:
-                                                TextDecoration.lineThrough),
-                                      )
-                                    : Text(''),
-                                SizedBox(width: 3.0),
-                                Text(
-                                    '\$' +
-                                        num.parse((product.price *
-                                                    ((100 - product.discount) /
-                                                        100))
-                                                .toStringAsFixed(2))
-                                            .toString(),
-                                    style: TextStyle(
-                                        color: colorPrimary,
-                                        fontSize: 17.0,
-                                        fontWeight: FontWeight.w600))
-                              ],
-                            ),
-                            SizedBox(height: 13.0),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: IconButton(
-                                    onPressed: () {},
-                                    padding: EdgeInsets.all(0.0),
-                                    icon: Icon(
-                                      LineIcons.heart,
-                                      size: 20.0,
-                                      color: Colors.red[500],
+                            Hero(
+                              tag: product.title,
+                              child: Container(
+                                  height: 135.0,
+                                  width: 115.0,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: Image(
+                                      gaplessPlayback: true,
+                                      image:
+                                          base64StringToImage(product.imgPath),
+                                      fit: BoxFit.cover,
                                     ),
-                                  ),
-                                ),
-                                SizedBox(width: 5.0),
-                                SizedBox(
-                                  height: 20.0,
-                                  width: 20.0,
-                                  child: Icon(
-                                    LineIcons.star,
-                                    size: 20.0,
-                                    color: Colors.yellow[700],
-                                  ),
-                                ),
-                                SizedBox(width: 3.0),
-                                Text(
-                                  product.star.toString(),
-                                  style: TextStyle(fontSize: 16.0),
-                                )
-                              ],
-                            )
+                                  )),
+                            ),
+                            product.discount != null && product.discount != 0
+                                ? Positioned(
+                                    top: 0,
+                                    left: 0,
+                                    child: SizedBox(
+                                      height: 30.0,
+                                      width: 40.0,
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            color: Colors.red[400],
+                                            borderRadius:
+                                                BorderRadius.circular(10.0)),
+                                        child: Text(
+                                          '- ${product.discount.toString()}%',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ))
+                                : SizedBox()
                           ],
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Center(
-                        child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                                shape: CircleBorder(),
-                                primary: colorDark,
-                                padding: EdgeInsets.all(5.0)),
-                            child: Icon(
-                              Icons.add,
-                              size: 30.0,
-                            )),
+                      Expanded(
+                        flex: 6,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                product.title,
+                                style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w500),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              SizedBox(
+                                height: 5.0,
+                              ),
+                              product.discount != 0
+                                  ? Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text('price ',
+                                                style: TextStyle(
+                                                    color: mutedColor)),
+                                            Text(
+                                              convertVND(product.price),
+                                              style: TextStyle(
+                                                  color: mutedColor,
+                                                  decoration: TextDecoration
+                                                      .lineThrough),
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                            convertVND(caculatePrice(
+                                                price: product.price,
+                                                discount: product.discount)),
+                                            style: TextStyle(
+                                                color: primaryColor,
+                                                fontSize: 17.0,
+                                                fontWeight: FontWeight.w600))
+                                      ],
+                                    )
+                                  : Row(
+                                      children: [
+                                        Text('price ',
+                                            style:
+                                                TextStyle(color: mutedColor)),
+                                        Text(
+                                            convertVND(caculatePrice(
+                                                price: product.price,
+                                                discount: product.discount)),
+                                            style: TextStyle(
+                                                color: primaryColor,
+                                                fontSize: 17.0,
+                                                fontWeight: FontWeight.w600)),
+                                      ],
+                                    ),
+                              SizedBox(height: 5.0),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: IconButton(
+                                      onPressed: () {},
+                                      padding: EdgeInsets.all(0.0),
+                                      icon: product.selfFavourited
+                                          ? Icon(
+                                              LineIcons.heartAlt,
+                                              size: 20.0,
+                                              color: Colors.red[500],
+                                            )
+                                          : Icon(
+                                              LineIcons.heart,
+                                              size: 20.0,
+                                              color: Colors.red[500],
+                                            ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 5.0),
+                                  SizedBox(
+                                    height: 20.0,
+                                    width: 20.0,
+                                    child: product.selfRating.star != 0
+                                        ? Icon(
+                                            LineIcons.starAlt,
+                                            size: 20.0,
+                                            color: Colors.yellow[700],
+                                          )
+                                        : Icon(
+                                            LineIcons.star,
+                                            size: 20.0,
+                                            color: Colors.yellow[700],
+                                          ),
+                                  ),
+                                  SizedBox(width: 3.0),
+                                  Text(
+                                    product.star.toString(),
+                                    style: TextStyle(fontSize: 16.0),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                    )
-                  ],
+                      Expanded(
+                        flex: 2,
+                        child: Center(
+                          child: ElevatedButton(
+                              onPressed: () {
+                                quickAddCart(cart);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  shape: CircleBorder(),
+                                  primary: darkColor,
+                                  padding: EdgeInsets.all(5.0)),
+                              child: Icon(
+                                Icons.add,
+                                size: 30.0,
+                              )),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             )
@@ -183,7 +236,9 @@ class ProductWidget extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.fromLTRB(0.0, 10.0, 20.0, 10.0),
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            _navigateToDetail(context);
+          },
           child: Container(
             width: 150.0,
             decoration: BoxDecoration(
@@ -207,14 +262,14 @@ class ProductWidget extends StatelessWidget {
                         color: Colors.white),
                   ),
                   Hero(
-                    tag: product.imgPath,
+                    tag: product.title,
                     child: Container(
                       height: 150.0,
                       width: 150.0,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                           image: DecorationImage(
-                              image: AssetImage(product.imgPath),
+                              image: base64StringToImage(product.imgPath),
                               fit: BoxFit.cover)),
                     ),
                   ),
@@ -223,9 +278,9 @@ class ProductWidget extends StatelessWidget {
                       right: 5.0,
                       child: ClipOval(
                         child: Material(
-                          color: colorDark,
+                          color: darkColor,
                           child: InkWell(
-                            splashColor: colorPrimary_medium,
+                            splashColor: primaryMediumColor,
                             child: SizedBox(
                               width: 30.0,
                               height: 30.0,
@@ -238,13 +293,12 @@ class ProductWidget extends StatelessWidget {
                           ),
                         ),
                       )),
-                  product.discount != 0
-                      ? DiscountBadge(
-                          discount: product.discount.toString(),
-                        )
-                      : Text(''),
+                  if (product.discount != 0)
+                    DiscountBadge(
+                      discount: product.discount.toString(),
+                    ),
                   Positioned(
-                    top: 150.0,
+                    top: 145.0,
                     width: 150.0,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -252,7 +306,7 @@ class ProductWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           SizedBox(
-                              height: 40.0,
+                              height: 45.0,
                               child: Text(product.title,
                                   style: TextStyle(
                                       fontSize: 18.0,
@@ -263,26 +317,21 @@ class ProductWidget extends StatelessWidget {
                           Row(
                             children: [
                               Text('price ',
-                                  style: TextStyle(color: colorMuted)),
-                              product.discount != 0
-                                  ? Text(
-                                      product.price.toString(),
-                                      style: TextStyle(
-                                          color: colorMuted,
-                                          decoration:
-                                              TextDecoration.lineThrough),
-                                    )
-                                  : Text(''),
+                                  style: TextStyle(color: mutedColor)),
+                              if (product.discount != 0)
+                                Text(
+                                  convertVND(product.price),
+                                  style: TextStyle(
+                                      color: mutedColor,
+                                      decoration: TextDecoration.lineThrough),
+                                ),
                               SizedBox(width: 3.0),
                               Text(
-                                  '\$' +
-                                      num.parse((product.price *
-                                                  ((100 - product.discount) /
-                                                      100))
-                                              .toStringAsFixed(2))
-                                          .toString(),
+                                  convertVND(caculatePrice(
+                                      price: product.price,
+                                      discount: product.discount)),
                                   style: TextStyle(
-                                      color: colorPrimary,
+                                      color: primaryColor,
                                       fontSize: 17.0,
                                       fontWeight: FontWeight.w600))
                             ],
@@ -292,7 +341,7 @@ class ProductWidget extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    top: 210.0,
+                    top: 215.0,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -313,7 +362,9 @@ class ProductWidget extends StatelessWidget {
                               child: IconButton(
                                 icon: Icon(Icons.star_border,
                                     color: Colors.yellow[600], size: 20.0),
-                                onPressed: () {},
+                                onPressed: () {
+                                  quickAddCart(cart);
+                                },
                               ),
                             ),
                             Text(

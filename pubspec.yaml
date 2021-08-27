@@ -23,10 +23,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  intl: ^0.17.0
+  provider: ^4.3.3
   carousel_pro: ^1.0.0
   flutter_svg: ^0.22.0
-  convex_bottom_bar: ^3.0.0
+  curved_navigation_bar: ^1.0.1
   line_icons: ^2.0.0
+  http: ^0.13.3
+  shared_preferences: ^2.0.6
+  image_picker: ^0.8.1+1
+  flutter_slidable: ^0.6.0
+  tiengviet: ^0.5.0
+  sms_autofill: ^2.0.1
+  flutter_otp: ^0.3.2
+  google_sign_in: ^5.0.7
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -35,6 +45,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.9.2"
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -48,8 +63,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/icons/
     - assets/images/banner/
-    - assets/images/icon/
     - assets/images/product/
     - assets/images/
 
@@ -64,17 +79,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand/Quicksand-Bold.ttf
+        - asset: assets/fonts/Quicksand/Quicksand-SemiBold.ttf
+        - asset: assets/fonts/Quicksand/Quicksand-Medium.ttf
+        - asset: assets/fonts/Quicksand/Quicksand-Light.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
