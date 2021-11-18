@@ -3,6 +3,7 @@ import 'package:coffee_shop/providers/cart_provider.dart';
 import 'package:coffee_shop/screens/product_detail/product_detail_screen.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
+import 'package:coffee_shop/values/size_config.dart';
 import 'package:coffee_shop/widgets/discount_badge.dart';
 import 'package:coffee_shop/widgets/rounded_container.dart';
 import 'package:flutter/material.dart';
@@ -122,11 +123,12 @@ class ProductWidget extends StatelessWidget {
                                           children: [
                                             Text('price ',
                                                 style: TextStyle(
-                                                    color: mutedColor)),
+                                                    color:
+                                                        AppColors.mutedColor)),
                                             Text(
                                               convertVND(product.price),
                                               style: TextStyle(
-                                                  color: mutedColor,
+                                                  color: AppColors.mutedColor,
                                                   decoration: TextDecoration
                                                       .lineThrough),
                                             ),
@@ -137,7 +139,7 @@ class ProductWidget extends StatelessWidget {
                                                 price: product.price,
                                                 discount: product.discount)),
                                             style: TextStyle(
-                                                color: primaryColor,
+                                                color: AppColors.primaryColor,
                                                 fontSize: 17.0,
                                                 fontWeight: FontWeight.w600))
                                       ],
@@ -145,14 +147,14 @@ class ProductWidget extends StatelessWidget {
                                   : Row(
                                       children: [
                                         Text('price ',
-                                            style:
-                                                TextStyle(color: mutedColor)),
+                                            style: TextStyle(
+                                                color: AppColors.mutedColor)),
                                         Text(
                                             convertVND(caculatePrice(
                                                 price: product.price,
                                                 discount: product.discount)),
                                             style: TextStyle(
-                                                color: primaryColor,
+                                                color: AppColors.primaryColor,
                                                 fontSize: 17.0,
                                                 fontWeight: FontWeight.w600)),
                                       ],
@@ -216,7 +218,7 @@ class ProductWidget extends StatelessWidget {
                               },
                               style: ElevatedButton.styleFrom(
                                   shape: CircleBorder(),
-                                  primary: darkColor,
+                                  primary: AppColors.darkColor,
                                   padding: EdgeInsets.all(5.0)),
                               child: Icon(
                                 Icons.add,
@@ -240,7 +242,7 @@ class ProductWidget extends StatelessWidget {
             _navigateToDetail(context);
           },
           child: Container(
-            width: 150.0,
+            width: getWidth(160),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(16.0)),
               boxShadow: [
@@ -250,98 +252,115 @@ class ProductWidget extends StatelessWidget {
                     spreadRadius: 5.0)
               ],
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    height: 270.0,
-                    width: 150.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        color: Colors.white),
-                  ),
-                  Hero(
-                    tag: product.title,
-                    child: Container(
-                      height: 150.0,
-                      width: 150.0,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          image: DecorationImage(
-                              image: base64StringToImage(product.imgPath),
-                              fit: BoxFit.cover)),
-                    ),
-                  ),
-                  Positioned(
-                      top: 5.0,
-                      right: 5.0,
-                      child: ClipOval(
-                        child: Material(
-                          color: darkColor,
-                          child: InkWell(
-                            splashColor: primaryMediumColor,
-                            child: SizedBox(
-                              width: 30.0,
-                              height: 30.0,
-                              child: Icon(
-                                Icons.add,
-                                color: Colors.white,
+            child: Container(
+              height: getHeight(275),
+              decoration: BoxDecoration(
+                  color: AppColors.whiteColor,
+                  borderRadius: BorderRadius.circular(10.0)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Stack(
+                    children: <Widget>[
+                      Hero(
+                        tag: product.title,
+                        child: Container(
+                          height: 150.0,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                              image: DecorationImage(
+                                  image: base64StringToImage(product.imgPath),
+                                  fit: BoxFit.cover)),
+                        ),
+                      ),
+                      Positioned(
+                          top: 5.0,
+                          right: 5.0,
+                          child: ClipOval(
+                            child: Material(
+                              color: AppColors.darkColor,
+                              child: InkWell(
+                                splashColor: AppColors.primaryMediumColor,
+                                child: SizedBox(
+                                  width: 30.0,
+                                  height: 30.0,
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                onTap: () {
+                                  quickAddCart(cart);
+                                },
                               ),
                             ),
-                            onTap: () {},
-                          ),
+                          )),
+                      if (product.discount != 0)
+                        DiscountBadge(
+                          discount: product.discount.toString(),
                         ),
-                      )),
-                  if (product.discount != 0)
-                    DiscountBadge(
-                      discount: product.discount.toString(),
-                    ),
-                  Positioned(
-                    top: 145.0,
-                    width: 150.0,
+                    ],
+                  ),
+                  Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           SizedBox(
-                              height: 45.0,
                               child: Text(product.title,
                                   style: TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.w500),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis)),
-                          SizedBox(height: 5.0),
-                          Row(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Text('price ',
-                                  style: TextStyle(color: mutedColor)),
+                              Row(
+                                children: [
+                                  Text('price ',
+                                      style: TextStyle(
+                                          color: AppColors.mutedColor)),
+                                  if (product.discount != 0)
+                                    Text(
+                                      convertVND(product.price),
+                                      style: TextStyle(
+                                          color: AppColors.mutedColor,
+                                          decoration:
+                                              TextDecoration.lineThrough),
+                                    ),
+                                  if (product.discount == 0)
+                                    Text(
+                                        convertVND(caculatePrice(
+                                            price: product.price,
+                                            discount: product.discount)),
+                                        style: TextStyle(
+                                            color: AppColors.primaryColor,
+                                            fontSize: 17.0,
+                                            fontWeight: FontWeight.w600))
+                                ],
+                              ),
                               if (product.discount != 0)
                                 Text(
-                                  convertVND(product.price),
-                                  style: TextStyle(
-                                      color: mutedColor,
-                                      decoration: TextDecoration.lineThrough),
-                                ),
-                              SizedBox(width: 3.0),
-                              Text(
-                                  convertVND(caculatePrice(
-                                      price: product.price,
-                                      discount: product.discount)),
-                                  style: TextStyle(
-                                      color: primaryColor,
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.w600))
+                                    convertVND(caculatePrice(
+                                        price: product.price,
+                                        discount: product.discount)),
+                                    style: TextStyle(
+                                        color: AppColors.primaryColor,
+                                        fontSize: 17.0,
+                                        fontWeight: FontWeight.w600))
                             ],
                           ),
                         ],
                       ),
                     ),
                   ),
-                  Positioned(
-                    top: 215.0,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 10.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -349,23 +368,15 @@ class ProductWidget extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.only(left: 0.0),
                           width: 25.0,
-                          child: IconButton(
-                            icon: Icon(Icons.favorite_border,
-                                color: Colors.red[400], size: 20.0),
-                            onPressed: () {},
-                          ),
+                          child: Icon(Icons.favorite_border,
+                              color: Colors.red[400], size: 20.0),
                         ),
                         Row(
                           children: [
                             Container(
                               width: 35.0,
-                              child: IconButton(
-                                icon: Icon(Icons.star_border,
-                                    color: Colors.yellow[600], size: 20.0),
-                                onPressed: () {
-                                  quickAddCart(cart);
-                                },
-                              ),
+                              child: Icon(Icons.star_border,
+                                  color: Colors.yellow[600], size: 20.0),
                             ),
                             Text(
                               product.star.toString(),

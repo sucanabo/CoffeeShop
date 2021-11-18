@@ -1,13 +1,13 @@
-import 'package:coffee_shop/constants.dart';
 import 'package:coffee_shop/models/api_response.dart';
 import 'package:coffee_shop/providers/product_provider.dart';
-import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
 import 'package:coffee_shop/services/product_service.dart';
 import 'package:coffee_shop/services/user_service.dart';
+import 'package:coffee_shop/values/api_end_point.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import './widgets/body.dart';
 
 class FavouriteProductScreen extends StatefulWidget {
@@ -25,11 +25,7 @@ class _FavouriteProductScreenState extends State<FavouriteProductScreen> {
       productProvider.setProductList(products.data);
     } else if (products.error == unauthorized ||
         products.error == unauthorized) {
-       logout().then((value) => {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => SignInScreen()),
-                (route) => false)
-          });
+       logout(context);
     }
     productProvider.setLoading(false);
   }
@@ -51,7 +47,7 @@ class _FavouriteProductScreenState extends State<FavouriteProductScreen> {
             builder: (_, products, __) => ScreenBody(
                   child: products.isLoading
                       ? CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation(primaryColor),
+                          valueColor: AlwaysStoppedAnimation(AppColors.primaryColor),
                         )
                       : Body(),
                 )));

@@ -44,14 +44,14 @@ class ProductHeader extends StatelessWidget {
                           padding: EdgeInsets.all(0.0),
                           elevation: 0.0,
                           primary:
-                              indexTab == 0 ? primaryColor : primaryLightColor),
+                              indexTab == 0 ? AppColors.primaryColor : AppColors.primaryLightColor),
                       onPressed: () {
                         if (indexTab != 0) setIndex(0);
                       },
                       child: Text(
                         'Drinks',
                         style: TextStyle(
-                            color: indexTab == 0 ? Colors.white : primaryColor,
+                            color: indexTab == 0 ? Colors.white : AppColors.primaryColor,
                             fontSize: 20.0),
                       ),
                     )),
@@ -67,14 +67,14 @@ class ProductHeader extends StatelessWidget {
                           padding: EdgeInsets.all(0.0),
                           elevation: 0.0,
                           primary:
-                              indexTab == 1 ? primaryColor : primaryLightColor),
+                              indexTab == 1 ? AppColors.primaryColor : AppColors.primaryLightColor),
                       onPressed: () {
                         if (indexTab != 1) setIndex(1);
                       },
                       child: Text(
                         'Foods',
                         style: TextStyle(
-                            color: indexTab == 1 ? Colors.white : primaryColor,
+                            color: indexTab == 1 ? Colors.white : AppColors.primaryColor,
                             fontSize: 20.0),
                       ),
                     )),
@@ -86,13 +86,13 @@ class ProductHeader extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.all(0.0),
                             shape: CircleBorder(
-                                side: BorderSide(color: primaryColor)),
-                            onPrimary: primaryMediumColor,
+                                side: BorderSide(color: AppColors.primaryColor)),
+                            onPrimary: AppColors.primaryMediumColor,
                             elevation: 0.0,
                             primary: Colors.white),
                         onPressed: () => Navigator.pushNamed(
                             context, SearchScreen.routeName),
-                        child: LineIcon.search(color: primaryColor, size: 25.0),
+                        child: LineIcon.search(color: AppColors.primaryColor, size: 25.0),
                       ),
                     ))
               ],

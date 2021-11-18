@@ -88,9 +88,6 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
             : data['discountVoucher'];
       }
     }
-
-    print(_shippingSelected);
-    print(_discountSelected);
     return Scaffold(
         appBar: AppBar(
           title: Text('Choose voucher'),
@@ -167,7 +164,7 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
             bottom: 0,
             right: 0,
             child: Radio(
-                activeColor: primaryColor,
+                activeColor: AppColors.primaryColor,
                 value: v,
                 groupValue: _shippingSelected,
                 onChanged: (val) => setShippingVoucher(val)),
@@ -197,7 +194,7 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
             bottom: 0,
             right: 0,
             child: Radio(
-                activeColor: primaryColor,
+                activeColor: AppColors.primaryColor,
                 value: v,
                 groupValue: _discountSelected,
                 onChanged: (val) {

@@ -19,7 +19,7 @@ class BottomBar extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           height: SizeConfig.screenHeigh * 0.085,
           decoration: BoxDecoration(
-              color: darkColor,
+              color: AppColors.darkColor,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10.0),
                   topRight: Radius.circular(10.0))),
@@ -55,11 +55,11 @@ class BottomBar extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: buttonPress,
                     style: ElevatedButton.styleFrom(
-                        elevation: 0, primary: primaryLightColor),
+                        elevation: 0, primary: AppColors.primaryLightColor),
                     child: Text(
                       buttonText,
                       style: TextStyle(
-                          color: darkColor,
+                          color: AppColors.darkColor,
                           fontWeight: FontWeight.w600,
                           fontSize: 16.0),
                     )),

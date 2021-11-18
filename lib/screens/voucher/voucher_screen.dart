@@ -1,9 +1,8 @@
-import 'package:coffee_shop/constants.dart';
 import 'package:coffee_shop/models/api_response.dart';
 import 'package:coffee_shop/providers/voucher_provider.dart';
-import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
 import 'package:coffee_shop/services/user_service.dart';
 import 'package:coffee_shop/services/voucher_service.dart';
+import 'package:coffee_shop/values/api_end_point.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/widgets/my_appbar.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
@@ -35,11 +34,7 @@ class _VoucherScreenState extends State<VoucherScreen> {
         voucherProvider.setRewards(apiReward.data);
       } else if (apiVoucher.error == unauthorized ||
           apiReward.error == unauthorized) {
-        logout().then((value) => {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => SignInScreen()),
-                  (route) => false)
-            });
+        logout(context);
       }
       voucherProvider.setLoading(false);
     }
@@ -63,7 +58,7 @@ class _VoucherScreenState extends State<VoucherScreen> {
                     margin: EdgeInsets.only(top: 50.0),
                     child: Center(
                       child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
+                        valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
                       ),
                     ),
                   )

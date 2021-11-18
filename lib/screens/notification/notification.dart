@@ -1,8 +1,9 @@
 import 'package:coffee_shop/models/notification.dart';
+import 'package:coffee_shop/values/color_theme.dart';
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({Key key}) : super(key: key);
+  static String routeName = '/notification';
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class NotificationScreen extends StatelessWidget {
                       .map((noti) => Container(
                             height: 70,
                             decoration: BoxDecoration(
-                                color: Colors.grey[300],
+                                color: AppColors.blackColor.withOpacity(0.05),
                                 borderRadius: BorderRadius.circular(10.0)),
                             margin: const EdgeInsets.symmetric(vertical: 5.0),
                             child: Center(
@@ -40,7 +41,7 @@ class NotificationScreen extends StatelessWidget {
                                 leading: ClipRRect(
                                   borderRadius: BorderRadius.circular(5.0),
                                   child: Image(
-                                    image: AssetImage('assets/images/logo.jpg'),
+                                    image: AssetImage('assets/images/logo.png'),
                                   ),
                                 ),
                                 title: Text(noti.title,

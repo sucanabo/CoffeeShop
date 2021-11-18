@@ -46,13 +46,13 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
             child: Column(children: <Widget>[
               TabBar(
                 controller: _tabController,
-                labelColor: primaryColor,
+                labelColor: AppColors.primaryColor,
                 unselectedLabelColor: Colors.grey[500],
                 labelStyle:
                     TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
                 isScrollable: true,
                 indicatorSize: TabBarIndicatorSize.tab,
-                indicator: CircleTabIndicator(color: primaryColor, radius: 3),
+                indicator: CircleTabIndicator(color: AppColors.primaryColor, radius: 3),
                 tabs: tabList.map((item) => Tab(text: item)).toList(),
               ),
               Expanded(

@@ -22,6 +22,12 @@ class _QuantityState extends State<Quantity> {
     _quantity = widget.initValue;
   }
 
+  @override
+  void didUpdateWidget(Widget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _quantity = widget.initValue;
+  }
+
   void minusPress() {
     if (_quantity > 1) {
       setState(() {
@@ -52,13 +58,13 @@ class _QuantityState extends State<Quantity> {
                       elevation: 0,
                       primary: Colors.transparent,
                       padding: EdgeInsets.all(0),
-                      side: BorderSide(width: 2, color: primaryMediumColor),
+                      side: BorderSide(width: 2, color: AppColors.primaryMediumColor),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50.0))),
                   onPressed: () => minusPress(),
                   child: Center(
                       child: LineIcon.minus(
-                    color: primaryMediumColor,
+                    color: AppColors.primaryMediumColor,
                     size: 22.0,
                   )))),
           Container(
@@ -73,9 +79,9 @@ class _QuantityState extends State<Quantity> {
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       elevation: 0,
-                      primary: primaryMediumColor,
+                      primary: AppColors.primaryMediumColor,
                       padding: EdgeInsets.all(0),
-                      side: BorderSide(width: 2, color: primaryMediumColor),
+                      side: BorderSide(width: 2, color: AppColors.primaryMediumColor),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50.0))),
                   onPressed: () => plusPress(),
@@ -99,11 +105,11 @@ class _QuantityState extends State<Quantity> {
                   primary: Colors.white,
                   padding: EdgeInsets.all(0),
                   shape: RoundedRectangleBorder(
-                      side: BorderSide(color: primaryMediumColor),
+                      side: BorderSide(color: AppColors.primaryMediumColor),
                       borderRadius: BorderRadius.circular(10.0))),
               child: Icon(
                 LineIcons.minus,
-                color: primaryMediumColor,
+                color: AppColors.primaryMediumColor,
               )),
         ),
         Text(
@@ -117,7 +123,7 @@ class _QuantityState extends State<Quantity> {
               onPressed: () => plusPress(),
               style: ElevatedButton.styleFrom(
                   elevation: 0,
-                  primary: primaryMediumColor,
+                  primary: AppColors.primaryMediumColor,
                   padding: EdgeInsets.all(0),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0))),

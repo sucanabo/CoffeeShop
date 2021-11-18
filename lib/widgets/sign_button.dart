@@ -15,14 +15,14 @@ class SignButton extends StatelessWidget {
         Text(
           text,
           style: TextStyle(
-              color: textColor, fontSize: 30.0, fontWeight: FontWeight.w600),
+              color: AppColors.textColor, fontSize: 30.0, fontWeight: FontWeight.w600),
         ),
         ElevatedButton(
             onPressed: onSubmit,
             style: ElevatedButton.styleFrom(
                 elevation: 5.0,
-                primary: primaryColor,
-                shadowColor: primaryColor,
+                primary: AppColors.primaryColor,
+                shadowColor: AppColors.primaryColor,
                 shape: CircleBorder(),
                 padding: EdgeInsets.all(0.0)),
             child: Icon(

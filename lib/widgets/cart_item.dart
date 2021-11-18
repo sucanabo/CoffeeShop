@@ -53,7 +53,6 @@ class _CartItemState extends State<CartItem> {
   Widget build(BuildContext context) {
     List<String> options = getOptions();
     List<String> toppings = getToppings();
-    print(widget.item.productExtend);
     return Container(
       decoration: BoxDecoration(
           color: Colors.white,
@@ -73,7 +72,7 @@ class _CartItemState extends State<CartItem> {
                 'cart_key': widget.item.key
               });
         },
-        splashColor: primaryLightColor,
+        splashColor: AppColors.primaryLightColor,
         child: IntrinsicHeight(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -86,8 +85,8 @@ class _CartItemState extends State<CartItem> {
                     child: Image(
                         gaplessPlayback: true,
                         fit: BoxFit.cover,
-                        image: base64StringToImage(
-                            widget.item.product.imgPath))),
+                        image:
+                            base64StringToImage(widget.item.product.imgPath))),
               ),
               Expanded(
                 child: Container(
@@ -107,49 +106,55 @@ class _CartItemState extends State<CartItem> {
                         ),
                         Expanded(
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    'Options: ',
-                                    style: TextStyle(
-                                        fontSize: 13.0,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  for (var item in options)
-                                    Text(
-                                      options.last == item ? item : '$item, ',
-                                      style: TextStyle(fontSize: 12.0),
-                                    )
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Toppings: ',
-                                    style: TextStyle(
-                                        fontSize: 13.0,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  toppings.isNotEmpty
-                                      ? Row(
-                                          children: [
-                                            for (var item in toppings)
-                                              Text(
-                                                toppings.last == item
-                                                    ? item
-                                                    : '$item, ',
-                                                style:
-                                                    TextStyle(fontSize: 12.0),
-                                              ),
-                                          ],
-                                        )
-                                      : Text(
-                                          'no toping.',
-                                          style: TextStyle(fontSize: 12.0),
-                                        )
-                                ],
-                              ),
+                              if (options.isNotEmpty)
+                                RichText(
+                                  text: TextSpan(
+                                      style:
+                                          TextStyle(color: AppColors.textColor),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                            text: 'Options: ',
+                                            style: TextStyle(
+                                                fontSize: 13.0,
+                                                fontWeight: FontWeight.w500)),
+                                        for (var item in options)
+                                          TextSpan(
+                                            text: options.last == item
+                                                ? item
+                                                : '$item, ',
+                                            style: TextStyle(
+                                                fontSize: 12.0,
+                                                color: AppColors.blackColor
+                                                    .withOpacity(0.5)),
+                                          ),
+                                      ]),
+                                ),
+                              SizedBox(height: getHeight(5.0)),
+                              if (toppings.isNotEmpty)
+                                RichText(
+                                    text: TextSpan(
+                                        style: TextStyle(
+                                            color: AppColors.textColor),
+                                        children: <TextSpan>[
+                                      TextSpan(
+                                          text: 'Toppings: ',
+                                          style: TextStyle(
+                                              fontSize: 13.0,
+                                              fontWeight: FontWeight.w500)),
+                                      for (var item in toppings)
+                                        TextSpan(
+                                          text: toppings.last == item
+                                              ? item
+                                              : '$item, ',
+                                          style: TextStyle(
+                                              fontSize: 12.0,
+                                              color: AppColors.blackColor
+                                                  .withOpacity(0.5)),
+                                        ),
+                                    ])),
                             ],
                           ),
                         ),
@@ -163,12 +168,12 @@ class _CartItemState extends State<CartItem> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 16,
-                                    color: darkColor),
+                                    color: AppColors.darkColor),
                               ),
                             ),
                             Expanded(
                                 flex: 4,
-                                child: Quantity(
+                                child: new Quantity(
                                   cicleStyle: true,
                                   initValue: widget.item.quantity,
                                   onChange: (value) {

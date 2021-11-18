@@ -3,11 +3,15 @@ import 'package:coffee_shop/models/cart_item.dart';
 import 'package:coffee_shop/models/voucher.dart';
 import 'package:coffee_shop/providers/auth_provider.dart';
 import 'package:coffee_shop/providers/cart_provider.dart';
+import 'package:coffee_shop/providers/navigation_provider.dart';
 import 'package:coffee_shop/screens/address/address_screen.dart';
 import 'package:coffee_shop/screens/checkout/widgets/checkout_choose_voucher.dart';
+import 'package:coffee_shop/screens/checkout/widgets/checkout_popup.dart';
 import 'package:coffee_shop/screens/success.dart';
+import 'package:coffee_shop/services/order_service.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
+import 'package:coffee_shop/widgets/message_box.dart';
 import 'package:coffee_shop/widgets/pill_button.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +33,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   bool _isDeleverySelected = true;
   double _deliveryPrice = 8000;
   Map _orderInfo;
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController _txtMessage = TextEditingController();
   @override
   void initState() {
     _cartProvider = Provider.of<CartProvider>(context, listen: false);
@@ -47,10 +53,56 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     super.initState();
   }
 
+  placeOrder() async {
+    bool addressCheck = _address != null;
+    if (!addressCheck) {
+      _addressProvider.setAddressLoading(true);
+      fetchAddress();
+      return;
+    }
+    String promoStr = _voucherData['shippingVoucher'] != null
+        ? _voucherData['shippingVoucher'].id.toString()
+        : '';
+    promoStr += _voucherData['discountVoucher'] != null
+        ? _voucherData['discountVoucher'].id.toString()
+        : '';
+    final navi = Provider.of<NavigationProvider>(context, listen: false);
+    navi.setLoading(true);
+    final response = await createOrder(
+        addressId: _address.id,
+        content: _txtMessage.text.trim(),
+        deliveryMethod: _isDeleverySelected ? 'delivery' : 'pickup',
+        subtotal: _cartProvider.totalAmount,
+        shippingCost: _deliveryPrice,
+        voucherDiscount: _orderInfo['voucherDiscount'],
+        shippingDiscount: _orderInfo['deliveryDiscount'],
+        grandtotal: _orderInfo['orderTotal'],
+        items: _cartProvider.items.values.map((item) => item).toList(),
+        promo: promoStr);
+    navi.setLoading(false);
+    if (response.error == null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => SuccessScreen()),
+          (route) => false);
+    } else {
+      showToast(response.error);
+    }
+  }
+
   fetchAddress() async {
     await _addressProvider.fetAddresses();
     _addressProvider.setAddressLoading(false);
-    _address = _addressProvider.addresses[0];
+    if (_addressProvider.addresses.isNotEmpty) {
+      _address = _addressProvider.addresses[0];
+    } else {
+      CheckOutPopUp.addressNull(context, (result) {
+        setState(() {
+          if (result != null)
+            _address = _addressProvider.addresses
+                .firstWhere((element) => element.id == result);
+        });
+      });
+    }
   }
 
   changeAddress() async {
@@ -147,19 +199,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           subtotal + deliveryPrice - deliveryDiscount - voucherDiscount
     };
   }
-  void order() {
-    
-  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ScreenBody(
         appBar: AppBar(
           title: Text('Checkout'),
-          centerTitle: true,
-          elevation: 0,
         ),
-        body: ScreenBody(
-            child: ListView(
+        child: ListView(
           padding: EdgeInsets.all(20.0),
           children: <Widget>[
             Row(
@@ -179,7 +226,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     onTap: () => changeAddress(),
                     child: Text(
                       'Change',
-                      style: TextStyle(fontSize: 12.0, color: primaryColor),
+                      style: TextStyle(
+                          fontSize: 12.0, color: AppColors.primaryColor),
                       textAlign: TextAlign.end,
                     ),
                   ),
@@ -190,7 +238,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             _buildAddressInformation(),
             Divider(height: 20.0),
             Text(
-              'Payment Method',
+              'Delivery Method',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 20.0),
@@ -213,7 +261,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     onTap: () {},
                     child: Text(
                       'Change',
-                      style: TextStyle(fontSize: 12.0, color: primaryColor),
+                      style: TextStyle(
+                          fontSize: 12.0, color: AppColors.primaryColor),
                       textAlign: TextAlign.end,
                     ),
                   ),
@@ -266,19 +315,26 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   Icon(
                     Icons.chevron_right_rounded,
                     size: 25.0,
-                    color: primaryColor,
+                    color: AppColors.primaryColor,
                   )
                 ],
               ),
             ),
             if (_voucherData != null) buildVoucherList(),
             SizedBox(height: 20.0),
+            MessageBox(
+              formKey: _formKey,
+              controller: _txtMessage,
+              maxLine: 5,
+              fillColor: AppColors.primaryLightColor,
+            ),
+            SizedBox(height: 20.0),
             Text(
               'Sumary',
               style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
-                  color: darkColor),
+                  color: AppColors.darkColor),
             ),
             Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
@@ -294,15 +350,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ),
                     PillButton(
                         child: Text('Order'),
-                        onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => new SuccessScreen())),
-                        color: primaryColor),
+                        onPressed: () => placeOrder(),
+                        color: AppColors.primaryColor),
                   ],
                 ))
           ],
-        )));
+        ));
   }
 
   Widget _buildAddressInformation() {
@@ -313,23 +366,34 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   height: 20.0,
                   width: 20.0,
                   child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation(primaryColor))))
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  _address.receiverName,
-                  style: TextStyle(fontWeight: FontWeight.w600, height: 1.5),
+                      valueColor:
+                          AlwaysStoppedAnimation(AppColors.primaryColor))))
+          : provider.addresses.isEmpty
+              ? Text('No shipping address ')
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _address.receiverName ??
+                          provider.addresses[0].receiverName,
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, height: 1.5),
+                    ),
+                    Text(
+                        _address.receiverPhone ??
+                            provider.addresses[0].receiverPhone,
+                        style: TextStyle(
+                            height: 1.2,
+                            fontSize: 13.0,
+                            color: Colors.grey[700])),
+                    Text(_address.address ?? provider.addresses[0].address,
+                        style: TextStyle(
+                            height: 1.2,
+                            fontSize: 13.0,
+                            color: Colors.grey[700])),
+                  ],
                 ),
-                Text(_address.receiverPhone,
-                    style: TextStyle(
-                        height: 1.2, fontSize: 13.0, color: Colors.grey[700])),
-                Text(_address.address,
-                    style: TextStyle(
-                        height: 1.2, fontSize: 13.0, color: Colors.grey[700])),
-              ],
-            ),
     );
   }
 
@@ -386,12 +450,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         Text(
           'Order Total',
           style: TextStyle(
-              fontSize: 16.0, fontWeight: FontWeight.w600, color: primaryColor),
+              fontSize: 16.0,
+              fontWeight: FontWeight.w600,
+              color: AppColors.primaryColor),
         ),
         Text(
           convertVND(_orderInfo['orderTotal']),
           style: TextStyle(
-              fontSize: 16.0, fontWeight: FontWeight.w600, color: textColor),
+              fontSize: 16.0,
+              fontWeight: FontWeight.w600,
+              color: AppColors.textColor),
           textAlign: TextAlign.end,
         )
       ]),
@@ -408,7 +476,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       itemCount: list.length,
       separatorBuilder: (context, index) => Divider(),
       itemBuilder: (context, index) => Container(
-        color: primaryLightColor,
+        color: AppColors.primaryLightColor,
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -442,7 +510,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       ),
       LabeledRadio(
         label: 'Delivery',
-        rightLabel: '\$8',
+        rightLabel: convertVND(_deliveryPrice),
         padding: const EdgeInsets.all(0.0),
         value: true,
         groupValue: _isDeleverySelected,
@@ -487,7 +555,7 @@ class LabeledRadio extends StatelessWidget {
             Container(
               height: 30.0,
               child: Radio<bool>(
-                activeColor: primaryColor,
+                activeColor: AppColors.primaryColor,
                 groupValue: groupValue,
                 value: value,
                 onChanged: (bool newValue) {

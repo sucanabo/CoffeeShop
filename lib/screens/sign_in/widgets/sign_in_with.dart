@@ -1,49 +1,59 @@
-import 'package:coffee_shop/services/google_service.dart';
+import 'package:coffee_shop/providers/firebase_provider.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/widgets/pill_button.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
+import 'package:provider/provider.dart';
 
-class SignInWith extends StatelessWidget {
-  const SignInWith({
-    Key key,
-  }) : super(key: key);
-  Future signinGoogle() async {
-    print('google');
-    await GoogleSignInApi.login();
-  }
+class SignInWith extends StatefulWidget {
+  @override
+  _SignInWithState createState() => _SignInWithState();
+}
 
+class _SignInWithState extends State<SignInWith> {
+  bool _isSignIn = false;
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<FirebaseProvider>(context, listen: false);
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        PillButton(
-          elevation: 1,
-          color: Colors.white,
-          onPressed: () => signinGoogle(),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              LineIcon.googlePlusG(
-                color: Colors.red[500],
-                size: 30.0,
-              ),
-              Text(
-                'Sign in with Google',
-                style: TextStyle(color: textColor, fontSize: 16.0),
-              ),
-              LineIcon.arrowRight(
-                color: textColor,
-                size: 25.0,
+        _isSignIn
+            ? Align(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
+                ),
               )
-            ],
-          ),
-        ),
+            : PillButton(
+                elevation: 1,
+                color: Colors.white,
+                onPressed: () {
+                  provider.googleAuth(context);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    LineIcon.googlePlusG(
+                      color: Colors.red[500],
+                      size: 30.0,
+                    ),
+                    Text(
+                      'Sign in with Google',
+                      style:
+                          TextStyle(color: AppColors.textColor, fontSize: 16.0),
+                    ),
+                    LineIcon.arrowRight(
+                      color: AppColors.textColor,
+                      size: 25.0,
+                    )
+                  ],
+                ),
+              ),
         SizedBox(height: 10.0),
         PillButton(
           elevation: 1,
           color: Colors.white,
-          onPressed: () {},
+          onPressed: () {provider.facebookLogin(context);},
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -53,10 +63,10 @@ class SignInWith extends StatelessWidget {
               ),
               Text(
                 'Sign in with Facebook',
-                style: TextStyle(color: textColor, fontSize: 16.0),
+                style: TextStyle(color: AppColors.textColor, fontSize: 16.0),
               ),
               LineIcon.arrowRight(
-                color: textColor,
+                color: AppColors.textColor,
                 size: 25.0,
               )
             ],

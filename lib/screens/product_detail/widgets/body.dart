@@ -4,6 +4,7 @@ import 'package:coffee_shop/screens/product_detail/widgets/bottom_bar.dart';
 import 'package:coffee_shop/screens/product_detail/widgets/heading.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
+import 'package:coffee_shop/widgets/message_box.dart';
 import 'package:coffee_shop/widgets/product_extend.dart';
 import 'package:coffee_shop/providers/cart_provider.dart';
 import 'package:coffee_shop/widgets/quantity.dart';
@@ -185,7 +186,7 @@ class _BodyState extends State<Body> {
                                           convertVND(widget.product.price),
                                           style: TextStyle(
                                               fontSize: 16.0,
-                                              color: mutedColor,
+                                              color: AppColors.mutedColor,
                                               decoration:
                                                   TextDecoration.lineThrough),
                                         )
@@ -195,7 +196,7 @@ class _BodyState extends State<Body> {
                                               discount:
                                                   widget.product.discount)),
                                           style: TextStyle(
-                                              color: primaryColor,
+                                              color: AppColors.primaryColor,
                                               fontSize: 26.0,
                                               fontWeight: FontWeight.w500)),
                                   SizedBox(
@@ -220,7 +221,7 @@ class _BodyState extends State<Body> {
                                         price: widget.product.price,
                                         discount: widget.product.discount)),
                                     style: TextStyle(
-                                        color: primaryColor,
+                                        color: AppColors.primaryColor,
                                         fontSize: 26.0,
                                         fontWeight: FontWeight.w500)),
                               Padding(
@@ -310,45 +311,22 @@ class _BodyState extends State<Body> {
                                     SizedBox(height: 10.0),
                                     Heading(title: 'Message'),
                                     Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.grey[500]
-                                                  .withOpacity(0.5),
-                                              offset: Offset(3, 5),
-                                              spreadRadius: 2.0,
-                                              blurRadius: 5.0)
-                                        ],
-                                        color: Colors.white,
-                                      ),
-                                      child: Form(
-                                        key: _formKey,
-                                        child: TextFormField(
-                                          controller: _txtMessage,
-                                          maxLines: 8,
-                                          validator: (value) => value.length >
-                                                  255
-                                              ? 'Message lenght is 255 char.'
-                                              : null,
-                                          decoration: InputDecoration(
-                                              border: InputBorder.none,
-                                              focusedBorder: InputBorder.none,
-                                              enabledBorder: InputBorder.none,
-                                              errorBorder: InputBorder.none,
-                                              disabledBorder: InputBorder.none,
-                                              contentPadding:
-                                                  EdgeInsets.all(10.0),
-                                              hintStyle: TextStyle(
-                                                fontSize: 13.0,
-                                                color: Colors.grey[800],
-                                              ),
-                                              hintText:
-                                                  "Enter your message to special request (not requied)."),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey[500]
+                                                    .withOpacity(0.5),
+                                                offset: Offset(3, 5),
+                                                spreadRadius: 2.0,
+                                                blurRadius: 5.0)
+                                          ],
+                                          color: Colors.white,
                                         ),
-                                      ),
-                                    ),
+                                        child: MessageBox(
+                                            formKey: _formKey,
+                                            controller: _txtMessage)),
                                   ],
                                 ),
                               )

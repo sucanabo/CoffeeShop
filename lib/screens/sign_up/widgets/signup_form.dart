@@ -1,13 +1,20 @@
-import 'package:coffee_shop/models/api_response.dart';
 import 'package:coffee_shop/models/user.dart';
+import 'package:coffee_shop/providers/firebase_provider.dart';
+import 'package:coffee_shop/providers/navigation_provider.dart';
+import 'package:coffee_shop/screens/otp/otp_screen.dart';
 import 'package:coffee_shop/services/user_service.dart';
+import 'package:coffee_shop/values/color_theme.dart';
+import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/values/size_config.dart';
-import 'package:coffee_shop/widgets/sign_button.dart';
+import 'package:coffee_shop/values/validate.dart';
+import 'package:coffee_shop/widgets/pop_up_notify.dart';
+import 'package:coffee_shop/widgets/rounded_button.dart';
+import 'package:coffee_shop/widgets/rounded_dropdown.dart';
+import 'package:coffee_shop/widgets/rounded_text_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icon.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../main_body.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key key}) : super(key: key);
@@ -15,172 +22,132 @@ class SignUpForm extends StatefulWidget {
   @override
   _SignUpFormState createState() => _SignUpFormState();
 }
+
 class _SignUpFormState extends State<SignUpForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController _txtEmail = TextEditingController();
+  TextEditingController _txtPhone = TextEditingController();
+  TextEditingController _txtDisplayName = TextEditingController();
+  TextEditingController _txtBirthday = TextEditingController();
+  List<String> listGender = ['male', 'female', 'other'];
+  String _dropdownGender;
+  bool _isSocialSignup = false;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _txtEmail.dispose();
+    _txtPhone.dispose();
+    _txtDisplayName.dispose();
+    _txtBirthday.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    final provider = Provider.of<FirebaseProvider>(context, listen: false);
+    if (provider.user != null) {
+      _txtEmail.text = provider.user.email;
+      _txtDisplayName.text = provider.user.displayName;
+      _isSocialSignup = true;
+    }
+  }
+
+  submitForm() async {
+    hideKeyboard(context);
+    final naviProvider =
+        Provider.of<NavigationProvider>(context, listen: false);
+
+    if (_formKey.currentState.validate()) {
+      naviProvider.setLoading(true);
+      bool phoneCheck = await isPhoneExisted(_txtPhone.text.trim());
+      if (phoneCheck == null) return;
+      if (!phoneCheck) {
+        final UserModel instance = UserModel(
+            displayName: _txtDisplayName.text.trim(),
+            birthday: formatStringToDate(_txtBirthday.text),
+            gender: _dropdownGender,
+            phone: _txtPhone.text.trim(),
+            email: _txtEmail.text.trim());
+        Navigator.of(context)
+            .pushNamed(OTPScreen.routeName, arguments: instance);
+      } else {
+        showDialog(
+            context: context,
+            builder: (context) => PopUpNotify(
+                  title: 'Opps!!!',
+                  content: Text(
+                      'This phone number is already taken. Try again with difference phone number.'),
+                ));
+      }
+      naviProvider.setLoading(false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool loading = false;
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    TextEditingController txtEmail = TextEditingController();
-    TextEditingController txtPhone = TextEditingController();
-    TextEditingController txtFirstName = TextEditingController();
-    TextEditingController txtlastName = TextEditingController();
-    TextEditingController txtPassword = TextEditingController();
-    TextEditingController txtPasswordConfirmation = TextEditingController();
-
-    void _saveAndRedirectToHome(UserModel user) async {
-      SharedPreferences pref = await SharedPreferences.getInstance();
-      pref.setString('token', user.token ?? '');
-      pref.setInt('id', user.id ?? 0);
-
-      //Navigate to Home
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => MainBody()),
-          (route) => false);
-    }
-
-    void _registerUser() async {
-      ApiResponse response = await register(
-          email: txtEmail.text,
-          phone: txtPhone.text,
-          firstName: txtFirstName.text,
-          lastName: txtlastName.text,
-          password: txtPassword.text);
-      if (response.error == null) {
-        _saveAndRedirectToHome(response.data as UserModel);
-      } else {
-        setState(() {
-          loading = !loading;
-        });
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('${response.error}')));
-      }
-    }
-
     return Form(
         key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                    flex: 5,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 10.0),
-                      child: TextFormField(
-                        validator: (value) =>
-                            value.isEmpty ? 'First name is requried' : null,
-                        controller: txtFirstName,
-                        style: TextStyle(fontSize: 14.0),
-                        decoration: InputDecoration(
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          hintText: 'First name',
-                        ),
-                        textInputAction: TextInputAction.next,
-                      ),
-                    )),
-                Expanded(
-                    flex: 7,
-                    child: TextFormField(
-                      validator: (value) =>
-                          value.isEmpty ? 'Last name is requried' : null,
-                      controller: txtlastName,
-                      style: TextStyle(fontSize: 14.0),
-                      decoration: InputDecoration(
-                        hintText: 'Last name',
-                      ),
-                      textInputAction: TextInputAction.next,
-                    ))
-              ],
-            ),
-            SizedBox(height: 10.0),
-            TextFormField(
-              validator: (value) => value.isEmpty ? 'Email is requried' : null,
-              controller: txtEmail,
-              keyboardType: TextInputType.emailAddress,
-              style: TextStyle(fontSize: 14.0),
-              decoration: InputDecoration(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(vertical: 15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              RoundedTextField(
+                controller: _txtDisplayName,
+                validator: (value) => Validate.displayNameValidate(value),
+                hintText: 'Display name',
+                textInputAction: TextInputAction.next,
+              ),
+              SizedBox(height: 15.0),
+              RoundedTextField(
+                controller: _txtEmail,
+                validator: (value) => Validate.emailValidate(value),
                 hintText: 'Email',
+                readOnly: _isSocialSignup,
+                textInputAction: TextInputAction.next,
               ),
-              textInputAction: TextInputAction.next,
-            ),
-            SizedBox(height: 10.0),
-            TextFormField(
-              //validator: (value) => value.isEmpty ? 'Phone is requried' : null,
-              //controller: txtPhone,
-              //keyboardType: TextInputType.phone,
-              style: TextStyle(fontSize: 14.0),
-              decoration: InputDecoration(hintText: 'Phone number'),
-              //textInputAction: TextInputAction.next,
-            ),
-            SizedBox(height: 10.0),
-            TextFormField(
-              controller: txtPassword,
-              validator: (value) =>
-                  value.length < 6 ? 'Required at least 6 chars.' : null,
-              style: TextStyle(fontSize: 14.0),
-              decoration: InputDecoration(
-                suffixIcon: SizedBox(
-                  width: 50.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: LineIcon.eye(),
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                    ],
-                  ),
-                ),
-                hintText: 'Password',
+              SizedBox(height: 15.0),
+              RoundedTextField(
+                controller: _txtPhone,
+                hintText: 'Phone number',
+                validator: (value) => Validate.phoneValidate(value),
+                keyboardType: TextInputType.phone,
+                textInputAction: TextInputAction.next,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
               ),
-              obscureText: true,
-              textInputAction: TextInputAction.next,
-            ),
-            SizedBox(height: 10.0),
-            TextFormField(
-              validator: (value) => value != txtPassword.text
-                  ? 'Confirm password does not match'
-                  : null,
-              controller: txtPasswordConfirmation,
-              style: TextStyle(fontSize: 14.0),
-              decoration: InputDecoration(
-                suffixIcon: SizedBox(
-                  width: 50.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: LineIcon.eye(),
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                    ],
-                  ),
-                ),
-                hintText: 'Confirm Password',
+              SizedBox(height: 15.0),
+              RoundedTextField(
+                controller: _txtBirthday,
+                validator: (value) => Validate.notEmptyValidate(value),
+                keyboardType: TextInputType.datetime,
+                readOnly: true,
+                isDate: true,
+                hintText: 'Birthday',
               ),
-              obscureText: true,
-              textInputAction: TextInputAction.done,
-            ),
-            SizedBox(height: SizeConfig.screenHeigh * 0.025),
-            loading
-                ? Center(child: CircularProgressIndicator())
-                : SignButton(
-                    text: 'Sign up',
-                    onSubmit: () {
-                      setState(() {
-                        loading = !loading;
-                        _registerUser();
-                      });
-                    })
-          ],
+              SizedBox(height: 15.0),
+              RoundedDropDown(
+                  value: _dropdownGender,
+                  listItem: listGender,
+                  validator: (value) => Validate.notEmptyValidate(value),
+                  onChanged: (value) {
+                    setState(() {
+                      _dropdownGender = value;
+                    });
+                  }),
+              SizedBox(
+                height: getHeight(50.0),
+              ),
+              RoundedButton(
+                onPressed: submitForm,
+                title: 'Next',
+                color: AppColors.primaryColor,
+              )
+            ],
+          ),
         ));
   }
 }

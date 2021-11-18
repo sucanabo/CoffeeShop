@@ -1,3 +1,4 @@
+import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:flutter/material.dart';
 import 'widgets/body.dart';
 
@@ -12,12 +13,13 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ScreenBody(
+        // resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
             'Sign in',
           ),
         ),
-        body: Body());
+        child: Body());
   }
 }

@@ -38,12 +38,12 @@ class AccumulateInfoCard extends StatelessWidget {
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(16.0),
                         bottomRight: Radius.circular(16.0)),
-                    gradient: primaryGradientColor),
+                    gradient: AppColors.primaryGradientColor),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      '${user.firstName} ${user.lastName}',
+                      '${user.displayName}',
                       style: TextStyle(
                           fontSize: 24.0,
                           color: Colors.white,
@@ -90,19 +90,20 @@ class AccumulateInfoCard extends StatelessWidget {
                     margin: const EdgeInsets.only(left: 25.0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50.0),
-                        gradient: primaryGradientColor),
+                        gradient: AppColors.primaryGradientColor),
                   ),
                   Positioned(
                       top: -10.0,
                       child: Container(
                         decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: primaryColor, width: 3),
+                            border: Border.all(
+                                color: AppColors.primaryColor, width: 3),
                             borderRadius: BorderRadius.circular(50)),
                         child: Icon(
                           Icons.eco_outlined,
                           size: 30.0,
-                          color: primaryColor,
+                          color: AppColors.primaryColor,
                         ),
                       ))
                 ],
@@ -115,11 +116,13 @@ class AccumulateInfoCard extends StatelessWidget {
                 children: [
                   Text(
                     '${userProvider.getLevelString()}',
-                    style: TextStyle(color: primaryColor, fontSize: 16.0),
+                    style: TextStyle(
+                        color: AppColors.primaryColor, fontSize: 16.0),
                   ),
                   Text(
                     '${userProvider.getLevelString(level: user.level + 1)}',
-                    style: TextStyle(color: primaryColor, fontSize: 16.0),
+                    style: TextStyle(
+                        color: AppColors.primaryColor, fontSize: 16.0),
                   )
                 ],
               ),

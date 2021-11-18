@@ -1,8 +1,9 @@
+import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/screens/address/address_screen.dart';
 import 'package:coffee_shop/screens/favourite_product/favourite_product_screen.dart';
 import 'package:coffee_shop/screens/more/widgets/more_tab.dart';
+import 'package:coffee_shop/screens/order/order_screeen.dart';
 import 'package:coffee_shop/screens/profile/profile_screen.dart';
-import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
 import 'package:coffee_shop/services/user_service.dart';
 import 'package:flutter/material.dart';
 
@@ -23,11 +24,14 @@ class Body extends StatelessWidget {
               child: Column(
                 children: [
                   MoreTab(
-                    imgPath: 'assets/icons/transaction_history.svg',
+                    imgPath: Res.ic_note,
                     title: 'Transaction History',
+                    onPressed: () {
+                      Navigator.pushNamed(context, OrderScreen.routeName);
+                    },
                   ),
                   MoreTab(
-                    imgPath: 'assets/icons/your_favourite.svg',
+                    imgPath: Res.ic_heart_circle,
                     title: 'Your Favourite',
                     onPressed: () {
                       Navigator.pushNamed(
@@ -49,7 +53,7 @@ class Body extends StatelessWidget {
               child: Column(
                 children: [
                   MoreTab(
-                    imgPath: 'assets/icons/contact_us.svg',
+                    imgPath: Res.ic_message_text,
                     title: 'Contact us',
                   ),
                 ],
@@ -67,32 +71,28 @@ class Body extends StatelessWidget {
               child: Column(
                 children: [
                   MoreTab(
-                    imgPath: 'assets/icons/account.svg',
+                    imgPath: Res.ic_profile,
                     title: 'Your account',
                     onPressed: () {
                       Navigator.of(context).pushNamed(ProfileScreen.routeName);
                     },
                   ),
                   MoreTab(
-                    imgPath: 'assets/icons/location.svg',
+                    imgPath: Res.ic_location_tick,
                     title: 'Save Addresses',
                     onPressed: () {
                       Navigator.of(context).pushNamed(AddressScreen.routeName);
                     },
                   ),
                   MoreTab(
-                    imgPath: 'assets/icons/setting.svg',
+                    imgPath: Res.ic_setting,
                     title: 'Setting',
                   ),
                   MoreTab(
-                    imgPath: 'assets/icons/logout.svg',
+                    imgPath: Res.ic_logout,
                     title: 'Logout',
                     onPressed: () {
-                      logout().then((value) => Navigator.of(context)
-                          .pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) => SignInScreen()),
-                              (route) => false));
+                      logout(context);
                     },
                   ),
                 ],

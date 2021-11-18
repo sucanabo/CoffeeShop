@@ -45,33 +45,25 @@ class PositionedVoucher extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          flex: 2,
-                          child: Text(
-                            reward.brandName,
-                            style: TextStyle(
-                                fontSize: 15.0,
-                                color: primaryColor,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 0.15),
-                          ),
+                        Text(
+                          reward.brandName,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              color: AppColors.primaryColor,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.15),
                         ),
-                        Expanded(
-                          flex: 6,
-                          child: Text(
-                            reward.title,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.w600),
-                          ),
+                        Text(
+                          reward.title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 13.0, fontWeight: FontWeight.w600),
                         ),
-                        Expanded(
-                          flex: 3,
-                          child: Text(
-                            'Expried date: ${formartDate(reward.expiryDate)}',
-                            style: TextStyle(fontSize: 15.0, color: textColor),
-                          ),
+                        Text(
+                          'Expried date: ${reward.expiryDate != null ? formatDateToString(reward.expiryDate) : ''}',
+                          style: TextStyle(
+                              fontSize: 15.0, color: AppColors.textColor),
                         )
                       ],
                     ),

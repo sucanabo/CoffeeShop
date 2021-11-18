@@ -44,7 +44,10 @@ class AccumulateTab extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: vouchers.voucherItems
-                          .map((voucher) => VoucherWidget(voucher: voucher,isUserVoucher: false,))
+                          .map((voucher) => VoucherWidget(
+                                voucher: voucher,
+                                isUserVoucher: false,
+                              ))
                           .toList()),
                 )
               ],

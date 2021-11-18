@@ -4,11 +4,11 @@ import './widgets/body.dart';
 
 class OTPScreen extends StatelessWidget {
   static String routeName = '/otp';
-
   @override
   Widget build(BuildContext context) {
     final UserModel user = ModalRoute.of(context).settings.arguments;
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
             'OTP Verification',

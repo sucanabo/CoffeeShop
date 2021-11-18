@@ -16,9 +16,8 @@ class ProductProvider with ChangeNotifier {
   }
 
   setProductList(List<dynamic> list) {
-    _productList = list;
+    _productList.addAll(list);
     notifyListeners();
-    print(_productList[0]);
   }
 
   ProductModel getProductByIndex(int index) => _productList[index];
@@ -47,5 +46,32 @@ class ProductProvider with ChangeNotifier {
 
   List<dynamic> get getFavouriteProducts {
     return _productList.where((product) => product.selfFavourited).toList();
+  }
+
+  List<dynamic> newProducts({int limit}) {
+    List<dynamic> list = [];
+    if(limit != null){
+      list.addAll(_productList.reversed.take(limit).toList());
+    }
+    else{
+      list.addAll(_productList.reversed.toList());
+    }
+    
+
+    return list;
+  }
+
+  List<dynamic> saleProducts({int limit}) {
+    List<dynamic> list = [];
+    final List<dynamic> instance = _productList;
+    if(limit != null){
+      list.addAll(
+        instance.where((element) => element.discount != 0).take(limit).toList());
+    }
+    else{
+      list.addAll(
+        instance.where((element) => element.discount != 0).toList());
+    }
+    return list;
   }
 }

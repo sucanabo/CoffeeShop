@@ -30,11 +30,12 @@ class VoucherDetail extends StatelessWidget {
             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
           ),
           Divider(height: 20.0),
-          Image(
-            image: base64StringToImage(voucher.qrCode ?? voucher.image),
-            height: SizeConfig.screenWidth * 0.8,
-            width: SizeConfig.screenWidth * 0.8,
-          ),
+          if (voucher.qrCode != null)
+            Image(
+              image: base64StringToImage(voucher.qrCode),
+              height: SizeConfig.screenWidth * 0.8,
+              width: SizeConfig.screenWidth * 0.8,
+            ),
           SizedBox(
             height: 15.0,
           ),
@@ -71,7 +72,7 @@ class VoucherDetail extends StatelessWidget {
                 'Expired date:',
                 style: TextStyle(fontSize: 16.0, color: Colors.grey[700]),
               ),
-              Text(formartDate(voucher.expiryDate) ?? 'null',
+              Text(formatDateToString(voucher.expiryDate) ?? 'null',
                   style: TextStyle(fontSize: 16.0, color: Colors.grey[700]))
             ],
           ),
@@ -100,7 +101,7 @@ class VoucherDetail extends StatelessWidget {
             elevation: 0,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50.0)),
-            primary: primaryMediumColor,
+            primary: AppColors.primaryMediumColor,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             textStyle: TextStyle(fontSize: 16.0)),
       ),

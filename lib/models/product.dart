@@ -3,8 +3,8 @@ import 'package:coffee_shop/models/rating.dart';
 class ProductModel {
   int id;
   int cateId;
-  double price;
   String title;
+  double price;
   String content;
   String imgPath;
   int discount;
@@ -47,9 +47,7 @@ class ProductModel {
           json['price'],
         ),
         discount: json['discount'].length > 0
-            ? json['discount']
-                .fold(0, (pre, index) => pre + index['discount'])
-            : 0
-            );
+            ? json['discount'].fold(0, (pre, index) => pre + index['discount'])
+            : 0);
   }
 }

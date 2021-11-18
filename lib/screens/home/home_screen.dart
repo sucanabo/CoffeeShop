@@ -1,15 +1,18 @@
 import 'package:coffee_shop/models/api_response.dart';
-import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
+import 'package:coffee_shop/providers/category_provider.dart';
+import 'package:coffee_shop/providers/product_provider.dart';
+import 'package:coffee_shop/services/category_service.dart';
 import 'package:coffee_shop/services/product_service.dart';
 import 'package:coffee_shop/services/user_service.dart';
-import 'package:coffee_shop/values/color_theme.dart';
+import 'package:coffee_shop/widgets/loading.dart';
 import 'package:coffee_shop/widgets/my_appbar.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './widgets/body.dart';
-import '../../constants.dart';
+import '../../values/api_end_point.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = '/home';
@@ -20,25 +23,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<dynamic> _newList = [];
-  bool _loading = true;
-
 //Get all product and category
   Future<void> retriveData() async {
-    ApiResponse newListResponse =
-        await getProductWithCondition(condition: 'new', limit: 5);
+    ProductProvider productProvider =
+        Provider.of<ProductProvider>(context, listen: false);
+    CategoryProvider categoryProvider =
+        Provider.of<CategoryProvider>(context, listen: false);
+    if (productProvider.isLoading == true) {
+      ApiResponse productResponse = await getProducts();
+      ApiResponse categoryResponse = await getCategories();
 
-    if (newListResponse.error == null) {
-      setState(() {
-        _loading = !_loading;
-        _newList = newListResponse.data as List<dynamic>;
-      });
-    } else if (newListResponse.error == unauthorized) {
-      logout().then((value) => {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => SignInScreen()),
-                (route) => false)
-          });
+      if (productResponse.error == null && categoryResponse.error == null) {
+        productProvider.setProductList(productResponse.data);
+        categoryProvider.setCategoryList(categoryResponse.data);
+      } else if (categoryResponse.error == unauthorized ||
+          productResponse.error == unauthorized) {
+        logout(context);
+      }
+      productProvider.setLoading(false);
     }
   }
 
@@ -57,14 +59,10 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ScreenBody(
           isHomeScreen: true,
           padding: EdgeInsets.all(20.0),
-          child: _loading
-              ? Center(
-                  child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(primaryColor)),
-                )
-              : Body(
-                  newProduct: _newList,
-                )),
+          child: Consumer<ProductProvider>(
+            builder: (context,provider,child)=> provider.isLoading? Center(child: Loading()): Body(),
+          )
+      )   
     );
   }
 }

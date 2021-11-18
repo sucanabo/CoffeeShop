@@ -12,9 +12,9 @@ class CloseBottomSheet extends StatelessWidget {
       onPressed: () {
         Navigator.pop(context);
       },
-      child: LineIcon.timesCircle(color: textColor),
+      child: LineIcon.timesCircle(color: AppColors.textColor),
       style: ElevatedButton.styleFrom(
-          shape: CircleBorder(), elevation: 0, primary: primaryMediumColor),
+          shape: CircleBorder(), elevation: 0, primary: AppColors.primaryMediumColor),
     );
   }
 }

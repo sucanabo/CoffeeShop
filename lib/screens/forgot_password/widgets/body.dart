@@ -12,14 +12,14 @@ class Body extends StatelessWidget {
     return SafeArea(
         child: ScreenBody(
       child: ListView(
-        padding: EdgeInsets.all(getProportionateScreenWidth(20.0)),
+        padding: EdgeInsets.all(getWidth(20.0)),
         children: [
           Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             Text(
               'Forgot Password',
               style: TextStyle(
-                  color: primaryColor,
-                  fontSize: getProportionateScreenWidth(28.0),
+                  color: AppColors.primaryColor,
+                  fontSize: getWidth(28.0),
                   fontWeight: FontWeight.w600),
             ),
             Text(
@@ -44,10 +44,10 @@ class Body extends StatelessWidget {
                     alignment: Alignment.topCenter, padding: EdgeInsets.zero),
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text('Sign up', style: TextStyle(color: primaryMediumColor)),
+                  Text('Sign up', style: TextStyle(color: AppColors.primaryMediumColor)),
                   Icon(
                     Icons.chevron_right_rounded,
-                    color: primaryMediumColor,
+                    color: AppColors.primaryMediumColor,
                   )
                 ]),
               )
@@ -90,7 +90,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
                 helperText: 'Erorr',
                 prefixIcon: LineIcon.user(
                   size: 26.0,
-                  color: primaryMediumColor,
+                  color: AppColors.primaryMediumColor,
                 ),
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 hintText: 'Enter your email',

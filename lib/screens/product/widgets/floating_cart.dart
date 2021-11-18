@@ -44,13 +44,13 @@ class _FloatingCartState extends State<FloatingCart>
           return Container();
         },
         child: FloatingActionButton.extended(
-            backgroundColor: primaryLightColor,
-            splashColor: primaryColor,
+            backgroundColor: AppColors.primaryLightColor,
+            splashColor: AppColors.primaryColor,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0)),
             icon: LineIcon.shoppingBasket(
               size: 20.0,
-              color: darkColor,
+              color: AppColors.darkColor,
             ),
             label: Row(
               children: [
@@ -60,18 +60,18 @@ class _FloatingCartState extends State<FloatingCart>
                       children: [
                         Text(
                           '${cart.itemCount.toString()} item${cart.itemCount > 1 ? 's' : ''}',
-                          style: TextStyle(color: textColor, fontSize: 12.0),
+                          style: TextStyle(color: AppColors.textColor, fontSize: 12.0),
                         ),
                         Text('${convertVND(cart.totalAmount)}',
                             style: TextStyle(
-                                color: primaryColor,
+                                color: AppColors.primaryColor,
                                 fontSize: 12.0,
                                 fontWeight: FontWeight.w600))
                       ]),
                 ),
                 SizedBox(width: 10.0),
                 LineIcon.arrowRight(
-                  color: textColor,
+                  color: AppColors.textColor,
                   size: 15.0,
                 )
               ],

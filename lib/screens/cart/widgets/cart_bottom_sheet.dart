@@ -15,7 +15,7 @@ class CartBottomSheet extends StatelessWidget {
     return Container(
       height: SizeConfig.screenHeigh * 0.08,
       decoration: BoxDecoration(
-          color: darkColor,
+          color: AppColors.darkColor,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0))),
       padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
@@ -32,7 +32,7 @@ class CartBottomSheet extends StatelessWidget {
                   )),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                primary: primaryColor,
+                primary: AppColors.primaryColor,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0))),

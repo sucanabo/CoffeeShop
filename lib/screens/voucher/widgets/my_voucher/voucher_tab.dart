@@ -33,7 +33,7 @@ class VoucherTab extends StatelessWidget {
               children: [
                 LineIcon.alternateTicket(
                   size: 30.0,
-                  color: primaryColor,
+                  color: AppColors.primaryColor,
                 ),
                 Text(
                   'Enter promotion code',

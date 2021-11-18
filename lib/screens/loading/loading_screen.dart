@@ -1,9 +1,9 @@
-import 'package:coffee_shop/constants.dart';
 import 'package:coffee_shop/models/api_response.dart';
 import 'package:coffee_shop/providers/auth_provider.dart';
 import 'package:coffee_shop/screens/main_body.dart';
 import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
 import 'package:coffee_shop/services/user_service.dart';
+import 'package:coffee_shop/values/api_end_point.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/size_config.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +60,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       home: Scaffold(
         body: Center(
           child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation(primaryColor),
+            valueColor: AlwaysStoppedAnimation(AppColors.primaryColor),
           ),
         ),
       ),

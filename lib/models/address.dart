@@ -22,12 +22,13 @@ class AddressModel {
   factory AddressModel.fromJson(Map<String, dynamic> json) {
     return AddressModel(
       id: json['id'],
-      title: json['title'],
-      address: json['address'],
-      coordinates: json['coordinates'],
-      description: json['description'],
-      receiverName: json['receiver_name'],
-      receiverPhone: json['receiver_phone'],
+      title: json['title'] == null ? " " : json['title'],
+      address: json['address'] == null ? " " : json['address'],
+      coordinates: json['coordinates'] == null ? " " : json['coordinates'],
+      description: json['description'] == null ? " " : json['description'],
+      receiverName: json['receiver_name'] == null ? " " : json['receiver_name'],
+      receiverPhone:
+          json['receiver_phone'] == null ? " " : json['receiver_phone'],
     );
   }
 }

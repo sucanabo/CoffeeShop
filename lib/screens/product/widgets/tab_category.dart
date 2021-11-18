@@ -11,12 +11,12 @@ class TabCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return TabBar(
               controller: controller,
-              labelColor: primaryColor,
+              labelColor: AppColors.primaryColor,
               unselectedLabelColor: Colors.grey[500],
               labelStyle: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
               isScrollable: true,
               indicatorSize: TabBarIndicatorSize.tab,
-              indicator: CircleTabIndicator(color: primaryColor, radius: 3),
+              indicator: CircleTabIndicator(color: AppColors.primaryColor, radius: 3),
               tabs: listCate.map((item) => Tab(text: item.title)).toList(),
             );
   }

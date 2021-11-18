@@ -12,7 +12,7 @@ class HomeCarousel extends StatelessWidget {
     return Carousel(
       dotBgColor: Colors.transparent,
       indicatorBgPadding: 5.0,
-      dotIncreasedColor: primaryMediumColor,
+      dotIncreasedColor: AppColors.primaryMediumColor,
       dotColor: Colors.grey[400],
       dotPosition: DotPosition.bottomRight,
       images: [

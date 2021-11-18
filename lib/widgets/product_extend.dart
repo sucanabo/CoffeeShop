@@ -91,13 +91,13 @@ class _ProductCheckBoxState extends State<ProductCheckBox> {
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: _initValue
-                    ? Border.all(color: primaryLightColor, width: 2.5)
+                    ? Border.all(color: AppColors.primaryLightColor, width: 2.5)
                     : Border.all(color: Colors.grey[400], width: 2.5),
-                color: _initValue ? primaryLightColor : Colors.white),
+                color: _initValue ? AppColors.primaryLightColor : Colors.white),
             child: _initValue
                 ? Icon(
                     Icons.check,
-                    color: primaryColor,
+                    color: AppColors.primaryColor,
                     size: 20,
                   )
                 : SizedBox(),
@@ -148,7 +148,7 @@ class _ProductDropDownState extends State<ProductDropDown> {
           width: 75.0,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50.0),
-              color: primaryMediumColor),
+              color: AppColors.primaryMediumColor),
           child: Align(
             alignment: Alignment.center,
             child: DropdownButton(
@@ -167,8 +167,8 @@ class _ProductDropDownState extends State<ProductDropDown> {
                 ),
                 underline: SizedBox(),
                 iconEnabledColor: Colors.white,
-                dropdownColor: primaryMediumColor,
-                focusColor: primaryMediumColor,
+                dropdownColor: AppColors.primaryMediumColor,
+                focusColor: AppColors.primaryMediumColor,
                 items: List.generate(
                     widget.data.length,
                     (index) => DropdownMenuItem(

@@ -125,21 +125,21 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                           children: [
                                             LineIcon.angleRight(
                                               size: 13.0,
-                                              color: darkColor,
+                                              color: AppColors.darkColor,
                                             ),
                                             Text(
                                               'Rules',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  color: darkColor),
+                                                  color: AppColors.darkColor),
                                             ),
                                           ],
                                         ))
                                     : Text(
-                                        formartDate(widget.voucher.expiryDate),
+                                        formatDateToString(widget.voucher.expiryDate),
                                         style: TextStyle(
                                             fontSize: 14.0,
-                                            color: primaryColor,
+                                            color: AppColors.primaryColor,
                                             fontWeight: FontWeight.w500),
                                       ),
                                 if (!widget.isUserVoucher)
@@ -179,7 +179,10 @@ class _VoucherWidgetState extends State<VoucherWidget> {
             padding:
                 const EdgeInsets.symmetric(horizontal: 15.0, vertical: 2.0),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3.0), color: primaryColor),
+                borderRadius: BorderRadius.circular(3.0),
+                color: widget.enable
+                    ? AppColors.primaryColor
+                    : AppColors.mutedColor),
             child: Text(
               widget.voucher.applyFor.capitalize(),
               style: TextStyle(
@@ -198,7 +201,9 @@ class _VoucherWidgetState extends State<VoucherWidget> {
             style: TextStyle(
                 fontSize: 26.0,
                 fontWeight: FontWeight.w600,
-                color: primaryColor),
+                color: widget.enable
+                    ? AppColors.primaryColor
+                    : AppColors.mutedColor),
           ),
         )
       ],
@@ -227,7 +232,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
         padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5.0),
-            color: isSaved ? Colors.grey : darkColor),
+            color: isSaved ? Colors.grey : AppColors.darkColor),
         child: Text(
           'Save',
           style: TextStyle(color: Colors.white),
@@ -253,7 +258,7 @@ class CardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      splashColor: primaryLightColor,
+      splashColor: AppColors.primaryLightColor,
       onTap: () {
         print('hi');
       },
@@ -279,7 +284,7 @@ class CardItem extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle, color: primaryLightColor),
+                    shape: BoxShape.circle, color: AppColors.primaryLightColor),
                 child: SvgPicture.asset('assets/icons/${item['icon']}'),
               ),
             ),

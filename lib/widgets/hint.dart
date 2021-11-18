@@ -32,7 +32,7 @@ class _HintState extends State<Hint> {
             margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             decoration: BoxDecoration(
-                color: widget.background ?? primaryLightColor,
+                color: widget.background ?? AppColors.primaryLightColor,
                 borderRadius: BorderRadius.circular(8.0)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,7 +44,7 @@ class _HintState extends State<Hint> {
                     style: TextStyle(
                         fontSize: 13.0,
                         fontWeight: FontWeight.w400,
-                        color: widget.textColor ?? textColor),
+                        color: widget.textColor ?? AppColors.textColor),
                   ),
                 ),
                 Flexible(
@@ -54,7 +54,7 @@ class _HintState extends State<Hint> {
                       alignment: Alignment.centerRight,
                       icon: LineIcon.times(
                         size: 20.0,
-                        color: textColor,
+                        color: AppColors.textColor,
                       ),
                       onPressed: () {
                         setState(() {

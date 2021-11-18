@@ -61,7 +61,7 @@ class CartProvider with ChangeNotifier {
               message: cartItem.message,
               productExtend: existingValue.productExtend),
         );
-        print(_items[cartItem.key].quantity);
+        print(_items[existingItemKey].quantity);
       }
     } else {
       print('khong tim thay');
@@ -140,7 +140,6 @@ class CartProvider with ChangeNotifier {
       }
     }
     notifyListeners();
-    print(_items);
   }
 
   //remove item

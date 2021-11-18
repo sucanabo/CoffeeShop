@@ -16,7 +16,7 @@ class ScreenBodyLoading extends StatelessWidget {
       child: Center(
         child: CircularProgressIndicator(
           valueColor:
-              AlwaysStoppedAnimation<Color>(indicatorColor ?? primaryColor),
+              AlwaysStoppedAnimation<Color>(indicatorColor ?? AppColors.primaryColor),
         ),
       ),
     );

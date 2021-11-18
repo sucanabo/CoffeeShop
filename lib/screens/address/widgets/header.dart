@@ -1,5 +1,6 @@
 import 'package:coffee_shop/models/user.dart';
 import 'package:coffee_shop/providers/auth_provider.dart';
+import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/values/size_config.dart';
@@ -27,7 +28,6 @@ class MoreScreenSliverDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    final UserModel user = Provider.of<AuthProvider>(context).getUser;
     return Stack(
       children: <Widget>[
         Image.asset(
@@ -51,57 +51,60 @@ class MoreScreenSliverDelegate extends SliverPersistentHeaderDelegate {
         Positioned(
           top: 15 - shrinkOffset,
           left: MediaQuery.of(context).size.width / 2 - 50,
-          child: Column(
-            children: [
-              Container(
-                height: 100.0,
-                width: 100.0,
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image(
-                      image: user.image == 'default_user.png'
-                          ? AssetImage('assets/images/${user.image}')
-                          : base64StringToImage(user.image),
-                      fit: BoxFit.cover,
-                    )),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Text(
-                '${user.firstName} ${user.lastName}',
-                style: TextStyle(
-                    color: textColor,
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.w600),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Container(
-                width: 100.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.0),
-                  border: Border.all(color: textColor),
+          child: Consumer<AuthProvider>(builder: (context, provider, child) {
+            final UserModel user = provider.getUser;
+            return Column(
+              children: [
+                Container(
+                  height: 100.0,
+                  width: 100.0,
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image(
+                        image: user.image == null
+                            ? AssetImage(Res.img_default_user)
+                            : base64StringToImage(user.image),
+                        fit: BoxFit.cover,
+                      )),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('New',
-                        style: TextStyle(
-                            color: textColor,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500)),
-                    Icon(
-                      Icons.eco_outlined,
-                      color: textColor,
-                      size: 22.0,
-                    ),
-                  ],
+                SizedBox(
+                  height: 10.0,
                 ),
-              ),
-            ],
-          ),
+                Text(
+                  '${user.displayName}',
+                  style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 5.0,
+                ),
+                Container(
+                  width: 100.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50.0),
+                    border: Border.all(color: AppColors.textColor),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('New',
+                          style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500)),
+                      Icon(
+                        Icons.eco_outlined,
+                        color: AppColors.textColor,
+                        size: 22.0,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          }),
         ),
       ],
     );

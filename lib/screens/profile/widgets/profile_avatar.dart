@@ -1,8 +1,8 @@
+
 import 'dart:io';
-import 'package:coffee_shop/models/api_response.dart';
-import 'package:coffee_shop/models/user.dart';
+
 import 'package:coffee_shop/providers/auth_provider.dart';
-import 'package:coffee_shop/services/user_service.dart';
+import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +10,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class ProfileAvatar extends StatefulWidget {
-  final String userImg;
-  final Function onImageChange;
-  ProfileAvatar({this.userImg, this.onImageChange});
+  final Function onChanged;
+
+  ProfileAvatar({this.onChanged});
 
   @override
   _ProfileAvatarState createState() => _ProfileAvatarState();
@@ -24,23 +24,16 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
   final _imgPicker = ImagePicker();
 
   Future getImage() async {
-    final pickedFile = await _imgPicker.getImage(source: ImageSource.gallery);
     setState(() {
       _isLoading = true;
     });
-    if (pickedFile != null) {
+    final pickedFile = await _imgPicker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null && pickedFile.path != '') {
       setState(() {
         _imageFile = File(pickedFile.path);
+        widget.onChanged(imageToBase64String(_imageFile.path));
       });
-      ApiResponse response =
-          await updateUser(image: imageToBase64String(_imageFile));
-      if (response.error == null) {
-        Provider.of<AuthProvider>(context, listen: false)
-            .updateUser(UserModel(image: imageToBase64String(_imageFile)));
-        showMess(context: context, text: 'Avatar updated');
-      } else {
-        showMess(context: context, text: response.error);
-      }
     }
     setState(() {
       _isLoading = false;
@@ -61,37 +54,40 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
         },
         child: Stack(
           children: [
-            Container(
-                width: 130.0,
-                height: 130.0,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(width: 4, color: Colors.white),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          spreadRadius: 2,
-                          blurRadius: 10,
-                          offset: Offset(0, 10))
-                    ],
-                    image: DecorationImage(
-                        image: _imageFile == null
-                            ? widget.userImg == 'default_user.png'
-                                ? AssetImage('assets/images/${widget.userImg}')
-                                : base64StringToImage(widget.userImg)
-                            : _isLoading == true
-                                ? AssetImage('assets/images/default_user.png')
-                                : FileImage(_imageFile),
-                        fit: BoxFit.cover,
-                        alignment: Alignment.center)),
-                child: _isLoading
-                    ? SizedBox(
-                        width: 30.0,
-                        height: 30.0,
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation(primaryColor),
-                        ))
-                    : null),
+            Consumer<AuthProvider>(builder: (context, provider, child) {
+              return Container(
+                  width: 130.0,
+                  height: 130.0,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(width: 4, color: Colors.white),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 2,
+                            blurRadius: 10,
+                            offset: Offset(0, 10))
+                      ],
+                      image: DecorationImage(
+                          image: _imageFile == null
+                              ? provider.getUser.image == null
+                                  ? AssetImage(Res.img_default_user)
+                                  : base64StringToImage(provider.getUser.image)
+                              : _isLoading == true
+                                  ? AssetImage(Res.img_default_user)
+                                  : FileImage(_imageFile),
+                          fit: BoxFit.cover,
+                          alignment: Alignment.center)),
+                  child: _isLoading
+                      ? SizedBox(
+                          width: 30.0,
+                          height: 30.0,
+                          child: CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation(AppColors.primaryColor),
+                          ))
+                      : null);
+            }),
             Positioned(
               bottom: 0,
               right: 0,
@@ -100,7 +96,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                 width: 40.0,
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: primaryColor,
+                    color: AppColors.primaryColor,
                     border: Border.all(color: Colors.white, width: 4.0)),
                 child: Icon(
                   Icons.edit,

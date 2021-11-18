@@ -35,7 +35,7 @@ class EnterCodeScreen extends StatelessWidget {
                           shape: BoxShape.circle, color: Colors.white),
                       child: LineIcon.alternateTicket(
                         size: 50.0,
-                        color: primaryColor,
+                        color: AppColors.primaryColor,
                       ),
                     ),
                     SizedBox(height: 20.0),
@@ -59,7 +59,7 @@ class EnterCodeScreen extends StatelessWidget {
                     SizedBox(height: 20.0),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: primaryMediumColor,
+                            primary: AppColors.primaryMediumColor,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50.0))),
                         onPressed: () => Navigator.pop(context),

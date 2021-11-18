@@ -41,7 +41,7 @@ Align _buildRewardBottom(rewardPoint) {
       child: Container(
         padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
-            color: primaryColor, borderRadius: BorderRadius.circular(10.0)),
+            color: AppColors.primaryColor, borderRadius: BorderRadius.circular(10.0)),
         width: SizeConfig.screenWidth * 0.9,
         height: SizeConfig.screenHeigh * 0.07,
         child: Row(
@@ -66,7 +66,7 @@ Align _buildRewardBottom(rewardPoint) {
                 onPressed: () {},
                 child: Text(
                   'Redeem',
-                  style: TextStyle(color: primaryColor),
+                  style: TextStyle(color: AppColors.primaryColor),
                 ),
                 elevation: 0,
                 color: Colors.white,

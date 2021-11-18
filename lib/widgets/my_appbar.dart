@@ -1,7 +1,9 @@
 import 'package:coffee_shop/providers/auth_provider.dart';
+import 'package:coffee_shop/providers/cart_provider.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:provider/provider.dart';
 
@@ -23,40 +25,62 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       preferredSize: Size.fromHeight(100.0),
       child: AppBar(
         centerTitle: false,
-        title: greeting(user.firstName),
-        brightness: Brightness.light,
+        title: greeting(user.displayName ?? ' '),
         elevation: 0.0,
         backgroundColor:
             backgroundColor != null ? backgroundColor : Colors.transparent,
-        actions: <Widget>[
+        actions: [
           _buildAcitonButton(
               icon: LineIcon.bell(
-                color: primaryColor,
+                color: AppColors.primaryColor,
               ),
               onPress: () => Navigator.pushNamed(context, '/notification')),
-          _buildAcitonButton(
-              icon: LineIcon.shoppingBasket(
-                color: primaryColor,
-              ),
-              onPress: () => Navigator.pushNamed(context, '/cart'))
-        ],
+          Consumer<CartProvider>(
+              builder: (context, provider, child) => _buildAcitonButton(
+                  quantity: provider.itemCount,
+                  icon: LineIcon.shoppingBasket(
+                    color: AppColors.primaryColor,
+                  ),
+                  onPress: () => Navigator.pushNamed(context, '/cart')))
+        ], systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
     );
   }
 
-  Widget _buildAcitonButton({Function onPress, Icon icon}) {
-    return Container(
-      margin: const EdgeInsets.only(right: 10.0),
-      height: 40.0,
-      width: 40.0,
-      child: ElevatedButton(
-        onPressed: onPress,
-        child: icon,
-        style: ElevatedButton.styleFrom(
-            elevation: 0,
-            primary: Colors.white,
-            shape: CircleBorder(),
-            padding: const EdgeInsets.all(0.0)),
+  Widget _buildAcitonButton({Function onPress, Icon icon, int quantity = 0}) {
+    return Align(
+      child: Container(
+        margin: const EdgeInsets.only(right: 10.0),
+        height: 40.0,
+        width: 40.0,
+        child: Stack(
+          children: [
+            ElevatedButton(
+              onPressed: onPress,
+              child: icon,
+              style: ElevatedButton.styleFrom(
+                  elevation: 0,
+                  primary: Colors.white,
+                  shape: CircleBorder(),
+                  padding: const EdgeInsets.all(0.0)),
+            ),
+            if (quantity > 0)
+              Align(
+                  alignment: Alignment.bottomRight,
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: AppColors.redColor,
+                          borderRadius: BorderRadius.circular(50.0)),
+                      height: 13,
+                      width: 13,
+                      child: Center(
+                          child: Text(
+                        quantity.toString(),
+                        style: TextStyle(
+                            fontSize: 10, color: AppColors.whiteColor),
+                      ))))
+          ],
+        ),
       ),
     );
   }

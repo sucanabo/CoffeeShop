@@ -1,8 +1,15 @@
 import 'package:coffee_shop/models/address.dart';
 import 'package:coffee_shop/models/api_response.dart';
 import 'package:coffee_shop/models/user.dart';
+import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
 import 'package:coffee_shop/services/user_service.dart' as sv;
+import 'package:coffee_shop/services/user_service.dart';
+import 'package:coffee_shop/values/api_end_point.dart';
+import 'package:coffee_shop/values/function.dart';
+import 'package:coffee_shop/values/strings.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider with ChangeNotifier {
@@ -51,12 +58,13 @@ class AuthProvider with ChangeNotifier {
     return response.error;
   }
 
-  Future<String> updateAddress(AddressModel address, int id) async {
+  Future<int> updateAddress(BuildContext context,
+      {AddressModel address, int id}) async {
+    int result = -1;
     ApiResponse response = await sv.updateAddress(address: address, id: id);
     if (response.error == null) {
       int index = _addresses
           .indexOf(_addresses.firstWhere((element) => element.id == id));
-      print(index);
       _addresses[index] = AddressModel(
         id: id,
         title: address.title,
@@ -66,13 +74,25 @@ class AuthProvider with ChangeNotifier {
         coordinates: address.coordinates,
         description: address.description,
       );
+
+      result = id;
       notifyListeners();
-      return null;
     }
-    return response.error;
+    if (response.error == unauthorized) {
+      logout(context).then((value) => {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => SignInScreen()),
+                (route) => false)
+          });
+    } else {
+      showToast(response.error);
+    }
+    return result;
   }
 
-  Future<String> createAddress(AddressModel address) async {
+  Future<int> createAddress(BuildContext context,
+      {AddressModel address}) async {
+    int result = -1;
     ApiResponse response = await sv.createAddress(address: address);
     if (response.error == null) {
       _addresses.add(AddressModel(
@@ -83,9 +103,20 @@ class AuthProvider with ChangeNotifier {
           receiverName: address.receiverName,
           receiverPhone: address.receiverPhone));
       notifyListeners();
-      return null;
+      result = response.data;
+    } else {
+      if (response.error == unauthorized) {
+        logout(context).then((value) => {
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => SignInScreen()),
+                  (route) => false)
+            });
+      } else {
+        showToast(response.error);
+      }
     }
-    return response.error;
+
+    return result;
   }
 
   Future<String> deleteAddress(int id) async {
@@ -98,12 +129,22 @@ class AuthProvider with ChangeNotifier {
     return response.error;
   }
 
-  updateUser(UserModel user) {
-    _user.firstName = user.firstName ?? _user.firstName;
-    _user.lastName = user.lastName ?? _user.lastName;
-    _user.email = user.email ?? _user.email;
-    _user.phone = user.phone ?? _user.phone;
-    _user.image = user.image ?? _user.image;
+  updateUser(UserModel user) async {
+    ApiResponse response = await sv.updateUser(
+        image: user.image,
+        displayName: user.displayName,
+        email: user.email,
+        gender: user.gender);
+    if (response.error == null) {
+      if (user.image != null) _user.image = user.image;
+      if (user.displayName != null) _user.displayName = user.displayName;
+      if (user.email != null) _user.email = user.email;
+      if (user.gender != null) _user.gender = user.gender;
+      showToast('Update user succes.');
+    } else {
+      showToast('Update user failded. Try again.',
+          toastLength: Toast.LENGTH_LONG);
+    }
     notifyListeners();
   }
 
@@ -125,17 +166,36 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<String> login({String phone, String password}) async {
-    ApiResponse response = await sv.login(phone, password);
+    ApiResponse response = await sv.loginPhone(phone, password);
     if (response.error == null) {
       SharedPreferences pref = await SharedPreferences.getInstance();
       final UserModel user = response.data as UserModel;
       setUser(user);
-      
-      pref.setString('token', user.token ?? '');
-      pref.setInt('id', user.id ?? 0);
+
+      pref.setString(PrefKey.TOKEN, user.token ?? '');
+      pref.setInt(PrefKey.ID, user.id ?? 0);
       return null;
     }
     return response.error;
   }
-  
+
+  Future<bool> signup({UserModel user, String password}) async {
+    ApiResponse response = await sv.register(
+        displayName: user.displayName,
+        email: user.email,
+        phone: user.phone,
+        birthday: user.birthday,
+        password: password);
+    if (response.error == null) {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      final UserModel user = response.data as UserModel;
+      setUser(user);
+      pref.setString(PrefKey.TOKEN, user.token ?? '');
+      pref.setInt(PrefKey.ID, user.id ?? 0);
+
+      return true;
+    }
+    showToast(response.error, toastLength: Toast.LENGTH_LONG);
+    return false;
+  }
 }

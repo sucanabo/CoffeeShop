@@ -1,20 +1,24 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:coffee_shop/providers/navigation_provider.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 //decode image base64
 MemoryImage base64StringToImage(String base64String) {
   return MemoryImage(base64Decode(base64String));
 }
 
-String imageToBase64String(File image) {
-  if (image != null) {
-    return base64Encode(image.readAsBytesSync());
+String imageToBase64String(String path) {
+  if (path != null) {
+    final bytes = File(path).readAsBytesSync();
+    return base64Encode(bytes);
   }
   return null;
 }
@@ -53,14 +57,21 @@ extension StringExtension on String {
 }
 
 //date formart
-String formartDate(DateTime date) {
-  return DateFormat('dd-MM-yyyy').format(date);
+String formatDateToString(DateTime date) {
+  return DateFormat('dd/MM/yyyy').format(date);
+}
+
+String formatDateToStringWithTime(DateTime date) {
+  return DateFormat('HH:mm - dd/MM/yyyy ').format(date);
+}
+
+DateTime formatStringToDate(String str) {
+  return DateFormat('dd/MM/yyyy').parse(str);
 }
 
 //greeting
 Widget greeting(String userName) {
   var hour = DateTime.now().hour;
-  print(hour);
   String session = '';
   if (hour < 12) {
     session = 'Morning';
@@ -73,9 +84,11 @@ Widget greeting(String userName) {
         hour < 17 ? 'assets/icons/sun.svg' : 'assets/icons/moon.svg'),
     SizedBox(width: 10.0),
     Text(
-      'Good $session, $userName',
+      'Good $session, ${userName.split(' ').last}',
       style: TextStyle(
-          color: textColor, fontSize: 20.0, fontWeight: FontWeight.w500),
+          color: AppColors.textColor,
+          fontSize: 20.0,
+          fontWeight: FontWeight.w500),
     ),
   ]);
 }
@@ -84,4 +97,33 @@ Widget greeting(String userName) {
 void coppyClipBoard(String text, context) {
   Clipboard.setData(ClipboardData(text: text)).then((value) =>
       showMess(text: 'Copied $text into clipboard.', context: context));
+}
+
+//show Toast
+void showToast(
+  String msg, {
+  Toast toastLength = Toast.LENGTH_SHORT,
+}) {
+  Fluttertoast.showToast(
+      msg: msg,
+      toastLength: toastLength,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.grey,
+      textColor: Colors.black,
+      fontSize: 16.0);
+}
+
+//hide keyboard
+void hideKeyboard(BuildContext context) {
+  FocusScopeNode currentFocus = FocusScope.of(context);
+  if (!currentFocus.hasPrimaryFocus) {
+    currentFocus.unfocus();
+  }
+}
+
+//set loading
+void setLoading(context, {@required bool loading}) {
+  final naviProvider = Provider.of<NavigationProvider>(context, listen: false);
+  naviProvider.setLoading(loading);
 }

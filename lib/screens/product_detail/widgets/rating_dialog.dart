@@ -154,7 +154,7 @@ class _RatinDialogState extends State<RatingDialog> {
                         onPressed: () {
                           Navigator.pop(widget.dialogContext);
                         },
-                        color: primaryLightColor,
+                        color: AppColors.primaryLightColor,
                         title: 'Cancel',
                       ),
                     ),
@@ -167,7 +167,7 @@ class _RatinDialogState extends State<RatingDialog> {
                               _starTemp != null ? _starTemp : _ratingModel.star,
                               _txtReview.text);
                         },
-                        color: primaryMediumColor,
+                        color: AppColors.primaryMediumColor,
                         title: 'Rate',
                       ),
                     ),

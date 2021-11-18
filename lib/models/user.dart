@@ -1,7 +1,6 @@
 class UserModel {
   int id;
-  String firstName;
-  String lastName;
+  String displayName;
   String image;
   String email;
   String phone;
@@ -11,12 +10,12 @@ class UserModel {
   bool isEmailVerified;
   int level;
   int point;
+  int totalPoint;
   String barCode;
 
   UserModel(
       {this.id,
-      this.firstName,
-      this.lastName,
+      this.displayName,
       this.image,
       this.email,
       this.phone,
@@ -26,23 +25,24 @@ class UserModel {
       this.token,
       this.level,
       this.point,
+      this.totalPoint,
       this.barCode});
 
   //function to convert json data to user model
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['user']['id'],
-      firstName: json['user']['first_name'],
-      lastName: json['user']['last_name'],
-      image: json['user']['image'],
-      email: json['user']['email'],
-      isEmailVerified: json['user']['email_verified_at'] != null,
-      phone: json['user']['phone'],
-      birthday: DateTime.parse(json['user']['birthday']),
+      displayName: json['user']['display_name'],
       gender: json['user']['gender'],
+      image: json['user']['image'],
       level: json['user']['level'],
       point: json['user']['point'],
+      totalPoint: json['user']['total_point'],
       barCode: json['user']['bar_code'],
+      email: json['user']['email'],
+      phone: json['user']['phone'],
+      isEmailVerified: json['user']['email_verified_at'] != null,
+      birthday: DateTime.parse(json['user']['birthday']),
       token: json['token'],
     );
   }

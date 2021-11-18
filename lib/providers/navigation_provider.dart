@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class NavigationProvider with ChangeNotifier {
   int _curentIndex = 0;
+  bool _loading = false;
   List<Widget> _menuItems = [
     HomeScreen(),
     ProductScreen(),
@@ -14,22 +15,28 @@ class NavigationProvider with ChangeNotifier {
   ];
   get menuItems => _menuItems;
   get currentIndex => _curentIndex;
+  get loading => _loading;
 
-  set currentIndex(int index) {
+  setCurrentIndex(int index) {
     _curentIndex = index;
     notifyListeners();
   }
-  void redirectScreen(Widget screen){
+
+  void redirectScreen(Widget screen) {
     int index = -1;
     for (var item in _menuItems) {
-      if(item.toString() == screen.toString()){
+      if (item.toString() == screen.toString()) {
         index = _menuItems.indexOf(item);
         break;
       }
     }
-    if(index != -1){
-      currentIndex = index;
+    if (index != -1) {
+      setCurrentIndex(index);
     }
+  }
 
+  setLoading(bool value) {
+    _loading = value;
+    notifyListeners();
   }
 }

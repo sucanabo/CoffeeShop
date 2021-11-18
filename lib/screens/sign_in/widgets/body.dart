@@ -1,28 +1,31 @@
-import 'package:coffee_shop/screens/sign_up/sign_up_screen.dart';
 import 'package:coffee_shop/screens/sign_in/widgets/sign_in_with.dart';
+import 'package:coffee_shop/screens/sign_up/sign_up_screen.dart';
 import 'package:coffee_shop/values/color_theme.dart';
-import 'package:coffee_shop/widgets/screen_body.dart';
+import 'package:coffee_shop/values/size_config.dart';
 import 'package:flutter/material.dart';
 
 import 'signin_form.dart';
-import 'package:coffee_shop/values/size_config.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: ScreenBody(
-          child: ListView(
-        padding: EdgeInsets.all(getProportionateScreenWidth(20.0)),
-        children: [
-          Column(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 'Let\'s sign you in',
                 style: TextStyle(
-                    color: primaryColor,
-                    fontSize: getProportionateScreenWidth(28.0),
+                    color: AppColors.primaryColor,
+                    fontSize: getWidth(28.0),
                     fontWeight: FontWeight.w600),
               ),
               SizedBox(
@@ -34,11 +37,12 @@ class Body extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 25.0),
-          SignForm(),
-          SizedBox(height: 20.0),
-          Column(
+        ),
+        SignForm(),
+        Expanded(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Don\'t you have an account ?'),
               TextButton(
@@ -49,18 +53,19 @@ class Body extends StatelessWidget {
                     alignment: Alignment.topCenter, padding: EdgeInsets.zero),
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text('Sign up', style: TextStyle(color: primaryMediumColor)),
+                  Text('Sign up',
+                      style: TextStyle(color: AppColors.primaryMediumColor)),
                   Icon(
                     Icons.chevron_right_rounded,
-                    color: primaryMediumColor,
+                    color: AppColors.primaryMediumColor,
                   )
                 ]),
-              )
+              ),
             ],
           ),
-          SignInWith()
-        ],
-      )),
+        ),
+        SignInWith()
+      ],
     );
   }
 }

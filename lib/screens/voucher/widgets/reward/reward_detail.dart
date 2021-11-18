@@ -56,7 +56,7 @@ class RewardDetail extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.w700,
-                                color: primaryColor),
+                                color: AppColors.primaryColor),
                           ),
                           SizedBox(width: 3.0),
                           Text(
@@ -66,7 +66,7 @@ class RewardDetail extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        '${formartDate(reward.expiryDate)}',
+                        '${reward.expiryDate != null ? formatDateToString(reward.expiryDate) : ''} ',
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.w700),
                         textAlign: TextAlign.end,

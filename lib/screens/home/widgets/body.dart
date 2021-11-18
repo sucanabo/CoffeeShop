@@ -1,16 +1,19 @@
-import 'package:coffee_shop/values/color_theme.dart';
+import 'package:coffee_shop/providers/product_provider.dart';
+import 'package:coffee_shop/screens/product/see_product_screen.dart';
 import 'package:coffee_shop/widgets/haeding_underline.dart';
 import 'package:coffee_shop/widgets/product.dart';
 import 'package:coffee_shop/widgets/see_all_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'home_carousel.dart';
 
 class Body extends StatelessWidget {
-  final List<dynamic> newProduct;
-  Body({this.newProduct});
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProductProvider>(context, listen: false);
+    var newList = provider.newProducts(limit: 10);
+    var saleList = provider.saleProducts(limit: 10);
     return ListView(
       children: <Widget>[
         ClipRRect(
@@ -24,63 +27,49 @@ class Body extends StatelessWidget {
         SizedBox(
           height: 20.0,
         ),
-        Container(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [HeadingUnderline(text: 'New'), SeeAllButton()],
-            ),
-            Container(
-              height: 275.0,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: newProduct.map((product) {
-                  return ProductWidget(product: product);
-                }).toList(),
-              ),
+            HeadingUnderline(text: 'New'),
+            SeeAllButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => SeeProductScreen(
+                          data: provider.newProducts(limit: 20),
+                        )));
+              },
             )
           ],
-        )),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+              children: List.generate(newList.length,
+                  (index) => ProductWidget(product: newList[index]))),
+        ),
         SizedBox(height: 15.0),
-        Container(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                HeadingUnderline(text: 'On Sale'),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'See all',
-                    style: TextStyle(color: primaryColor),
-                  ),
-                  style: ButtonStyle(
-                      padding: MaterialStateProperty.all<EdgeInsets>(
-                          EdgeInsets.all(0)),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                          side: BorderSide(color: primaryColor),
-                        ),
-                      )),
-                )
-              ],
-            ),
-            // Container(
-            //   height: 275.0,
-            //   child: ListView(
-            //     scrollDirection: Axis.horizontal,
-            //     children: saleProduct.map((product) {
-            //       return ProductWidget(product: product);
-            //     }).toList(),
-            //   ),
-            // )
+            HeadingUnderline(text: 'Sale'),
+            SeeAllButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => SeeProductScreen(
+                          data: provider.saleProducts(),
+                        )));
+              },
+            )
           ],
-        )),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Container(
+            child: Row(
+                children: List.generate(saleList.length,
+                    (index) => ProductWidget(product: saleList[index]))),
+          ),
+        ),
       ],
     );
   }

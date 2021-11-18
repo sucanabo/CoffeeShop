@@ -22,7 +22,7 @@ class AddressItem extends StatelessWidget {
               )
             : Navigator.pop(context, {'id': address.id});
       },
-      splashColor: primaryColor,
+      splashColor: AppColors.primaryColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

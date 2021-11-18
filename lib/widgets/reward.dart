@@ -61,7 +61,7 @@ class RewardWidget extends StatelessWidget {
                                       Text(
                                         reward.brandName,
                                         style: TextStyle(
-                                            color: primaryColor,
+                                            color: AppColors.primaryColor,
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.w600),
                                       ),
@@ -80,7 +80,7 @@ class RewardWidget extends StatelessWidget {
                                 height: 35.0,
                                 width: 35.0,
                                 decoration: BoxDecoration(
-                                    color: darkColor, shape: BoxShape.circle),
+                                    color: AppColors.darkColor, shape: BoxShape.circle),
                                 child: Center(
                                     child: Text(
                                   '${reward.point}',
@@ -135,7 +135,7 @@ class RewardWidget extends StatelessWidget {
                           Text(
                             reward.brandName,
                             style:
-                                TextStyle(fontSize: 16.0, color: primaryColor),
+                                TextStyle(fontSize: 16.0, color: AppColors.primaryColor),
                           ),
                           Text(
                             reward.title,
@@ -152,7 +152,7 @@ class RewardWidget extends StatelessWidget {
                         height: 35.0,
                         width: 35.0,
                         decoration: BoxDecoration(
-                            color: darkColor, shape: BoxShape.circle),
+                            color: AppColors.darkColor, shape: BoxShape.circle),
                         child: Center(
                           child: Text(
                             '${reward.point}',

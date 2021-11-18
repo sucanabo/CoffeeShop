@@ -1,7 +1,7 @@
 //Get all voucher of user
 import 'dart:convert';
 
-import 'package:coffee_shop/constants.dart';
+import 'package:coffee_shop/values/api_end_point.dart';
 import 'package:coffee_shop/models/api_response.dart';
 import 'package:coffee_shop/models/reward.dart';
 import 'package:coffee_shop/models/voucher.dart';

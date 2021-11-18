@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:coffee_shop/models/api_response.dart';
 import 'package:coffee_shop/services/user_service.dart';
 
-import '../constants.dart';
+import '../values/api_end_point.dart';
 
 //get all category
 Future<ApiResponse> getCategories() async {

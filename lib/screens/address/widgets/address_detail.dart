@@ -7,6 +7,7 @@ import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/widgets/pill_button.dart';
 import 'package:coffee_shop/widgets/popup_menu_item.dart';
 import 'package:coffee_shop/widgets/rounded_button.dart';
+import 'package:coffee_shop/widgets/rounded_text_field.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:coffee_shop/widgets/screen_body_loading.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../../constants.dart';
+import '../../../values/api_end_point.dart';
 
 class AddressDetail extends StatefulWidget {
   final bool isEdit;
@@ -36,26 +37,16 @@ class _AddressDetailState extends State<AddressDetail> {
 
   AddressModel _address;
   void submitForm(AddressModel address) async {
-    String result = widget.isEdit
+    int result = widget.isEdit
         ? await Provider.of<AuthProvider>(context, listen: false)
-            .updateAddress(address, widget.address.id)
+            .updateAddress(context, address: address, id: widget.address.id)
         : await Provider.of<AuthProvider>(context, listen: false)
-            .createAddress(address);
-    if (result != null) {
-      if (result == unauthorized) {
-        logout().then((value) => {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => SignInScreen()),
-                  (route) => false)
-            });
-      } else {
-        showMess(context: context, text: result);
-      }
+            .createAddress(context, address: address);
+    if (result != -1) {
+      Navigator.of(context).pop(result);
+      showToast(widget.isEdit ? 'Updated success' : 'Create success');
     } else {
-      Navigator.of(context).pop();
-      showMess(
-          context: context,
-          text: widget.isEdit ? 'Updated success' : 'Create success');
+      showToast(widget.isEdit ? 'Updated failed' : 'Updated failed');
     }
     setState(() {
       _loading = false;
@@ -67,7 +58,7 @@ class _AddressDetailState extends State<AddressDetail> {
         .deleteAddress(widget.address.id);
     if (result != null) {
       if (result == unauthorized) {
-        logout().then((value) => {
+        logout(context).then((value) => {
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => SignInScreen()),
                   (route) => false)
@@ -96,7 +87,7 @@ class _AddressDetailState extends State<AddressDetail> {
       _txtReceiverPhone.text = _address.receiverPhone;
     } else {
       final user = Provider.of<AuthProvider>(context, listen: false).getUser;
-      _txtReceiverName.text = '${user.firstName} ${user.lastName}';
+      _txtReceiverName.text = '${user.displayName}';
       _txtReceiverPhone.text = user.phone;
     }
   }
@@ -129,7 +120,7 @@ class _AddressDetailState extends State<AddressDetail> {
                                 fontSize: 20.0, fontWeight: FontWeight.w500),
                           ),
                           SizedBox(height: 20.0),
-                          TextFormField(
+                          RoundedTextField(
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter title';
@@ -139,16 +130,12 @@ class _AddressDetailState extends State<AddressDetail> {
                               return null;
                             },
                             controller: _txtTitle,
-                            style: TextStyle(fontSize: 14.0),
-                            decoration: InputDecoration(
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                hintText: 'Name of address',
-                                labelText: 'Address title'),
+                            hintText: 'Name of address',
+                            label: 'Address title',
                             textInputAction: TextInputAction.next,
                           ),
                           SizedBox(height: 20.0),
-                          TextFormField(
+                          RoundedTextField(
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter address';
@@ -157,31 +144,27 @@ class _AddressDetailState extends State<AddressDetail> {
                                 return 'Title length must in 500 character';
                               return null;
                             },
+                            maxLine: 5,
+                            paddingContent: EdgeInsets.symmetric(
+                                vertical: 20.0, horizontal: 15.0),
                             controller: _txtAddress,
-                            style: TextStyle(fontSize: 14.0),
-                            maxLines: 3,
-                            decoration: InputDecoration(
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                hintText: 'Address',
-                                labelText: 'Adress'),
+                            hintText: 'Address',
+                            label: 'Address',
                             textInputAction: TextInputAction.next,
                           ),
                           SizedBox(height: 20.0),
-                          TextFormField(
+                          RoundedTextField(
                             validator: (value) {
                               if (value.length > 500)
                                 return 'Title length must in 500 character';
                               return null;
                             },
+                            paddingContent: EdgeInsets.symmetric(
+                                horizontal: 15.0, vertical: 20.0),
                             controller: _txtDescription,
-                            style: TextStyle(fontSize: 14.0),
-                            maxLines: 5,
-                            decoration: InputDecoration(
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                hintText: 'More desciption about your address',
-                                labelText: 'Description'),
+                            maxLine: 5,
+                            hintText: 'More desciption about your address',
+                            label: 'Description',
                             textInputAction: TextInputAction.next,
                           ),
                           Divider(
@@ -194,7 +177,7 @@ class _AddressDetailState extends State<AddressDetail> {
                                 fontSize: 20.0, fontWeight: FontWeight.w500),
                           ),
                           SizedBox(height: 20.0),
-                          TextFormField(
+                          RoundedTextField(
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter receiver\'s name';
@@ -204,16 +187,12 @@ class _AddressDetailState extends State<AddressDetail> {
                               return null;
                             },
                             controller: _txtReceiverName,
-                            style: TextStyle(fontSize: 14.0),
-                            decoration: InputDecoration(
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                hintText: 'Receiver\'s name',
-                                labelText: 'Receiver'),
+                            hintText: 'Receiver\'s name',
+                            label: 'Receiver',
                             textInputAction: TextInputAction.next,
                           ),
                           SizedBox(height: 20.0),
-                          TextFormField(
+                          RoundedTextField(
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter receiver\'s phone number';
@@ -224,12 +203,8 @@ class _AddressDetailState extends State<AddressDetail> {
                             },
                             controller: _txtReceiverPhone,
                             keyboardType: TextInputType.phone,
-                            style: TextStyle(fontSize: 14.0),
-                            decoration: InputDecoration(
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                hintText: 'Receiver\'s phone',
-                                labelText: 'Phone number'),
+                            hintText: 'Receiver\'s phone',
+                            label: 'Phone number',
                             textInputAction: TextInputAction.done,
                           ),
                           SizedBox(
@@ -251,7 +226,7 @@ class _AddressDetailState extends State<AddressDetail> {
                                   submitForm(address);
                                 }
                               },
-                              color: primaryColor)
+                              color: AppColors.primaryColor)
                         ],
                       ))
                 ],
@@ -274,14 +249,14 @@ class _AddressDetailState extends State<AddressDetail> {
                     });
                   },
                   title: 'Yes',
-                  color: primaryColor,
+                  color: AppColors.primaryColor,
                 ),
                 RoundedButton(
                   onPressed: () {
                     Navigator.pop(dialogContext);
                   },
                   title: 'No',
-                  color: darkColor,
+                  color: AppColors.darkColor,
                 ),
               ],
               shape: RoundedRectangleBorder(
@@ -302,7 +277,7 @@ class _AddressDetailState extends State<AddressDetail> {
                         Text(item.text),
                         Icon(
                           item.icon,
-                          color: textColor,
+                          color: AppColors.textColor,
                           size: 18.0,
                         ),
                       ],

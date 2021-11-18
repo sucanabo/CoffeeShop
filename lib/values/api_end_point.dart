@@ -1,9 +1,12 @@
 //----------STRINGS----------
-const baseURL = 'http://192.168.1.5:8000/api';
+const baseURL = 'https://koffeeholic.com/api';
+//auth
 const loginURL = baseURL + '/login';
 const registerURL = baseURL + '/register';
 const logoutURL = baseURL + '/logout';
 const userURL = baseURL + '/user';
+const checkPhone = baseURL + '/check_phone';
+//product
 const productsURL = baseURL + '/products';
 const categoriesURL = baseURL + '/categories';
 const ratingsURL = baseURL + '/ratings';
@@ -11,6 +14,11 @@ const uservouchersURL = baseURL + '/uservouchers';
 const vouchersURL = baseURL + '/vouchers';
 const rewardsURL = baseURL + '/rewards';
 const addressesURL = baseURL + '/addresses';
+//order
+const order = baseURL + '/orders';
+//transactions
+const transaction = baseURL + '/transactions';
+
 //----------ERROR----------
 const serverError = 'Server Error.';
 const unauthorized = 'Unauthorized.';

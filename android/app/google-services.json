@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "853833848607",
+    "project_id": "koffeeholic-75e48",
+    "storage_bucket": "koffeeholic-75e48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853833848607:android:27efaf3c9d58b7c9de822a",
+        "android_client_info": {
+          "package_name": "com.example.coffee_shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "853833848607-kn7v09jg2snii71e5jdlmfaudlpm5dqr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOtpGDh52mz-_Y8uFTjfNM2wdHYY6KIGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "853833848607-kn7v09jg2snii71e5jdlmfaudlpm5dqr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

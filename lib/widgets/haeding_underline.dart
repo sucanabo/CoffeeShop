@@ -15,9 +15,9 @@ class HeadingUnderline extends StatelessWidget {
                 fontSize: 24.0,
                 fontWeight: FontWeight.w500,
                 letterSpacing: 1.5,
-                color: textColor)),
+                color: AppColors.textColor)),
         SizedBox(
-            height: 3.0, width: 100.0, child: Container(color: primaryColor))
+            height: 3.0, width: 100.0, child: Container(color: AppColors.primaryColor))
       ],
     );
   }

@@ -20,7 +20,7 @@ class _BodyState extends State<Body> {
     List result = [];
     final List allProduct =
         Provider.of<ProductProvider>(context, listen: false).productList;
-    if (searchString != '') {
+    if (searchString.isNotEmpty) {
       for (var item in allProduct) {
         String title = TiengViet.parse(
             item.title.toString().toLowerCase().replaceAll(' ', '').trim());
@@ -35,6 +35,7 @@ class _BodyState extends State<Body> {
       _productSearch = result;
     });
   }
+
   @override
   void initState() {
     super.initState();
@@ -45,18 +46,19 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return ScreenBody(
+        resizeToAvoidBottomInset: false,
         child: Column(children: [
-      SearchBar(
-        onChange: (value) {
-          changeFilter(value);
-        },
-      ),
-      Expanded(
-          child: ListView.builder(
-        itemCount: _productSearch.length,
-        itemBuilder: (context, index) =>
-            ProductWidget(isLarge: true, product: _productSearch[index]),
-      ))
-    ]));
+          SearchBar(
+            onChange: (value) {
+              changeFilter(value);
+            },
+          ),
+          Expanded(
+              child: ListView.builder(
+            itemCount: _productSearch.length,
+            itemBuilder: (context, index) =>
+                ProductWidget(isLarge: true, product: _productSearch[index]),
+          ))
+        ]));
   }
 }

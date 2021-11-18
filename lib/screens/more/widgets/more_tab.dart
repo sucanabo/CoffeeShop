@@ -13,8 +13,8 @@ class MoreTab extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.0),
       child: InkWell(
-        splashColor: primaryMediumColor,
-        focusColor: primaryMediumColor,
+        splashColor: AppColors.primaryMediumColor,
+        focusColor: AppColors.primaryMediumColor,
         onTap: onPressed,
         child: Row(
           children: [
@@ -32,7 +32,7 @@ class MoreTab extends StatelessWidget {
                       (TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500))),
             ),
             LineIcon.arrowRight(
-              color: primaryColor,
+              color: AppColors.primaryMediumColor,
             )
           ],
         ),

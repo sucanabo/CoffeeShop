@@ -37,14 +37,14 @@ class Body extends StatelessWidget {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => AddressDetail(isEdit: false)));
         },
-        splashColor: primaryColor,
+        splashColor: AppColors.primaryColor,
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(
             'Add new',
             style: TextStyle(
                 fontSize: 20.0,
-                color: primaryColor,
+                color: AppColors.primaryColor,
                 fontWeight: FontWeight.bold),
           ),
           LineIcon.plus(),
