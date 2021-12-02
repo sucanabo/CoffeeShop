@@ -12,14 +12,14 @@ class VoucherModel {
   final String discountUnit;
   final int discount;
   final String applyFor;
+  final List discountObj;
   final int quantityRule;
+  final int maxQuantity;
   final double priceRule;
+  final double maxPrice;
   final String sizeRule;
   final String deliveryRule;
   final String locationRule;
-  final List discountObj;
-  final int maxQuantity;
-  final double maxPrice;
 
   bool isUserUsed;
 
@@ -57,9 +57,11 @@ class VoucherModel {
       startDate: DateTime.parse(json['start_date']),
       expiryDate: DateTime.parse(json['expiry_date']),
       discountUnit: json['discount_unit'],
-      discount: json['discount'],
+      discount: json['discount'] != null ? json['discount']:0,
       applyFor: json['apply_for'],
+      maxQuantity: json['max_quantity'],
       quantityRule: json['quantity_rule'] != null ? json['quantity_rule'] : 0,
+      maxPrice: json['max_price'] != null ?double.parse(json['max_price']):0,
       priceRule:
           json['price_rule'] != null ? double.parse(json['price_rule']) : 0,
       isUserUsed: json['status'] == 1,
@@ -73,8 +75,6 @@ class VoucherModel {
       locationRule: json['location_rule'],
       sizeRule: json['size_rule'],
       deliveryRule: json['delivery_rule'],
-      maxQuantity: json['max_quantity'],
-      maxPrice: json['max_price'],
     );
   }
 }

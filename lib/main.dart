@@ -2,8 +2,8 @@ import 'package:coffee_shop/providers/auth_provider.dart';
 import 'package:coffee_shop/providers/cart_provider.dart';
 import 'package:coffee_shop/providers/category_provider.dart';
 import 'package:coffee_shop/providers/firebase_provider.dart';
+import 'package:coffee_shop/providers/location_provider.dart';
 import 'package:coffee_shop/providers/navigation_provider.dart';
-import 'package:coffee_shop/providers/notification_provider.dart';
 import 'package:coffee_shop/providers/product_provider.dart';
 import 'package:coffee_shop/providers/transaction_provider.dart';
 import 'package:coffee_shop/providers/voucher_provider.dart';
@@ -43,6 +43,8 @@ class MyApp extends StatelessWidget {
             create: (_) => VoucherProvider()),
         ChangeNotifierProvider<TransactionProvider>(
             create: (_) => TransactionProvider()),
+        ChangeNotifierProvider<LocationProvider>(
+            create: (_) => LocationProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

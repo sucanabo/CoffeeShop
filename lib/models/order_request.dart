@@ -11,7 +11,8 @@ class OrderRequestModel {
       this.promo,
       this.grandtotal,
       this.content,
-      this.items});
+      this.items,
+      this.firebaseToken});
   int addressId;
   String deliveryMethod;
   double shipping;
@@ -22,8 +23,10 @@ class OrderRequestModel {
   double grandtotal;
   String content;
   List<CartItemModel> items;
+  String firebaseToken;
 
   Map toJson() => {
+        "token": firebaseToken,
         "address_id": addressId,
         "delivery_method": deliveryMethod,
         "shipping": shipping,

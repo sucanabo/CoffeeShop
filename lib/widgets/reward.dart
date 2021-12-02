@@ -45,6 +45,7 @@ class RewardWidget extends StatelessWidget {
                             ? Image(
                                 image: base64StringToImage(reward.image),
                                 fit: BoxFit.cover,
+                                height: 180.0,
                               )
                             : Image.network('https://via.placeholder.com/200')),
                     Padding(
@@ -80,7 +81,8 @@ class RewardWidget extends StatelessWidget {
                                 height: 35.0,
                                 width: 35.0,
                                 decoration: BoxDecoration(
-                                    color: AppColors.darkColor, shape: BoxShape.circle),
+                                    color: AppColors.darkColor,
+                                    shape: BoxShape.circle),
                                 child: Center(
                                     child: Text(
                                   '${reward.point}',
@@ -134,8 +136,8 @@ class RewardWidget extends StatelessWidget {
                         children: [
                           Text(
                             reward.brandName,
-                            style:
-                                TextStyle(fontSize: 16.0, color: AppColors.primaryColor),
+                            style: TextStyle(
+                                fontSize: 16.0, color: AppColors.primaryColor),
                           ),
                           Text(
                             reward.title,

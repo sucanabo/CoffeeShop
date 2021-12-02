@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../res.dart';
 
+// ignore: must_be_immutable
 class RoundedTextField extends StatefulWidget {
   RoundedTextField(
       {this.hintText,

@@ -3,7 +3,6 @@ import 'package:coffee_shop/models/cart_item.dart';
 import 'package:coffee_shop/models/voucher.dart';
 import 'package:coffee_shop/providers/auth_provider.dart';
 import 'package:coffee_shop/providers/cart_provider.dart';
-import 'package:coffee_shop/providers/navigation_provider.dart';
 import 'package:coffee_shop/screens/address/address_screen.dart';
 import 'package:coffee_shop/screens/checkout/widgets/checkout_choose_voucher.dart';
 import 'package:coffee_shop/screens/checkout/widgets/checkout_popup.dart';
@@ -66,8 +65,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     promoStr += _voucherData['discountVoucher'] != null
         ? _voucherData['discountVoucher'].id.toString()
         : '';
-    final navi = Provider.of<NavigationProvider>(context, listen: false);
-    navi.setLoading(true);
+    setLoading(context, loading: true);
+
     final response = await createOrder(
         addressId: _address.id,
         content: _txtMessage.text.trim(),
@@ -79,7 +78,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         grandtotal: _orderInfo['orderTotal'],
         items: _cartProvider.items.values.map((item) => item).toList(),
         promo: promoStr);
-    navi.setLoading(false);
+    setLoading(context, loading: false);
     if (response.error == null) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => SuccessScreen()),

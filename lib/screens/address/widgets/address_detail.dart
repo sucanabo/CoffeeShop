@@ -1,5 +1,6 @@
 import 'package:coffee_shop/models/address.dart';
 import 'package:coffee_shop/providers/auth_provider.dart';
+import 'package:coffee_shop/screens/google_map_screen.dart';
 import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
 import 'package:coffee_shop/services/user_service.dart';
 import 'package:coffee_shop/values/color_theme.dart';
@@ -20,6 +21,7 @@ import '../../../values/api_end_point.dart';
 class AddressDetail extends StatefulWidget {
   final bool isEdit;
   final AddressModel address;
+
   AddressDetail({@required this.isEdit, this.address});
 
   @override
@@ -28,6 +30,7 @@ class AddressDetail extends StatefulWidget {
 
 class _AddressDetailState extends State<AddressDetail> {
   bool _loading = false;
+  LocationAddress coordinate;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _txtTitle = TextEditingController();
   TextEditingController _txtAddress = TextEditingController();
@@ -85,6 +88,8 @@ class _AddressDetailState extends State<AddressDetail> {
       _txtDescription.text = _address.description;
       _txtReceiverName.text = _address.receiverName;
       _txtReceiverPhone.text = _address.receiverPhone;
+      coordinate = LocationAddress(
+          address: _address.address, coordinates: _address.coordinates);
     } else {
       final user = Provider.of<AuthProvider>(context, listen: false).getUser;
       _txtReceiverName.text = '${user.displayName}';
@@ -148,6 +153,18 @@ class _AddressDetailState extends State<AddressDetail> {
                             paddingContent: EdgeInsets.symmetric(
                                 vertical: 20.0, horizontal: 15.0),
                             controller: _txtAddress,
+                            autoFocus: false,
+                            onTapTextField: () async {
+                              dynamic result = await Navigator.of(context)
+                                  .pushNamed(GoogleMapScreen.routeName,
+                                      arguments: coordinate);
+                              print(result);
+                              if (result != null) {
+                                _txtAddress.text = result.address;
+                                coordinate = result.coordinates;
+                              }
+                            },
+                            readOnly: true,
                             hintText: 'Address',
                             label: 'Address',
                             textInputAction: TextInputAction.next,
@@ -213,7 +230,8 @@ class _AddressDetailState extends State<AddressDetail> {
                           PillButton(
                               child: Text('OK'),
                               onPressed: () {
-                                if (_formKey.currentState.validate()) {
+                                if (_formKey.currentState.validate() &&
+                                    coordinate != null) {
                                   setState(() {
                                     _loading = true;
                                   });
@@ -222,7 +240,8 @@ class _AddressDetailState extends State<AddressDetail> {
                                       address: _txtAddress.text,
                                       description: _txtDescription.text,
                                       receiverName: _txtReceiverName.text,
-                                      receiverPhone: _txtReceiverPhone.text);
+                                      receiverPhone: _txtReceiverPhone.text,
+                                      coordinates: coordinate.coordinates);
                                   submitForm(address);
                                 }
                               },

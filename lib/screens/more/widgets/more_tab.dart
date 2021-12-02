@@ -8,6 +8,7 @@ class MoreTab extends StatelessWidget {
   final String title;
   final Function onPressed;
   MoreTab({this.imgPath, this.title, this.onPressed});
+
   @override
   Widget build(BuildContext context) {
     return Container(

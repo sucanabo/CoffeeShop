@@ -27,7 +27,7 @@ class _VoucherScreenState extends State<VoucherScreen> {
       ApiResponse apiVoucher = await getAllVoucher();
       ApiResponse apiReward = await getAllReward();
       if (apiVoucher.error == null &&
-          apiVoucher.error == null &&
+          apiUserVoucher.error == null &&
           apiReward.error == null) {
         voucherProvider.setVouchers(apiVoucher.data);
         voucherProvider.setUserVouchers(apiUserVoucher.data);
@@ -35,6 +35,8 @@ class _VoucherScreenState extends State<VoucherScreen> {
       } else if (apiVoucher.error == unauthorized ||
           apiReward.error == unauthorized) {
         logout(context);
+      } else {
+        print('co loi xay ra.');
       }
       voucherProvider.setLoading(false);
     }
@@ -58,7 +60,8 @@ class _VoucherScreenState extends State<VoucherScreen> {
                     margin: EdgeInsets.only(top: 50.0),
                     child: Center(
                       child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            AppColors.primaryColor),
                       ),
                     ),
                   )

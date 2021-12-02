@@ -1,4 +1,3 @@
-import 'package:coffee_shop/models/product.dart';
 import 'package:coffee_shop/widgets/product.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:flutter/material.dart';

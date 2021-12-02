@@ -47,6 +47,7 @@ class TransactionPagingModel {
 class TransactionModel {
   TransactionModel({
     this.id,
+    this.token,
     this.userId,
     this.orderId,
     this.code,
@@ -61,6 +62,7 @@ class TransactionModel {
   });
 
   final int id;
+  final String token;
   final int userId;
   final int orderId;
   final String code;
@@ -76,6 +78,7 @@ class TransactionModel {
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>
       TransactionModel(
         id: json["id"] == null ? null : json["id"],
+        token: json["token"] == null ? null : json["token"],
         userId: json["user_id"] == null ? null : json["user_id"],
         orderId: json["order_id"] == null ? null : json["order_id"],
         code: json["code"] == null ? null : json["code"],
@@ -100,6 +103,7 @@ class TransactionModel {
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
+        "token": token == null ? null : token,
         "user_id": userId == null ? null : userId,
         "order_id": orderId == null ? null : orderId,
         "code": code == null ? null : code,

@@ -1,10 +1,10 @@
 import 'package:coffee_shop/models/api_response.dart';
 import 'package:coffee_shop/providers/auth_provider.dart';
+import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/screens/main_body.dart';
 import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
 import 'package:coffee_shop/services/user_service.dart';
 import 'package:coffee_shop/values/api_end_point.dart';
-import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,10 +59,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation(AppColors.primaryColor),
-          ),
-        ),
+            child: Image.asset(
+          Res.logo,
+          width: SizeConfig.screenWidth * 0.3,
+          fit: BoxFit.fitWidth,
+        )),
       ),
     );
   }

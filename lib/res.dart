@@ -24,6 +24,9 @@ class Res {
   static const String ic_truck_run = 'assets/icons/ic_truck_run.svg';
   static const String ic_3d_box = 'assets/icons/ic_3d_box.svg';
   static const String ic_location = 'assets/icons/ic_location.svg';
+  static const String ic_lock2 = 'assets/icons/ic_lock2.svg';
+  static const String ic_sms = 'assets/icons/ic_sms.svg';
   //images
   static const String img_default_user = 'assets/images/img_default_user.png';
+  static const String logo = 'assets/images/logo.png';
 }

@@ -7,9 +7,9 @@ ThemeData theme() {
     fontFamily: 'Quicksand',
     textTheme: textTheme(),
     splashColor: AppColors.primaryMediumColor,
-    colorScheme: ColorScheme.fromSwatch(
-      accentColor: AppColors.primaryMediumColor,
-    ),
+    colorScheme: ThemeData().colorScheme.copyWith(
+          primary: AppColors.primaryMediumColor,
+        ),
     primaryColor: AppColors.primaryMediumColor,
     bottomNavigationBarTheme:
         BottomNavigationBarThemeData(backgroundColor: Colors.transparent),

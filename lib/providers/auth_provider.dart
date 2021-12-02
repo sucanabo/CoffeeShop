@@ -90,6 +90,17 @@ class AuthProvider with ChangeNotifier {
     return result;
   }
 
+  Future<void> changePassword(BuildContext context, {String newPwd ,String oldPwd}) async {
+    final ApiResponse response = await sv.changePassword(newPwd: newPwd,oldPwd: oldPwd);
+    if (response.error == null) {
+      Navigator.of(context).pop();
+      showToast('Change password success', toastLength: Toast.LENGTH_LONG);
+      logout(context);
+    } else {
+      showToast(response.error, toastLength: Toast.LENGTH_LONG);
+    }
+  }
+
   Future<int> createAddress(BuildContext context,
       {AddressModel address}) async {
     int result = -1;
@@ -101,7 +112,8 @@ class AuthProvider with ChangeNotifier {
           title: address.title,
           description: address.description,
           receiverName: address.receiverName,
-          receiverPhone: address.receiverPhone));
+          receiverPhone: address.receiverPhone,
+          coordinates: address.coordinates));
       notifyListeners();
       result = response.data;
     } else {
@@ -149,20 +161,29 @@ class AuthProvider with ChangeNotifier {
   }
 
   int caculateNextLevel() {
-    return levelPoint.values.toList()[_user.level] - _user.point;
+    for (var pts in levelPoint.values) {
+      if (pts > _user.point) return pts - _user.point;
+    }
+    return 0;
   }
 
-  String getLevelString({int level}) {
-    int curentPoint =
-        level != null ? levelPoint.values.toList()[level] : _user.point;
-    String result;
+  String getLevelString({bool isNext = false}) {
+    String oldKey = levelPoint.keys.first;
+    bool flag = false;
     for (var key in levelPoint.keys) {
-      if (curentPoint <= levelPoint[key]) {
-        result = key;
-        break;
+      if (flag == true) {
+        return oldKey;
       }
+      if (_user.point <= levelPoint[key]) {
+        if (isNext == true) {
+          flag = true;
+        } else {
+          return oldKey;
+        }
+      }
+      oldKey = key;
     }
-    return result != null ? result : 'V.I.P';
+    return 'V.I.P';
   }
 
   Future<String> login({String phone, String password}) async {

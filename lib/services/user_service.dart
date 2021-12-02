@@ -211,10 +211,41 @@ Future<ApiResponse> updateUser(
   return apiResponse;
 }
 
+Future<ApiResponse> changePassword({String oldPwd, String newPwd}) async {
+  ApiResponse apiResponse = ApiResponse();
+  try {
+    String token = await getToken();
+    final response = await http.post(Uri.parse(userChangePassword), headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    }, body: {
+      'old_password':oldPwd,
+      'new_password': newPwd,
+    });
+    switch (response.statusCode) {
+      case 200:
+        apiResponse.data = jsonDecode(response.body)['message'];
+        break;
+      case 401:
+        apiResponse.error = unauthorized;
+        break;
+
+      default:
+        apiResponse.error = jsonDecode(response.body)['message']?? somethingWentWrong;
+        break;
+    }
+  } catch (e) {
+    print(e);
+    apiResponse.error = serverError;
+  }
+  return apiResponse;
+}
+
 //crate address
 Future<ApiResponse> createAddress({AddressModel address}) async {
   ApiResponse apiResponse = ApiResponse();
   try {
+    print(address.toJson());
     String token = await getToken();
     final response = await http.post(Uri.parse('$addressesURL/create'),
         headers: {
@@ -222,14 +253,8 @@ Future<ApiResponse> createAddress({AddressModel address}) async {
           'Authorization': 'Bearer $token',
           'content-type': 'application/json'
         },
-        body: jsonEncode({
-          'title': address.title,
-          'address': address.address,
-          'receiver_name': address.receiverName,
-          'receiver_phone': address.receiverPhone,
-          'description': address.description,
-          'coordinates': address.coordinates,
-        }));
+        body: json.encode(address.toJson()));
+    print(response.statusCode);
     switch (response.statusCode) {
       case 200:
         apiResponse.data = jsonDecode(response.body)['address']['id'];
@@ -382,7 +407,6 @@ Future<void> logout(BuildContext context) async {
   authProvider.setAddressLoading(true);
   authProvider.setAddresses([]);
   //share pref
-
   bool loginGoogle = pref.getBool(PrefKey.GOOGLE_SIGN_IN);
   bool loginFacebook = pref.getBool(PrefKey.FACEBOOK_SIGN_IN);
   if (loginGoogle == true) {

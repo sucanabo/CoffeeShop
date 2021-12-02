@@ -34,7 +34,7 @@ class _OrderScreenState extends State<OrderScreen>
     'success'
   ];
   int tabSelected = 0;
-  int page = 0;
+  int page = 1;
   int totalRow = 0;
   bool _loading = true;
 
@@ -66,7 +66,7 @@ class _OrderScreenState extends State<OrderScreen>
     if (isNextPage) {
       page++;
     } else {
-      page = 0;
+      page = 1;
       totalRow = 0;
       provider.clear();
     }

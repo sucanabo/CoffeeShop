@@ -34,7 +34,7 @@ class FirebaseNotifications {
     //Get token
     _messaging.getToken().then((token) => print('My token $token'));
     _messaging
-        .subscribeToTopic("mess_demo")
+        .subscribeToTopic("all")
         .whenComplete(() => print('Subscribe success.'));
     //Handle mess
     FirebaseMessaging.onMessage.listen((message) {
@@ -109,16 +109,13 @@ class NotificationHandler {
           title,
           body,
           NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                channelDescription: channel.description,
-                icon: 'launch_background',
-                importance: Importance.max,
-                priority: Priority.max,
-                playSound: true,
-                ticker: 'ticker'
-              ),
+              android: AndroidNotificationDetails(channel.id, channel.name,
+                  channelDescription: channel.description,
+                  icon: 'launch_background',
+                  importance: Importance.max,
+                  priority: Priority.max,
+                  playSound: true,
+                  ticker: 'ticker'),
               iOS: IOSNotificationDetails()));
 
   static Future onDidReceiveLocalNotification(

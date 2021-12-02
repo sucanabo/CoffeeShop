@@ -1,10 +1,12 @@
+import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/screens/sign_up/sign_up_screen.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/size_config.dart';
+import 'package:coffee_shop/values/validate.dart';
+import 'package:coffee_shop/widgets/rounded_text_field.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:coffee_shop/widgets/sign_button.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icon.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -44,7 +46,8 @@ class Body extends StatelessWidget {
                     alignment: Alignment.topCenter, padding: EdgeInsets.zero),
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text('Sign up', style: TextStyle(color: AppColors.primaryMediumColor)),
+                  Text('Sign up',
+                      style: TextStyle(color: AppColors.primaryMediumColor)),
                   Icon(
                     Icons.chevron_right_rounded,
                     color: AppColors.primaryMediumColor,
@@ -67,35 +70,21 @@ class ForgotPassForm extends StatefulWidget {
 }
 
 class _ForgotPassFormState extends State<ForgotPassForm> {
-  List<String> errors = [];
-  String email;
-
+  TextEditingController _txtMail = TextEditingController();
+  GlobalKey<FormState> _fromKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _fromKey,
       child: Column(
         children: [
-          TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                setState(() {
-                  errors.add('Please enter your email');
-                });
-              }
-              return null;
-            },
+          RoundedTextField(
+            hintText: 'Enter your email',
+            controller: _txtMail,
+            prefixIcon: Res.ic_sms,
+            validator: (value) => Validate.emailValidate(value),
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(fontSize: 14.0),
-            decoration: InputDecoration(
-                helperText: 'Erorr',
-                prefixIcon: LineIcon.user(
-                  size: 26.0,
-                  color: AppColors.primaryMediumColor,
-                ),
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                hintText: 'Enter your email',
-                labelText: 'Email'),
-            textInputAction: TextInputAction.next,
+            textInputAction: TextInputAction.done,
           )
         ],
       ),

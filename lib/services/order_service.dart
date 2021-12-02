@@ -7,6 +7,7 @@ import 'package:coffee_shop/models/transaction.dart';
 import 'package:coffee_shop/services/user_service.dart';
 import 'package:coffee_shop/values/api_end_point.dart';
 import 'package:coffee_shop/values/function.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 
 Future<ApiResponse> createOrder(
@@ -24,7 +25,10 @@ Future<ApiResponse> createOrder(
 
   try {
     String token = await getToken();
+    String firebaseToken = await FirebaseMessaging.instance.getToken();
+    print('request order data');
     print(jsonEncode(OrderRequestModel(
+            firebaseToken: firebaseToken,
             addressId: addressId,
             content: content,
             deliveryMethod: deliveryMethod,
@@ -43,6 +47,7 @@ Future<ApiResponse> createOrder(
           'content-type': 'application/json'
         },
         body: jsonEncode(OrderRequestModel(
+                firebaseToken: firebaseToken,
                 addressId: addressId,
                 content: content,
                 deliveryMethod: deliveryMethod,

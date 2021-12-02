@@ -120,7 +120,7 @@ class AccumulateInfoCard extends StatelessWidget {
                         color: AppColors.primaryColor, fontSize: 16.0),
                   ),
                   Text(
-                    '${userProvider.getLevelString(level: user.level + 1)}',
+                    '${userProvider.getLevelString(isNext: true)}',
                     style: TextStyle(
                         color: AppColors.primaryColor, fontSize: 16.0),
                   )

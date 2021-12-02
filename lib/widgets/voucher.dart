@@ -136,7 +136,8 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                           ],
                                         ))
                                     : Text(
-                                        formatDateToString(widget.voucher.expiryDate),
+                                        formatDateToString(
+                                            widget.voucher.expiryDate),
                                         style: TextStyle(
                                             fontSize: 14.0,
                                             color: AppColors.primaryColor,
@@ -184,7 +185,9 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                     ? AppColors.primaryColor
                     : AppColors.mutedColor),
             child: Text(
-              widget.voucher.applyFor.capitalize(),
+              widget.voucher.applyFor != null
+                  ? widget.voucher.applyFor.capitalize()
+                  : 'unknow',
               style: TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.w600,

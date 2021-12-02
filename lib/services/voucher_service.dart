@@ -31,7 +31,7 @@ Future<ApiResponse> getAllUserVoucher() async {
         break;
     }
   } catch (e) {
-    print('error uservoucher');
+    print('error user voucher');
 
     apiResponse.error = serverError;
   }
@@ -64,6 +64,7 @@ Future<ApiResponse> getAllVoucher() async {
     print('error voucher');
 
     apiResponse.error = serverError;
+    throw Exception(e);
   }
   return apiResponse;
 }
@@ -124,6 +125,7 @@ Future<ApiResponse> getAllReward() async {
     }
   } catch (e) {
     apiResponse.error = serverError;
+    print('error reward');
   }
   return apiResponse;
 }

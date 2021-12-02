@@ -3,6 +3,7 @@ import 'package:coffee_shop/screens/address/address_screen.dart';
 import 'package:coffee_shop/screens/favourite_product/favourite_product_screen.dart';
 import 'package:coffee_shop/screens/more/widgets/more_tab.dart';
 import 'package:coffee_shop/screens/order/order_screeen.dart';
+import 'package:coffee_shop/screens/password/change_password/change_password.dart';
 import 'package:coffee_shop/screens/profile/profile_screen.dart';
 import 'package:coffee_shop/services/user_service.dart';
 import 'package:flutter/material.dart';
@@ -85,8 +86,10 @@ class Body extends StatelessWidget {
                     },
                   ),
                   MoreTab(
-                    imgPath: Res.ic_setting,
-                    title: 'Setting',
+                    imgPath: Res.ic_lock2,
+                    title: 'Change Password',
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(ChangePassword.routeName),
                   ),
                   MoreTab(
                     imgPath: Res.ic_logout,

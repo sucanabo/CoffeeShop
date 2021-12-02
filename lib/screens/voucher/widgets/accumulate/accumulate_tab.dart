@@ -13,6 +13,7 @@ class AccumulateTab extends StatelessWidget {
   final List cardList;
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<VoucherProvider>(context, listen: false);
     return ListView(children: [
       Container(
         clipBehavior: Clip.none,
@@ -39,6 +40,11 @@ class AccumulateTab extends StatelessWidget {
                 HeadingUnderline(
                   text: 'Available',
                 ),
+                if (provider.voucherItems.isEmpty)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+                    child: Text('No voucher available'),
+                  ),
                 Consumer<VoucherProvider>(
                   builder: (context, vouchers, child) => Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
