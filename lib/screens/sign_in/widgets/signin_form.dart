@@ -52,7 +52,7 @@ class _SignFormState extends State<SignForm> {
           ),
           SizedBox(height: SizeConfig.screenHeigh * 0.1),
           SignButton(
-              text: 'Sign in',
+              text: 'Continue',
               onSubmit: () async {
                 if (_formKey.currentState.validate()) {
                   hideKeyboard(context);

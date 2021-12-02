@@ -8,8 +8,10 @@ import 'package:coffee_shop/values/size_config.dart';
 import 'package:coffee_shop/values/validate.dart';
 import 'package:coffee_shop/widgets/rounded_text_field.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
+import 'package:coffee_shop/widgets/sign_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:coffee_shop/values/function.dart';
 
 class EnterPassword extends StatelessWidget {
   static const String routeName = '/enterPassword';
@@ -93,6 +95,14 @@ class EnterPassword extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: 30.0),
+          SignButton(
+              text: 'Sign in',
+              onSubmit: () async {
+                if (_formKey.currentState.validate()) {
+                  _loginUser(context, phone, _txtPassword.text);
+                }
+              }),
         ],
       ),
     );
