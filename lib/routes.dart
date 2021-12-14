@@ -1,6 +1,7 @@
 import 'package:coffee_shop/screens/address/address_screen.dart';
 import 'package:coffee_shop/screens/cart/cart_screen.dart';
 import 'package:coffee_shop/screens/checkout/checkout_screen.dart';
+import 'package:coffee_shop/screens/contact_us/contact_us_screen.dart';
 import 'package:coffee_shop/screens/enter_code.dart';
 import 'package:coffee_shop/screens/favourite_product/favourite_product_screen.dart';
 import 'package:coffee_shop/screens/google_map_screen.dart';
@@ -45,4 +46,5 @@ final Map<String, WidgetBuilder> routes = {
   GoogleMapScreen.routeName: (context) => GoogleMapScreen(),
   ChangePassword.routeName: (context) => ChangePassword(),
   EnterPassword.routeName: (context) => EnterPassword(),
+  ContactUsScreen.routeName: (context) => ContactUsScreen(),
 };

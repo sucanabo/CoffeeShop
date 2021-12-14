@@ -3,6 +3,7 @@ import 'package:coffee_shop/providers/navigation_provider.dart';
 import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/screens/main_body.dart';
 import 'package:coffee_shop/screens/password/forgot_password/forgot_password_screen.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/size_config.dart';
 import 'package:coffee_shop/values/validate.dart';
@@ -11,8 +12,7 @@ import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:coffee_shop/widgets/sign_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:coffee_shop/values/function.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class EnterPassword extends StatelessWidget {
   static const String routeName = '/enterPassword';
   const EnterPassword({Key key}) : super(key: key);
@@ -41,13 +41,13 @@ class EnterPassword extends StatelessWidget {
 
     return ScreenBody(
       appBar: AppBar(
-        title: Text('Enter password'),
+        title: Text(LocaleKeys.enter_password.tr()),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'Enter your password to login app',
+            LocaleKeys.hint_enter_pwd_login.tr(),
             style: TextStyle(
                 color: AppColors.primaryColor,
                 fontSize: getWidth(20.0),
@@ -58,7 +58,7 @@ class EnterPassword extends StatelessWidget {
             height: SizeConfig.screenHeigh * 0.025,
           ),
           Text(
-            'Your registed phone number: $phone',
+            LocaleKeys.register_phone.tr(args: [phone]),
             style: TextStyle(
               fontSize: 15,
             ),
@@ -70,8 +70,8 @@ class EnterPassword extends StatelessWidget {
           Form(
             key: _formKey,
             child: RoundedTextField(
-              label: 'Password',
-              hintText: 'Enter password',
+              label: LocaleKeys.password.tr(),
+              hintText: LocaleKeys.enter_password.tr(),
               isPassword: true,
               controller: _txtPassword,
               prefixIcon: Res.ic_lock,
@@ -84,10 +84,11 @@ class EnterPassword extends StatelessWidget {
             width: double.infinity,
             child: GestureDetector(
               onTap: () {
-                Navigator.of(context).pushNamed(ForgotPasswordScreen.routeName);
+                Navigator.of(context).pushNamed(ForgotPasswordScreen.routeName,
+                    arguments: phone);
               },
               child: Text(
-                'Forgot password?',
+                '${LocaleKeys.forgot_password.tr()}?',
                 style: TextStyle(
                     decoration: TextDecoration.underline,
                     color: AppColors.primaryColor),
@@ -97,7 +98,7 @@ class EnterPassword extends StatelessWidget {
           ),
           SizedBox(height: 30.0),
           SignButton(
-              text: 'Sign in',
+              text: LocaleKeys.sign_in.tr(),
               onSubmit: () async {
                 if (_formKey.currentState.validate()) {
                   _loginUser(context, phone, _txtPassword.text);

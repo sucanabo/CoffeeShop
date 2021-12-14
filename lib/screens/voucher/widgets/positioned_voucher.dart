@@ -1,9 +1,11 @@
 import 'package:coffee_shop/models/reward.dart';
+import 'package:coffee_shop/res.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/values/size_config.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class PositionedVoucher extends StatelessWidget {
   final RewardModel reward;
   PositionedVoucher({this.reward});
@@ -19,7 +21,7 @@ class PositionedVoucher extends StatelessWidget {
         decoration: BoxDecoration(
             image: DecorationImage(
                 fit: BoxFit.fill,
-                image: AssetImage('assets/images/voucher_background.png'))),
+                image: AssetImage(Res.voucher_background))),
         child: IntrinsicHeight(
           child: Row(
             children: [
@@ -61,7 +63,7 @@ class PositionedVoucher extends StatelessWidget {
                               fontSize: 13.0, fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          'Expried date: ${reward.expiryDate != null ? formatDateToString(reward.expiryDate) : ''}',
+                          '${LocaleKeys.expired_date.tr()} ${reward.expiryDate != null ? formatDateToString(reward.expiryDate) : ''}',
                           style: TextStyle(
                               fontSize: 15.0, color: AppColors.textColor),
                         )

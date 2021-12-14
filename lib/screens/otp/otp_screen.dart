@@ -1,5 +1,7 @@
 import 'package:coffee_shop/models/user.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import './widgets/body.dart';
 
 class OTPScreen extends StatelessWidget {
@@ -11,7 +13,7 @@ class OTPScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
-            'OTP Verification',
+           LocaleKeys.otp_verification.tr(),
           ),
         ),
         body: Body(user: user));

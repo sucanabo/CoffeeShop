@@ -4,11 +4,12 @@ import 'package:coffee_shop/providers/product_provider.dart';
 import 'package:coffee_shop/screens/product_detail/widgets/rating_dialog.dart';
 import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
 import 'package:coffee_shop/services/product_service.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../values/api_end_point.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ActionButton extends StatefulWidget {
   final Icon icon;
   final bool isActive;
@@ -75,9 +76,9 @@ class _ActionButtonState extends State<ActionButton> {
           .setProductFavourite(productId);
       _isActive
           ? ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Item is added in favourite list.')))
+              SnackBar(content: Text(LocaleKeys.favourite_added.tr())))
           : ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Item is delete from favourite list.')));
+              SnackBar(content: Text(LocaleKeys.favourite_deleted.tr())));
     } else if (response.error == unauthorized) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => SignInScreen()),

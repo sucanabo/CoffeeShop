@@ -4,7 +4,7 @@ import 'package:coffee_shop/values/color_theme.dart';
 class HeadingUnderline extends StatelessWidget {
   final String text;
   // const HeadingUnderline({Key key}) : super(key: key);
-  HeadingUnderline({this.text});
+  const HeadingUnderline({this.text});
   @override
   Widget build(BuildContext context) {
     return Column(

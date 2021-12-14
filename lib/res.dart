@@ -26,7 +26,18 @@ class Res {
   static const String ic_location = 'assets/icons/ic_location.svg';
   static const String ic_lock2 = 'assets/icons/ic_lock2.svg';
   static const String ic_sms = 'assets/icons/ic_sms.svg';
+  static const String ic_global = 'assets/icons/ic_global.svg';
+  static const String ic_book = 'assets/icons/ic_book.svg';
+  static const String ic_empty_cart = 'assets/icons/ic_empty_cart.svg';
+
+
   //images
   static const String img_default_user = 'assets/images/img_default_user.png';
   static const String logo = 'assets/images/logo.png';
+  static const String momoLogo  = 'assets/images/MoMo_Logo.png';
+  static const String baner1  = 'assets/images/banner/16280TheCoffeeHouse_1534905202.png';
+  static const String baner2  = 'assets/images/banner/20200316_AppVinID_BannerWeb_TCH_25.jpg';
+  static const String baner3  = 'assets/images/banner/20200316_AppVinID_BannerWeb_TCH_30k.jpg';
+  static const String success  = 'assets/images/banner/assets/images/Success.gif';
+  static const String voucher_background  = 'assets/images/voucher_background.png';
 }

@@ -1,9 +1,11 @@
 import 'package:coffee_shop/providers/voucher_provider.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
+import 'package:coffee_shop/untils/app_information.dart';
 import 'package:coffee_shop/widgets/haeding_underline.dart';
 import 'package:coffee_shop/widgets/reward.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class RewardTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class RewardTab extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     HeadingUnderline(
-                      text: 'Featured',
+                      text: LocaleKeys.futured.tr(),
                     ),
                   ],
                 ),
@@ -37,9 +39,9 @@ class RewardTab extends StatelessWidget {
                   ),
                 ),
                 _buildRewardContainer(
-                    list: provider.getShopReward(), heading: 'Kofeeholic'),
+                    list: provider.getShopReward(), heading: AppInformation.appName),
                 _buildRewardContainer(
-                    list: provider.getBrandReward(), heading: 'Other brand')
+                    list: provider.getBrandReward(), heading: LocaleKeys.other_brand.tr())
               ],
             )
           ],
@@ -72,7 +74,7 @@ class RewardTab extends StatelessWidget {
                         .toList(),
                   )
                 : Text(
-                    'No reward this time.',
+                    LocaleKeys.no_reward.tr(),
                     style: TextStyle(fontSize: 16.0),
                   ))
       ],

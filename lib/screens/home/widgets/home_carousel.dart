@@ -1,3 +1,4 @@
+import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
@@ -16,14 +17,13 @@ class HomeCarousel extends StatelessWidget {
       dotColor: Colors.grey[400],
       dotPosition: DotPosition.bottomRight,
       images: [
-        Image.asset('assets/images/banner/16280TheCoffeeHouse_1534905202.png',
-            fit: BoxFit.fill),
+        Image.asset(Res.baner1, fit: BoxFit.fill),
         Image.asset(
-          'assets/images/banner/20200316_AppVinID_BannerWeb_TCH_25.jpg',
+          Res.baner2,
           fit: BoxFit.fill,
         ),
         Image.asset(
-          'assets/images/banner/20200316_AppVinID_BannerWeb_TCH_30k.jpg',
+          Res.baner3,
           fit: BoxFit.fill,
         ),
       ],

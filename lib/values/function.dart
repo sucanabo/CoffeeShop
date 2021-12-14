@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:collection/collection.dart';
 
 //decode image base64
 MemoryImage base64StringToImage(String base64String) {
@@ -141,4 +142,15 @@ double getDistance(double lat1, double lon1, double lat2, double lon2) {
   var r = 6371;
 
   return (c * r);
+}
+
+String hiddenEmail(String str) {
+  List<String> list = str.split('');
+  var specialIndex = list.indexOf('@');
+  list.forEachIndexed((index, item) {
+    if (index > 2 && index < specialIndex) {
+      list[index] = '*';
+    }
+  });
+  return list.join();
 }

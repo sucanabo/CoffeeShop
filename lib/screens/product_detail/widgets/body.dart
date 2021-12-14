@@ -2,6 +2,7 @@ import 'package:coffee_shop/models/cart_item.dart';
 import 'package:coffee_shop/models/product.dart';
 import 'package:coffee_shop/screens/product_detail/widgets/bottom_bar.dart';
 import 'package:coffee_shop/screens/product_detail/widgets/heading.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/widgets/message_box.dart';
@@ -13,6 +14,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
 import 'action_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Body extends StatefulWidget {
   final ProductModel product;
@@ -174,7 +176,7 @@ class _BodyState extends State<Body> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Price:',
+                                    LocaleKeys.price.tr(),
                                     style: TextStyle(
                                         fontSize: 18.0,
                                         color: Colors.grey[500]),
@@ -243,7 +245,9 @@ class _BodyState extends State<Body> {
                                         children: [
                                           Expanded(
                                             flex: 6,
-                                            child: Heading(title: 'Quantity'),
+                                            child: Heading(
+                                                title:
+                                                    LocaleKeys.quantity.tr()),
                                           ),
                                           Expanded(
                                             flex: 4,
@@ -256,7 +260,8 @@ class _BodyState extends State<Body> {
                                             ),
                                           )
                                         ]),
-                                    Heading(title: 'Option'),
+                                    Heading(
+                                        title: LocaleKeys.product_option.tr()),
                                     options.isNotEmpty
                                         ? Column(
                                             children: options.entries
@@ -279,8 +284,7 @@ class _BodyState extends State<Body> {
                                                     )))
                                                 .toList(),
                                           )
-                                        : Text(
-                                            'Product does has not any options.'),
+                                        : Text(LocaleKeys.no_option.tr()),
                                     Heading(title: 'Topping'),
                                     toppings.isNotEmpty
                                         ? Column(
@@ -306,10 +310,9 @@ class _BodyState extends State<Body> {
                                                       ),
                                                     ))
                                                 .toList())
-                                        : Text(
-                                            'Product does has not any toppings.'),
+                                        : Text(LocaleKeys.no_topping.tr()),
                                     SizedBox(height: 10.0),
-                                    Heading(title: 'Message'),
+                                    Heading(title: LocaleKeys.note.tr()),
                                     Container(
                                         decoration: BoxDecoration(
                                           borderRadius:
@@ -364,7 +367,9 @@ class _BodyState extends State<Body> {
             ])),
         BottomBar(
           price: _totalPrice,
-          buttonText: widget.cartEdit ? 'Edit item' : 'Add cart',
+          buttonText: widget.cartEdit
+              ? LocaleKeys.edit_product.tr()
+              : LocaleKeys.add_to_cart.tr(),
           buttonPress: () {
             if (_formKey.currentState.validate()) {
               widget.cartEdit ? editCart() : addToCart();

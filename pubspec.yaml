@@ -28,6 +28,7 @@ dependencies:
   shared_preferences: ^2.0.6
   #Http request
   http: ^0.13.3
+  url_launcher: ^6.0.17
   #UI
   pin_code_fields: ^7.3.0
   fluttertoast: ^8.0.8
@@ -57,7 +58,8 @@ dependencies:
   geolocator: ^7.7.1
   geocoding: ^2.0.1
   flutter_typeahead: ^3.2.3
-
+  #languages
+  easy_localization: ^3.0.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -88,6 +90,7 @@ flutter:
     - assets/images/product/
     - assets/images/
     - assets/mapstyles/
+    - assets/translations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

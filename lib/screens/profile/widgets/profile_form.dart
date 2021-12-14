@@ -1,17 +1,16 @@
-
 import 'package:coffee_shop/models/user.dart';
 import 'package:coffee_shop/providers/auth_provider.dart';
 import 'package:coffee_shop/providers/navigation_provider.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/values/size_config.dart';
 import 'package:coffee_shop/values/validate.dart';
 import 'package:coffee_shop/widgets/pill_button.dart';
-import 'package:coffee_shop/widgets/pop_up_notify.dart';
 import 'package:coffee_shop/widgets/rounded_dropdown.dart';
 import 'package:coffee_shop/widgets/rounded_text_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icon.dart';
 import 'package:provider/provider.dart';
 
 class ProfileForm extends StatefulWidget {
@@ -27,7 +26,6 @@ class _ProfileFormState extends State<ProfileForm> {
   final TextEditingController _txtEmail = TextEditingController();
   final TextEditingController _txtPhone = TextEditingController();
   final TextEditingController _txtBithday = TextEditingController();
-  bool _isEmailVerified;
   String _dropdownGender;
   DateTime birthday;
   @override
@@ -39,7 +37,6 @@ class _ProfileFormState extends State<ProfileForm> {
     _txtDisplayName.text = user.displayName;
     _txtBithday.text = formatDateToString(user.birthday);
     _dropdownGender = user.gender;
-    _isEmailVerified = user.isEmailVerified;
   }
 
   submitForm() async {
@@ -70,7 +67,12 @@ class _ProfileFormState extends State<ProfileForm> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> listGender = ['male', 'female', 'other'];
+    List<String> listGender = [
+      'male',
+      'female',
+      'other',
+    ];
+
     return Form(
       key: _formKey,
       child: Column(
@@ -79,12 +81,12 @@ class _ProfileFormState extends State<ProfileForm> {
           RoundedTextField(
               validator: (value) => Validate.displayNameValidate(value),
               controller: _txtDisplayName,
-              label: 'Display name',
-              hintText: 'Display name'),
+              label: LocaleKeys.search_product.tr(),
+              hintText: LocaleKeys.display_name.tr()),
           SizedBox(height: SizeConfig.screenHeigh * 0.025),
           RoundedTextField(
             controller: _txtPhone,
-            label: 'Phone',
+            label: LocaleKeys.phone.tr(),
             enabled: false,
             readOnly: true,
           ),
@@ -92,30 +94,19 @@ class _ProfileFormState extends State<ProfileForm> {
           RoundedTextField(
             validator: (value) => Validate.emailValidate(value),
             controller: _txtEmail,
-            label: 'Email',
-            suffix: _isEmailVerified
-                ? Icon(
-                    Icons.check,
-                    color: Colors.green[400],
-                  )
-                : IconButton(
-                    onPressed: _verifyDialog,
-                    icon: LineIcon.exclamationCircle(
-                      color: Colors.orange[500],
-                    ),
-                  ),
+            label: LocaleKeys.email.tr(),
           ),
           SizedBox(height: SizeConfig.screenHeigh * 0.025),
           RoundedTextField(
             controller: _txtBithday,
-            label: 'Birthday',
+            label: LocaleKeys.birthday.tr(),
             isDate: true,
             readOnly: true,
             enabled: false,
           ),
           SizedBox(height: SizeConfig.screenHeigh * 0.025),
           RoundedDropDown(
-            label: 'Gender',
+            label: LocaleKeys.gender_text.tr(),
             value: _dropdownGender,
             listItem: listGender,
             validator: null,
@@ -128,7 +119,7 @@ class _ProfileFormState extends State<ProfileForm> {
           SizedBox(height: SizeConfig.screenHeigh * 0.035),
           PillButton(
               child: Text(
-                'Update Profile',
+                LocaleKeys.update_profile.tr(),
                 style: TextStyle(fontSize: 18.0),
               ),
               onPressed: () {
@@ -138,25 +129,5 @@ class _ProfileFormState extends State<ProfileForm> {
         ],
       ),
     );
-  }
-
-  _verifyDialog() {
-    return showDialog(
-        context: context,
-        builder: (context) => new PopUpNotify(
-              title: 'Your email is not verified',
-              content: Text(
-                'Verify email to get more important informations and use to reset your password.',
-                textAlign: TextAlign.center,
-              ),
-              actions: [
-                PillButton(
-                  child: Text('Verify now'),
-                  onPressed: () {
-                    print('aa');
-                  },
-                )
-              ],
-            ));
   }
 }

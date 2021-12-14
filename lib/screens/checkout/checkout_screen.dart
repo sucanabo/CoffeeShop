@@ -1,13 +1,17 @@
 import 'package:coffee_shop/models/address.dart';
 import 'package:coffee_shop/models/cart_item.dart';
+import 'package:coffee_shop/models/tomtom_routes.dart';
 import 'package:coffee_shop/models/voucher.dart';
 import 'package:coffee_shop/providers/auth_provider.dart';
 import 'package:coffee_shop/providers/cart_provider.dart';
+import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/screens/address/address_screen.dart';
 import 'package:coffee_shop/screens/checkout/widgets/checkout_choose_voucher.dart';
 import 'package:coffee_shop/screens/checkout/widgets/checkout_popup.dart';
 import 'package:coffee_shop/screens/success.dart';
+import 'package:coffee_shop/services/location_service.dart';
 import 'package:coffee_shop/services/order_service.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/widgets/message_box.dart';
@@ -15,6 +19,7 @@ import 'package:coffee_shop/widgets/pill_button.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CheckoutScreen extends StatefulWidget {
   static String routeName = '/checkout';
@@ -30,7 +35,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   AddressModel _address;
   Map<String, dynamic> _voucherData;
   bool _isDeleverySelected = true;
-  double _deliveryPrice = 8000;
+  double _deliveryPrice = 0;
   Map _orderInfo;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _txtMessage = TextEditingController();
@@ -42,7 +47,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       fetchAddress();
     } else {
       _address = _addressProvider.addresses[0];
+      caculateShipping();
     }
+
     _voucherData = {
       'shippingVoucher': null,
       'discountVoucher': null,
@@ -102,6 +109,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         });
       });
     }
+    caculateShipping();
   }
 
   changeAddress() async {
@@ -111,8 +119,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       setState(() {
         _address = _addressProvider.addresses
             .firstWhere((element) => element.id == result['id']);
+        caculateShipping();
       });
     }
+  }
+
+  caculateShipping() async {
+    TomtomRoutes route =
+        await GeolocatorService().getTomtomRoutes(_address.coordinates);
+    setState(() {
+      _deliveryPrice = route.routes[0].summary.lengthInMeters / 1000 * 5000;
+      _orderInfo = caculateOrder();
+    });
   }
 
   chooseVoucher() async {
@@ -133,7 +151,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       });
     }
   }
-
   Map caculateOrder() {
     double subtotal = _cartProvider.totalAmount;
     double deliveryPrice = _isDeleverySelected ? _deliveryPrice : 0;
@@ -203,7 +220,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   Widget build(BuildContext context) {
     return ScreenBody(
         appBar: AppBar(
-          title: Text('Checkout'),
+          title: Text(LocaleKeys.checkout.tr()),
         ),
         child: ListView(
           padding: EdgeInsets.all(20.0),
@@ -214,7 +231,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 Expanded(
                   flex: 6,
                   child: Text(
-                    'Delivery Address',
+                    LocaleKeys.deliver_address.tr(),
                     style:
                         TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
                   ),
@@ -224,7 +241,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   child: InkWell(
                     onTap: () => changeAddress(),
                     child: Text(
-                      'Change',
+                      LocaleKeys.change.tr(),
                       style: TextStyle(
                           fontSize: 12.0, color: AppColors.primaryColor),
                       textAlign: TextAlign.end,
@@ -237,7 +254,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             _buildAddressInformation(),
             Divider(height: 20.0),
             Text(
-              'Delivery Method',
+              LocaleKeys.delivery_method.tr(),
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 20.0),
@@ -249,7 +266,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 Expanded(
                   flex: 6,
                   child: Text(
-                    'Payment Method',
+                    LocaleKeys.payment_method.tr(),
                     style:
                         TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
                   ),
@@ -259,7 +276,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   child: InkWell(
                     onTap: () {},
                     child: Text(
-                      'Change',
+                      LocaleKeys.change.tr(),
                       style: TextStyle(
                           fontSize: 12.0, color: AppColors.primaryColor),
                       textAlign: TextAlign.end,
@@ -273,7 +290,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                    flex: 2, child: Image.asset('assets/images/MoMo_Logo.png')),
+                    flex: 2, child: Image.asset(Res.momoLogo)),
                 Expanded(
                     flex: 10,
                     child: Container(
@@ -307,7 +324,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Shop Voucher',
+                    LocaleKeys.shop_voucher.tr(),
                     style:
                         TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
                   ),
@@ -329,7 +346,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
             SizedBox(height: 20.0),
             Text(
-              'Sumary',
+              LocaleKeys.sumary.tr(),
               style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
@@ -348,7 +365,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       height: 10.0,
                     ),
                     PillButton(
-                        child: Text('Order'),
+                        child: Text(LocaleKeys.place_order.tr()),
                         onPressed: () => placeOrder(),
                         color: AppColors.primaryColor),
                   ],
@@ -368,7 +385,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       valueColor:
                           AlwaysStoppedAnimation(AppColors.primaryColor))))
           : provider.addresses.isEmpty
-              ? Text('No shipping address ')
+              ? Text(LocaleKeys.no_shipping_address.tr())
               : Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -400,7 +417,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     return Table(children: [
       TableRow(children: [
         Text(
-          'Subtotal',
+          LocaleKeys.subtotal.tr(),
           style: TextStyle(),
         ),
         Text(
@@ -410,7 +427,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       ]),
       TableRow(children: [
         Text(
-          'Shipping',
+          LocaleKeys.shipping.tr(),
           style: TextStyle(),
         ),
         Text(
@@ -423,7 +440,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       if (_voucherData['discountVoucher'] != null)
         TableRow(children: [
           Text(
-            'Voucher discount',
+            LocaleKeys.voucher_discount.tr(),
             style: TextStyle(),
           ),
           Text(
@@ -436,7 +453,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       if (_voucherData['shippingVoucher'] != null)
         TableRow(children: [
           Text(
-            'Shipping discount',
+            LocaleKeys.shipping_discount.tr(),
             style: TextStyle(),
           ),
           Text(
@@ -447,7 +464,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       TableRow(children: [Divider(height: 15.0), Divider(height: 15.0)]),
       TableRow(children: [
         Text(
-          'Order Total',
+          LocaleKeys.order_total.tr(),
           style: TextStyle(
               fontSize: 16.0,
               fontWeight: FontWeight.w600,
@@ -496,8 +513,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   Column buildDeliveryOptions() {
     return Column(children: <LabeledRadio>[
       LabeledRadio(
-        label: 'Pick up at Shop',
-        rightLabel: 'Free',
+        label: LocaleKeys.pick_up_at_shop.tr(),
+        rightLabel: LocaleKeys.free.tr(),
         padding: const EdgeInsets.all(0.0),
         value: false,
         groupValue: _isDeleverySelected,
@@ -508,7 +525,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         },
       ),
       LabeledRadio(
-        label: 'Delivery',
+        label: LocaleKeys.delivery.tr(),
         rightLabel: convertVND(_deliveryPrice),
         padding: const EdgeInsets.all(0.0),
         value: true,

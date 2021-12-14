@@ -1,9 +1,11 @@
 import 'package:coffee_shop/providers/cart_provider.dart';
+import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/screens/main_body.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({Key key}) : super(key: key);
   buttonClick(BuildContext context) async {
@@ -18,7 +20,7 @@ class SuccessScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          title: Text('Thank you'),
+          title: Text(LocaleKeys.thank_you.tr()),
           centerTitle: true,
         ),
         body: Column(
@@ -38,11 +40,11 @@ class SuccessScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Image(
-                      image: AssetImage('assets/images/Success.gif'),
+                      image: AssetImage(Res.success),
                       height: 200.0,
                     ),
                     Text(
-                      'Successfull',
+                      LocaleKeys.success.tr(),
                       style: TextStyle(
                           fontSize: 26.0,
                           color: AppColors.primaryColor,
@@ -51,7 +53,7 @@ class SuccessScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 10.0),
                     Text(
-                      'Your payment was done successfully.',
+                      LocaleKeys.payment_success.tr(),
                       style:
                           TextStyle(fontSize: 16.0, color: AppColors.textColor),
                       textAlign: TextAlign.center,
@@ -64,7 +66,7 @@ class SuccessScreen extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50.0))),
                         onPressed: () => buttonClick(context),
-                        child: Text('OK'))
+                        child: Text(LocaleKeys.ok.tr()))
                   ],
                 ),
               ))

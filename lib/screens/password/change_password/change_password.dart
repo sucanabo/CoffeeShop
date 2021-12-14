@@ -1,5 +1,5 @@
 import 'package:coffee_shop/providers/auth_provider.dart';
-import 'package:coffee_shop/values/function.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/validate.dart';
 import 'package:coffee_shop/widgets/divider_custom.dart';
 import 'package:coffee_shop/widgets/pill_button.dart';
@@ -7,7 +7,7 @@ import 'package:coffee_shop/widgets/rounded_text_field.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ChangePassword extends StatelessWidget {
   const ChangePassword({Key key}) : super(key: key);
   static const String routeName = '/routeName';
@@ -28,7 +28,7 @@ class ChangePassword extends StatelessWidget {
     }
 
     return ScreenBody(
-      appBar: AppBar(title: Text('Change Password')),
+      appBar: AppBar(title: Text(LocaleKeys.change_password.tr())),
       child: Form(
         key: _formKey,
         child: Column(
@@ -41,8 +41,8 @@ class ChangePassword extends StatelessWidget {
               validator: (val) => Validate.passwordValidate(val),
               controller: _txtOldPass,
               isPassword: true,
-              hintText: 'Enter current password',
-              label: 'Current Password',
+              hintText: LocaleKeys.password_confirm.tr(),
+              label: LocaleKeys.current_password.tr(),
             ),
             // SizedBox(height: 40.0),
             DividerCustom(
@@ -52,8 +52,8 @@ class ChangePassword extends StatelessWidget {
               validator: (val) => Validate.passwordValidate(val),
               controller: _txtNewPass,
               isPassword: true,
-              hintText: 'Enter new password',
-              label: 'New password',
+              hintText: LocaleKeys.password_confirm.tr(),
+              label: LocaleKeys.new_password.tr(),
             ),
             SizedBox(height: 25.0),
             RoundedTextField(
@@ -61,14 +61,14 @@ class ChangePassword extends StatelessWidget {
                   Validate.reEnterPasswordValidate(val, _txtNewPass.text),
               controller: _txtConfirm,
               isPassword: true,
-              hintText: 'Enter new password',
-              label: 'Password Confirmation',
+              hintText: LocaleKeys.password_confirm.tr(),
+              label: LocaleKeys.password_confirm.tr(),
             ),
             SizedBox(
               height: 50.0,
             ),
             PillButton(
-              child: Text('Change password'),
+              child: Text(LocaleKeys.change_password.tr()),
               onPressed: onChangePassword,
             )
           ],

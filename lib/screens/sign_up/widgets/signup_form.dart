@@ -69,6 +69,7 @@ class _SignUpFormState extends State<SignUpForm> {
             gender: _dropdownGender,
             phone: _txtPhone.text.trim(),
             email: _txtEmail.text.trim());
+       
         Navigator.of(context)
             .pushNamed(OTPScreen.routeName, arguments: instance);
       } else {

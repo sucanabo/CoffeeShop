@@ -5,6 +5,7 @@ import 'package:coffee_shop/models/tomtom_location_suggestion.dart';
 import 'package:coffee_shop/models/vietmap_location_suggestion.dart';
 import 'package:coffee_shop/providers/location_provider.dart';
 import 'package:coffee_shop/res.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/size_config.dart';
 import 'package:coffee_shop/widgets/divider_custom.dart';
@@ -17,7 +18,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class GoogleMapScreen extends StatefulWidget {
   static String routeName = '/map';
   @override
@@ -157,7 +158,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                                     controller: _searchController,
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
-                                        hintText: 'Search...',
+                                        hintText: '${LocaleKeys.search.tr()}...',
                                         prefixIcon: Icon(Icons.search),
                                         suffixIcon: IconButton(
                                             onPressed: () {
@@ -191,7 +192,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                                       ],
                                     );
                                   }
-                                  return Center(child: Text('No items found.'));
+                                  return Center(child: Text(LocaleKeys.no_item_found.tr()));
                                 },
                                 hideOnError: true,
                                 onSuggestionSelected:
@@ -201,7 +202,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                                 noItemsFoundBuilder: (context) => Container(
                                     height: 100.0,
                                     child: Center(
-                                      child: Text('No items found.'),
+                                      child: Text(LocaleKeys.no_item_found.tr()),
                                     )),
                               ),
                             ),
@@ -220,7 +221,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                'Delivery to:',
+                                LocaleKeys.delivery_to.tr(),
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.bold),
@@ -232,7 +233,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                                 height: getHeight(10.0),
                               ),
                               PillButton(
-                                child: Text('Confirm'),
+                                child: Text(LocaleKeys.confirm.tr()),
                                 onPressed: confirmLocation,
                               )
                             ],

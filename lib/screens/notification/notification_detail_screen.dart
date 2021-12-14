@@ -1,6 +1,10 @@
+import 'package:coffee_shop/models/notification.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
+import 'package:coffee_shop/values/function.dart';
+import 'package:coffee_shop/values/size_config.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class NotificationDetailScreen extends StatefulWidget {
   static String routeName = '/notification_detail';
 
@@ -17,10 +21,51 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var mess = ModalRoute.of(context).settings.arguments;
-    print('mess');
-    print(mess);
+    final data =
+        ModalRoute.of(context).settings.arguments as NotificationViewModel;
+
     return ScreenBody(
-        appBar: AppBar(title: Text('Notification')), child: Text('hi'));
+      appBar: AppBar(title: Text(LocaleKeys.notification.tr())),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image(
+                image: base64StringToImage(data.imgPath),
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(
+              height: SizeConfig.screenHeigh * 0.025,
+            ),
+            Text(
+              data.title,
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: SizeConfig.screenHeigh * 0.05,
+            ),
+            Text(
+              LocaleKeys.desciption.tr(),
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Text(
+              data.content,
+              style: TextStyle(
+                height: 1.5,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

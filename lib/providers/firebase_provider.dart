@@ -120,6 +120,10 @@ class FirebaseProvider extends ChangeNotifier {
         pref.setBool(PrefKey.FACEBOOK_SIGN_IN, true);
         pref.setBool(PrefKey.GOOGLE_SIGN_IN, true);
       }
+      final User instance = FirebaseAuth.instance.currentUser;
+      instance.delete();
+      clearUser();
+
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => MainBody()),
           (route) => false);

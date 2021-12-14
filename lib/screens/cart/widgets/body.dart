@@ -1,8 +1,10 @@
 import 'package:coffee_shop/models/cart_item.dart';
 import 'package:coffee_shop/providers/cart_provider.dart';
 import 'package:coffee_shop/providers/navigation_provider.dart';
+import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/screens/product/product_screen.dart';
 import 'package:coffee_shop/screens/product_detail/product_detail_screen.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/size_config.dart';
 import 'package:coffee_shop/widgets/cart_item.dart';
@@ -13,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -46,7 +49,7 @@ class _BodyState extends State<Body> {
             Padding(
               padding: const EdgeInsets.only(right: 20.0, top: 20.0),
               child: Text(
-                '${cart.itemCount} item${cart.itemCount > 1 ? 's' : ''}',
+                'product_item_args',
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   fontSize: 18.0,
@@ -58,10 +61,10 @@ class _BodyState extends State<Body> {
                   decoration: TextDecoration.underline,
                   decorationColor: AppColors.primaryColor,
                 ),
-              ),
+              ).plural(cart.itemCount),
             ),
             if (cart.itemCount != 0)
-              Hint(title: 'You can swipe item right to Edit or Delete.'),
+              Hint(title: LocaleKeys.hint_swipe_to_edit.tr()),
             Expanded(
                 child: cart.itemCount > 0
                     ? buildCartItem(context)
@@ -79,7 +82,7 @@ class _BodyState extends State<Body> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'You don\'t have any item in cart :(',
+            LocaleKeys.no_item_in_cart.tr(),
             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
             textAlign: TextAlign.center,
           ),
@@ -89,7 +92,7 @@ class _BodyState extends State<Body> {
                 width: SizeConfig.screenWidth * 0.5,
                 height: SizeConfig.screenHeigh * 0.3,
                 child: SvgPicture.asset(
-                  'assets/images/empty_cart.svg',
+                  Res.ic_empty_cart,
                   fit: BoxFit.contain,
                 ),
               ),
@@ -103,7 +106,7 @@ class _BodyState extends State<Body> {
               },
               color: AppColors.primaryMediumColor,
               child: Text(
-                'GO SHOP NOW',
+                LocaleKeys.go_shop_now.tr(),
                 style: TextStyle(fontSize: 18.0),
               ))
         ],
@@ -139,7 +142,7 @@ class _BodyState extends State<Body> {
                         borderRadius: BorderRadius.circular(10.0),
                         child: IconSlideAction(
                           onTap: () => onDissmissed(index, CartItemAction.edit),
-                          caption: 'Edit',
+                          caption: LocaleKeys.edit_address.tr(),
                           color: AppColors.primaryMediumColor,
                           icon: Icons.edit,
                         ),
@@ -152,7 +155,7 @@ class _BodyState extends State<Body> {
                         child: IconSlideAction(
                             onTap: () =>
                                 onDissmissed(index, CartItemAction.delete),
-                            caption: 'Delete',
+                            caption: LocaleKeys.delete.tr(),
                             color: AppColors.darkColor,
                             icon: Icons.delete),
                       ),

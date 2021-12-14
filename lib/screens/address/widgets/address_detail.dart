@@ -1,10 +1,12 @@
 import 'package:coffee_shop/models/address.dart';
 import 'package:coffee_shop/providers/auth_provider.dart';
+import 'package:coffee_shop/screens/address/address_screen.dart';
 import 'package:coffee_shop/screens/google_map_screen.dart';
 import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
 import 'package:coffee_shop/services/user_service.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
+import 'package:coffee_shop/values/validate.dart';
 import 'package:coffee_shop/widgets/pill_button.dart';
 import 'package:coffee_shop/widgets/popup_menu_item.dart';
 import 'package:coffee_shop/widgets/rounded_button.dart';
@@ -15,8 +17,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
 import '../../../values/api_end_point.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 
 class AddressDetail extends StatefulWidget {
   final bool isEdit;
@@ -47,9 +50,17 @@ class _AddressDetailState extends State<AddressDetail> {
             .createAddress(context, address: address);
     if (result != -1) {
       Navigator.of(context).pop(result);
-      showToast(widget.isEdit ? 'Updated success' : 'Create success');
+      showToast(
+        widget.isEdit
+            ? LocaleKeys.update_success.tr()
+            : LocaleKeys.create_success.tr(),
+      );
     } else {
-      showToast(widget.isEdit ? 'Updated failed' : 'Updated failed');
+      showToast(
+        widget.isEdit
+            ? LocaleKeys.update_fail.tr()
+            : LocaleKeys.create_fail.tr(),
+      );
     }
     setState(() {
       _loading = false;
@@ -70,8 +81,8 @@ class _AddressDetailState extends State<AddressDetail> {
         showMess(context: context, text: result);
       }
     } else {
-      Navigator.popUntil(context, ModalRoute.withName('/address'));
-      showMess(context: context, text: 'Delete success');
+      Navigator.popUntil(context, ModalRoute.withName(AddressScreen.routeName));
+      showMess(context: context, text: LocaleKeys.delete_success.tr());
     }
     setState(() {
       _loading = false;
@@ -101,11 +112,15 @@ class _AddressDetailState extends State<AddressDetail> {
   Widget build(BuildContext context) {
     List<AppBarPopupItem> appBarActions = [
       AppBarPopupItem(
-          text: 'Delete', icon: Icons.delete, onPressed: openDeleteDialog)
+          text: LocaleKeys.delete.tr(),
+          icon: Icons.delete,
+          onPressed: openDeleteDialog)
     ];
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.isEdit ? 'Edit address' : 'Add address'),
+          title: Text(widget.isEdit
+              ? '${LocaleKeys.update.tr() + LocaleKeys.address.tr()}'
+              : LocaleKeys.add_address.tr()),
           actions: widget.isEdit ? [_buildDeleteAction(appBarActions)] : [],
         ),
         body: _loading
@@ -120,7 +135,7 @@ class _AddressDetailState extends State<AddressDetail> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text(
-                            'Address Information',
+                            LocaleKeys.address_information.tr(),
                             style: TextStyle(
                                 fontSize: 20.0, fontWeight: FontWeight.w500),
                           ),
@@ -128,25 +143,25 @@ class _AddressDetailState extends State<AddressDetail> {
                           RoundedTextField(
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter title';
+                                return LocaleKeys.validate_not_null.tr();
                               }
                               if (value.length > 500)
-                                return 'Title length must in 500 character';
+                                return LocaleKeys.validate_length_500.tr();
                               return null;
                             },
                             controller: _txtTitle,
-                            hintText: 'Name of address',
-                            label: 'Address title',
+                            hintText: LocaleKeys.address_name.tr(),
+                            label: LocaleKeys.address_name.tr(),
                             textInputAction: TextInputAction.next,
                           ),
                           SizedBox(height: 20.0),
                           RoundedTextField(
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter address';
+                                return LocaleKeys.validate_not_null.tr();
                               }
                               if (value.length > 500)
-                                return 'Title length must in 500 character';
+                                return LocaleKeys.validate_length_500.tr();
                               return null;
                             },
                             maxLine: 5,
@@ -161,27 +176,29 @@ class _AddressDetailState extends State<AddressDetail> {
                               print(result);
                               if (result != null) {
                                 _txtAddress.text = result.address;
-                                coordinate = result.coordinates;
+                                setState(() {
+                                  coordinate = result;
+                                });
                               }
                             },
                             readOnly: true,
-                            hintText: 'Address',
-                            label: 'Address',
+                            hintText: LocaleKeys.address.tr(),
+                            label: LocaleKeys.address.tr(),
                             textInputAction: TextInputAction.next,
                           ),
                           SizedBox(height: 20.0),
                           RoundedTextField(
                             validator: (value) {
                               if (value.length > 500)
-                                return 'Title length must in 500 character';
+                                return LocaleKeys.validate_length_500.tr();
                               return null;
                             },
                             paddingContent: EdgeInsets.symmetric(
                                 horizontal: 15.0, vertical: 20.0),
                             controller: _txtDescription,
                             maxLine: 5,
-                            hintText: 'More desciption about your address',
-                            label: 'Description',
+                            hintText: LocaleKeys.more_description.tr(),
+                            label: LocaleKeys.more_description.tr(),
                             textInputAction: TextInputAction.next,
                           ),
                           Divider(
@@ -189,7 +206,7 @@ class _AddressDetailState extends State<AddressDetail> {
                             thickness: 1.5,
                           ),
                           Text(
-                            'Receiver Information',
+                            LocaleKeys.receiver_info.tr(),
                             style: TextStyle(
                                 fontSize: 20.0, fontWeight: FontWeight.w500),
                           ),
@@ -197,39 +214,33 @@ class _AddressDetailState extends State<AddressDetail> {
                           RoundedTextField(
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter receiver\'s name';
+                                return LocaleKeys.validate_not_null.tr();
                               }
                               if (value.length > 255)
-                                return 'Title length must in 255 character';
+                                return LocaleKeys.validate_length_255.tr();
                               return null;
                             },
                             controller: _txtReceiverName,
-                            hintText: 'Receiver\'s name',
-                            label: 'Receiver',
+                            hintText: LocaleKeys.receiver_name.tr(),
+                            label: LocaleKeys.receiver_name.tr(),
                             textInputAction: TextInputAction.next,
                           ),
                           SizedBox(height: 20.0),
                           RoundedTextField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter receiver\'s phone number';
-                              }
-                              if (value.length > 11 || value.length < 10)
-                                return 'Invalid phone number (10 or 11 numbers)';
-                              return null;
-                            },
+                            validator: (value) => Validate.phoneValidate(value),
                             controller: _txtReceiverPhone,
                             keyboardType: TextInputType.phone,
-                            hintText: 'Receiver\'s phone',
-                            label: 'Phone number',
+                            hintText: LocaleKeys.receiver_phone.tr(),
+                            label: LocaleKeys.receiver_phone.tr(),
                             textInputAction: TextInputAction.done,
                           ),
                           SizedBox(
                             height: 30.0,
                           ),
                           PillButton(
-                              child: Text('OK'),
+                              child: Text(LocaleKeys.ok.tr()),
                               onPressed: () {
+                                print(coordinate);
                                 if (_formKey.currentState.validate() &&
                                     coordinate != null) {
                                   setState(() {
@@ -256,8 +267,9 @@ class _AddressDetailState extends State<AddressDetail> {
     showDialog(
         context: context,
         builder: (dialogContext) => AlertDialog(
-              title: Text('Delete Address'),
-              content: Text('Are you sure delete ${widget.address.title} ?'),
+              title: Text(LocaleKeys.delete.tr() + LocaleKeys.address),
+              content: Text(
+                  ' ${LocaleKeys.are_you_sure.tr()} ${LocaleKeys.delete.tr() + LocaleKeys.address.tr()} ${widget.address.title} ?'),
               actions: [
                 RoundedButton(
                   onPressed: () {
@@ -267,14 +279,14 @@ class _AddressDetailState extends State<AddressDetail> {
                       deleteAdddress();
                     });
                   },
-                  title: 'Yes',
+                  title: LocaleKeys.yes.tr(),
                   color: AppColors.primaryColor,
                 ),
                 RoundedButton(
                   onPressed: () {
                     Navigator.pop(dialogContext);
                   },
-                  title: 'No',
+                  title: LocaleKeys.no.tr(),
                   color: AppColors.darkColor,
                 ),
               ],

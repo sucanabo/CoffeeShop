@@ -1,10 +1,12 @@
+import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:flutter/material.dart';
 
 class NotificationItem extends StatelessWidget {
   final String title;
   final String body;
-  NotificationItem({this.title, this.body});
+  final VoidCallback onTap;
+  NotificationItem({this.title, this.body, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +18,18 @@ class NotificationItem extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 5.0),
       child: Center(
         child: ListTile(
-          onTap: () {},
+          onTap: onTap,
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(5.0),
             child: Image(
-              image: AssetImage('assets/images/logo.png'),
+              image: AssetImage(Res.logo),
             ),
           ),
-          title: Text(title,
-              maxLines: 1, overflow: TextOverflow.ellipsis),
-          subtitle: Text(body,
-              maxLines: 2, overflow: TextOverflow.ellipsis),
+          title: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
+          subtitle: Text(body, maxLines: 2, overflow: TextOverflow.ellipsis),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-          trailing: Icon(Icons.close),
+          trailing: Icon(Icons.chevron_right_rounded),
           dense: true,
         ),
       ),

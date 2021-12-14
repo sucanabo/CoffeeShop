@@ -2,6 +2,7 @@ import 'package:coffee_shop/models/api_response.dart';
 import 'package:coffee_shop/models/rating.dart';
 import 'package:coffee_shop/providers/product_provider.dart';
 import 'package:coffee_shop/services/product_service.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/widgets/rating.dart';
@@ -9,7 +10,7 @@ import 'package:coffee_shop/widgets/rounded_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class RatingDialog extends StatefulWidget {
   final RatingModel rating;
   final int productId;
@@ -51,11 +52,9 @@ class _RatinDialogState extends State<RatingDialog> {
 
   //post reting
   void _postRating(star, review) async {
-    print('star $star, $review');
     if (star == 0) {
       setStarError();
     } else if (star != widget.rating.star || star != 0) {
-      print('other rating');
       ApiResponse response = await postRating(
           productId: widget.productId, star: star, review: review);
       if (response.error == null) {
@@ -65,7 +64,7 @@ class _RatinDialogState extends State<RatingDialog> {
             .setProductRating(productId: widget.productId, rating: newRating);
         Navigator.pop(widget.dialogContext);
         showMess(
-            context: widget.pageContext, text: 'Thanks for your rating <3');
+            context: widget.pageContext, text: LocaleKeys.thank_for_rating.tr());
       } else {
         showMess(context: widget.pageContext, text: '${response.error}');
       }
@@ -96,7 +95,7 @@ class _RatinDialogState extends State<RatingDialog> {
                       children: [
                         Container(
                           decoration: BoxDecoration(color: Colors.white),
-                          child: Text('Rate:'),
+                          child: Text(LocaleKeys.rate.tr()),
                         ),
                         Rating(
                           currentRating: _ratingModel.star,
@@ -111,7 +110,7 @@ class _RatinDialogState extends State<RatingDialog> {
                         ? Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: Text(
-                              'Please choose number of star',
+                              LocaleKeys.please_choose_start.tr(),
                               style: TextStyle(color: Colors.red[300]),
                             ),
                           )
@@ -125,7 +124,7 @@ class _RatinDialogState extends State<RatingDialog> {
                     key: _formKey,
                     child: TextFormField(
                       validator: (val) =>
-                          val.length > 255 ? 'Review max length is 255.' : null,
+                          val.length > 255 ? LocaleKeys.validate_length_255.tr() : null,
                       textInputAction: TextInputAction.done,
                       controller: _txtReview,
                       maxLines: 8,
@@ -139,7 +138,7 @@ class _RatinDialogState extends State<RatingDialog> {
                           hintStyle: TextStyle(
                             color: Colors.grey[800],
                           ),
-                          hintText: 'Product review (not required)...'),
+                          hintText: LocaleKeys.product_review_not_required.tr()),
                     ),
                   ),
                 )),
@@ -155,7 +154,7 @@ class _RatinDialogState extends State<RatingDialog> {
                           Navigator.pop(widget.dialogContext);
                         },
                         color: AppColors.primaryLightColor,
-                        title: 'Cancel',
+                        title: LocaleKeys.cancel.tr(),
                       ),
                     ),
                     Spacer(),
@@ -168,7 +167,7 @@ class _RatinDialogState extends State<RatingDialog> {
                               _txtReview.text);
                         },
                         color: AppColors.primaryMediumColor,
-                        title: 'Rate',
+                        title: LocaleKeys.rate.tr(),
                       ),
                     ),
                   ],

@@ -1,12 +1,14 @@
 import 'package:coffee_shop/models/voucher.dart';
 import 'package:coffee_shop/providers/navigation_provider.dart';
 import 'package:coffee_shop/screens/product/product_screen.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
+import 'package:coffee_shop/untils/app_information.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/values/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class VoucherDetail extends StatelessWidget {
   final VoucherModel voucher;
   VoucherDetail({this.voucher});
@@ -17,7 +19,7 @@ class VoucherDetail extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'Kofeeholic',
+            AppInformation.appName,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
           ),
@@ -52,7 +54,7 @@ class VoucherDetail extends StatelessWidget {
                     coppyClipBoard(voucher.couponCode, context);
                   },
                   child: Text(
-                    'Copy',
+                    LocaleKeys.copy.tr(),
                     style: TextStyle(fontSize: 18.0),
                   )),
             ],
@@ -69,7 +71,7 @@ class VoucherDetail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Expired date:',
+                LocaleKeys.expired_date.tr(),
                 style: TextStyle(fontSize: 16.0, color: Colors.grey[700]),
               ),
               Text(formatDateToString(voucher.expiryDate) ?? 'null',
@@ -80,7 +82,7 @@ class VoucherDetail extends StatelessWidget {
             height: 20.0,
           ),
           Text(
-            voucher.content ?? 'No content',
+            voucher.content ?? LocaleKeys.no_content.tr(),
             style: TextStyle(fontSize: 16.0),
           ),
         ],
@@ -91,7 +93,7 @@ class VoucherDetail extends StatelessWidget {
   Align _buildOrderButton(BuildContext context) {
     return Align(
       child: ElevatedButton(
-        child: Text('ORDER NOW'),
+        child: Text(LocaleKeys.order_now.tr()),
         onPressed: () {
           Navigator.of(context).pop();
           Provider.of<NavigationProvider>(context, listen: false)

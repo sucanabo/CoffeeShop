@@ -1,10 +1,12 @@
 import 'package:coffee_shop/providers/cart_provider.dart';
+import 'package:coffee_shop/screens/checkout/checkout_screen.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/values/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class CartBottomSheet extends StatelessWidget {
   const CartBottomSheet({
     Key key,
@@ -24,7 +26,7 @@ class CartBottomSheet extends StatelessWidget {
         children: [
           Consumer<CartProvider>(
               builder: (context, cart, child) => Text(
-                    'Subtotal: ${convertVND(cart.totalAmount)}',
+                    '${LocaleKeys.subtotal.tr()} ${convertVND(cart.totalAmount)}',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 18.0,
@@ -36,9 +38,9 @@ class CartBottomSheet extends StatelessWidget {
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0))),
-            onPressed: () => Navigator.pushNamed(context, '/checkout'),
+            onPressed: () => Navigator.pushNamed(context, CheckoutScreen.routeName),
             child: Text(
-              'Checkout',
+              LocaleKeys.checkout.tr(),
               style: TextStyle(color: Colors.white),
             ),
           )

@@ -3,6 +3,7 @@ import 'package:coffee_shop/models/voucher.dart';
 import 'package:coffee_shop/providers/cart_provider.dart';
 import 'package:coffee_shop/providers/category_provider.dart';
 import 'package:coffee_shop/providers/voucher_provider.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
@@ -10,7 +11,7 @@ import 'package:coffee_shop/widgets/screen_body_loading.dart';
 import 'package:coffee_shop/widgets/voucher.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ChooseVoucher extends StatefulWidget {
   final bool isDeliveryMethod;
   final bool isEdit;
@@ -45,7 +46,7 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
     if (result == null) {
       getVouchers();
     } else {
-      showMess(context: context, text: 'Fetch data fail.');
+      showMess(context: context, text: LocaleKeys.fetch_data_fail.tr());
     }
     _vouchersProvider.setLoading(false);
   }
@@ -90,7 +91,7 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
     }
     return Scaffold(
         appBar: AppBar(
-          title: Text('Choose voucher'),
+          title: Text(LocaleKeys.choose_voucher.tr()),
           centerTitle: true,
           actions: [
             TextButton(
@@ -98,7 +99,7 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
                   returnData();
                 },
                 child: Text(
-                  'Done',
+                  LocaleKeys.done.tr(),
                   style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w600,
@@ -119,16 +120,16 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
                     padding: EdgeInsets.all(20.0),
                     children: [
                       Text(
-                        'Shipping',
+                        LocaleKeys.shipping.tr(),
                         style: TextStyle(
                             fontSize: 20.0, fontWeight: FontWeight.w500),
                       ),
                       SizedBox(height: 10.0),
                       _shippingVouchers.isEmpty
-                          ? Text('You don\'t have any shipping voucher.')
+                          ? Text(LocaleKeys.dont_have_shipping_voucher.tr())
                           : !widget.isDeliveryMethod
                               ? Text(
-                                  'Shipping vouchers are only apply with delivery method.')
+                                  LocaleKeys.delivery_method_only.tr())
                               : _buildShippingList(_shippingVouchers),
                       SizedBox(height: 20.0),
                       Text(
@@ -138,7 +139,7 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
                       ),
                       SizedBox(height: 10.0),
                       _discountVouchers.isEmpty
-                          ? Text('You don\'t have any discount voucher.')
+                          ? Text(LocaleKeys.dont_have_voucher_discount.tr())
                           : _buildDiscountList(_discountVouchers),
                     ],
                   )),

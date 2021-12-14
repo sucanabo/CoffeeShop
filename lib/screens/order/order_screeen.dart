@@ -5,6 +5,7 @@ import 'package:coffee_shop/models/transaction.dart';
 import 'package:coffee_shop/providers/transaction_provider.dart';
 import 'package:coffee_shop/screens/order/widgets/transaction.dart';
 import 'package:coffee_shop/services/order_service.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/values/size_config.dart';
@@ -13,6 +14,7 @@ import 'package:coffee_shop/widgets/loading.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class OrderScreen extends StatefulWidget {
   static String routeName = '/order';
@@ -27,11 +29,11 @@ class _OrderScreenState extends State<OrderScreen>
   TabController filterTabController;
   List<String> transactionStatus = [
     '',
-    'pending',
-    'cancelled',
-    'packing',
-    'shipping',
-    'success'
+    'pending'.tr(),
+    'cancelled'.tr(),
+    'packing'.tr(),
+    'shipping'.tr(),
+    'success'.tr(),
   ];
   int tabSelected = 0;
   int page = 1;
@@ -52,7 +54,7 @@ class _OrderScreenState extends State<OrderScreen>
         totalRow = data.totalRow;
       });
     } else {
-      showToast('Get data failed.');
+      showToast(LocaleKeys.fetch_data_fail.tr());
     }
     setState(() {
       _loading = false;
@@ -105,7 +107,7 @@ class _OrderScreenState extends State<OrderScreen>
     return ScreenBody(
       padding: EdgeInsets.zero,
       appBar: AppBar(
-        title: Text('Your transaction'),
+        title: Text(LocaleKeys.transaction_history.tr()),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -131,7 +133,7 @@ class _OrderScreenState extends State<OrderScreen>
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
-              '$totalRow result',
+              plural(LocaleKeys.result_args, totalRow),
               style: TextStyle(
                   color: AppColors.primaryColor,
                   fontSize: AppStyles.textSize14,
@@ -167,8 +169,8 @@ class _OrderScreenState extends State<OrderScreen>
                             return Padding(
                                 padding: EdgeInsets.symmetric(
                                     vertical: getHeight(15.0)),
-                                child: const Text(
-                                  'No more resul.',
+                                child: Text(
+                                  LocaleKeys.no_more_result.tr(),
                                   textAlign: TextAlign.center,
                                 ));
                           }
@@ -193,7 +195,7 @@ class _OrderScreenState extends State<OrderScreen>
               : null,
           borderRadius: BorderRadius.circular(getHeight(50))),
       child: Tab(
-        text: index != 0 ? title.capitalize() : 'All',
+        text: index != 0 ? title.capitalize() : LocaleKeys.all.tr(),
       ),
     );
   }

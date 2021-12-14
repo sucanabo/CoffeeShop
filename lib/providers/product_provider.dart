@@ -16,6 +16,7 @@ class ProductProvider with ChangeNotifier {
   }
 
   setProductList(List<dynamic> list) {
+    _productList.clear();
     _productList.addAll(list);
     notifyListeners();
   }
@@ -50,13 +51,11 @@ class ProductProvider with ChangeNotifier {
 
   List<dynamic> newProducts({int limit}) {
     List<dynamic> list = [];
-    if(limit != null){
+    if (limit != null) {
       list.addAll(_productList.reversed.take(limit).toList());
-    }
-    else{
+    } else {
       list.addAll(_productList.reversed.toList());
     }
-    
 
     return list;
   }
@@ -64,13 +63,13 @@ class ProductProvider with ChangeNotifier {
   List<dynamic> saleProducts({int limit}) {
     List<dynamic> list = [];
     final List<dynamic> instance = _productList;
-    if(limit != null){
-      list.addAll(
-        instance.where((element) => element.discount != 0).take(limit).toList());
-    }
-    else{
-      list.addAll(
-        instance.where((element) => element.discount != 0).toList());
+    if (limit != null) {
+      list.addAll(instance
+          .where((element) => element.discount != 0)
+          .take(limit)
+          .toList());
+    } else {
+      list.addAll(instance.where((element) => element.discount != 0).toList());
     }
     return list;
   }

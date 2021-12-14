@@ -1,10 +1,11 @@
 import 'package:coffee_shop/providers/voucher_provider.dart';
 import 'package:coffee_shop/screens/voucher/widgets/accumulate/accumulate_info_card.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/widgets/haeding_underline.dart';
 import 'package:coffee_shop/widgets/voucher.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class AccumulateTab extends StatelessWidget {
   const AccumulateTab({
     @required this.cardList,
@@ -14,6 +15,7 @@ class AccumulateTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<VoucherProvider>(context, listen: false);
+    
     return ListView(children: [
       Container(
         clipBehavior: Clip.none,
@@ -38,12 +40,12 @@ class AccumulateTab extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HeadingUnderline(
-                  text: 'Available',
+                  text: LocaleKeys.available.tr(),
                 ),
                 if (provider.voucherItems.isEmpty)
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15.0),
-                    child: Text('No voucher available'),
+                    child: Text(LocaleKeys.no_voucher.tr()),
                   ),
                 Consumer<VoucherProvider>(
                   builder: (context, vouchers, child) => Column(

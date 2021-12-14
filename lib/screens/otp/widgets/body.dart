@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:coffee_shop/models/user.dart';
 import 'package:coffee_shop/screens/password/new_password/new_password_screen.dart';
 import 'package:coffee_shop/services/firebase_auth.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/size_config.dart';
 import 'package:coffee_shop/widgets/pill_button.dart';
@@ -11,10 +12,14 @@ import 'package:coffee_shop/widgets/screen_body_loading.dart';
 import 'package:flutter/material.dart';
 
 import 'otp_form.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+enum OTPType { nomal, register }
 
 class Body extends StatefulWidget {
   final UserModel user;
   Body({this.user});
+
   @override
   _BodyState createState() => _BodyState();
 }
@@ -26,6 +31,8 @@ class _BodyState extends State<Body> {
   int secondCounter = 0;
   int defaultSecond = 60;
   Timer timer;
+  String _phoneNumber;
+
   @override
   void initState() {
     super.initState();
@@ -34,9 +41,9 @@ class _BodyState extends State<Body> {
   }
 
   @override
-  void dispose() { 
+  void dispose() {
     timer.cancel();
-     _otpController.dispose();
+    _otpController.dispose();
     super.dispose();
   }
 
@@ -105,15 +112,19 @@ class _BodyState extends State<Body> {
                   Column(
                     children: [
                       Text(
-                        'OTP Verification',
+                        LocaleKeys.otp_verification.tr(),
                         style: TextStyle(
                             color: AppColors.primaryColor,
                             fontSize: getWidth(28.0),
                             fontWeight: FontWeight.w600),
                       ),
-                      Text('We sent your code to ${widget.user.phone}'),
+                      Text(LocaleKeys.we_send_code_to.tr(args: [_phoneNumber])),
                       SizedBox(height: getHeight(20.0)),
-                      Text('Send OTP again in 00:$secondCounter second.'),
+                      Text(
+                        LocaleKeys.send_otp_again.tr(
+                          args: [secondCounter.toString()],
+                        ),
+                      ),
                     ],
                   ),
                   Expanded(
@@ -132,8 +143,8 @@ class _BodyState extends State<Body> {
                           width: double.infinity,
                           child: PillButton(
                               child: Text(secondCounter != 0
-                                  ? 'Continue'
-                                  : 'Resend OTP'),
+                                  ? LocaleKeys.continue_text.tr()
+                                  : LocaleKeys.resend_otp.tr()),
                               onPressed: () => secondCounter != 0
                                   ? _buttonEnable
                                       ? verifyOTP(_otpController.text)

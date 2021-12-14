@@ -1,10 +1,12 @@
 import 'package:coffee_shop/providers/voucher_provider.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/widgets/haeding_underline.dart';
 import 'package:coffee_shop/widgets/voucher.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class VoucherTab extends StatelessWidget {
   @override
@@ -36,7 +38,7 @@ class VoucherTab extends StatelessWidget {
                   color: AppColors.primaryColor,
                 ),
                 Text(
-                  'Enter promotion code',
+                  LocaleKeys.enter_code.tr(),
                   style: TextStyle(fontSize: 16.0),
                 ),
                 LineIcon.angleRight()
@@ -50,15 +52,18 @@ class VoucherTab extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HeadingUnderline(
-                text: 'Available',
+                text: LocaleKeys.available.tr(),
               ),
               Consumer<VoucherProvider>(
-      builder: (context,vouchers,child)=>
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: vouchers.userVoucherItems.map((voucher) => VoucherWidget(voucher: voucher,isUserVoucher: true,)).toList()
-                ),
+                builder: (context, vouchers, child) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: vouchers.userVoucherItems
+                        .map((voucher) => VoucherWidget(
+                              voucher: voucher,
+                              isUserVoucher: true,
+                            ))
+                        .toList()),
               )
             ],
           ),

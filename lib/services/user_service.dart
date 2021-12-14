@@ -219,7 +219,7 @@ Future<ApiResponse> changePassword({String oldPwd, String newPwd}) async {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     }, body: {
-      'old_password':oldPwd,
+      'old_password': oldPwd,
       'new_password': newPwd,
     });
     switch (response.statusCode) {
@@ -231,7 +231,8 @@ Future<ApiResponse> changePassword({String oldPwd, String newPwd}) async {
         break;
 
       default:
-        apiResponse.error = jsonDecode(response.body)['message']?? somethingWentWrong;
+        apiResponse.error =
+            jsonDecode(response.body)['message'] ?? somethingWentWrong;
         break;
     }
   } catch (e) {
@@ -359,6 +360,22 @@ Future<ApiResponse> getUserAddresses() async {
   } catch (e) {
     print('error address');
     apiResponse.error = serverError;
+  }
+  return apiResponse;
+}
+
+Future<ApiResponse> sendMailReset({String phone}) async {
+  ApiResponse apiResponse = ApiResponse();
+  try {
+    final response =
+        await http.post(Uri.parse('$baseURL/password/create'), headers: {
+      'Accept': 'application/json',
+    }, body: {
+      'phone': phone
+    });
+    apiResponse.data = jsonDecode(response.body)['message'];
+  } catch (e) {
+    print(e);
   }
   return apiResponse;
 }

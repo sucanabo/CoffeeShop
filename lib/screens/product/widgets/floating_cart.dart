@@ -1,7 +1,9 @@
 import 'package:coffee_shop/providers/cart_provider.dart';
 import 'package:coffee_shop/screens/cart/cart_screen.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +61,7 @@ class _FloatingCartState extends State<FloatingCart>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${cart.itemCount.toString()} item${cart.itemCount > 1 ? 's' : ''}',
+                          plural(LocaleKeys.product_item_args, cart.itemCount),
                           style: TextStyle(color: AppColors.textColor, fontSize: 12.0),
                         ),
                         Text('${convertVND(cart.totalAmount)}',

@@ -6,6 +6,7 @@ import 'package:coffee_shop/providers/product_provider.dart';
 import 'package:coffee_shop/services/category_service.dart';
 import 'package:coffee_shop/services/product_service.dart';
 import 'package:coffee_shop/services/user_service.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/api_end_point.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
@@ -16,7 +17,7 @@ import 'package:coffee_shop/widgets/loading.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class OrderDetail extends StatefulWidget {
   const OrderDetail({@required this.model});
   final TransactionModel model;
@@ -55,7 +56,7 @@ class _OrderDetailState extends State<OrderDetail> {
   @override
   Widget build(BuildContext context) {
     return ScreenBody(
-      appBar: AppBar(title: Text('Order detail')),
+      appBar: AppBar(title: Text(LocaleKeys.order_detail.tr())),
       child: Consumer<ProductProvider>(builder: (_, provider, child) {
         return provider.isLoading
             ? Center(child: Loading())
@@ -72,19 +73,19 @@ class _OrderDetailState extends State<OrderDetail> {
                       _buildOrderItem(),
                       DividerCustom(),
                       _buildRow(
-                          textLeft: 'Subtotal',
+                          textLeft: LocaleKeys.subtotal.tr(),
                           textRight:
                               '${convertVND(double.parse(widget.model.order.subtotal))}'),
                       _buildRow(
-                          textLeft: 'Shipping',
+                          textLeft: LocaleKeys.shipping.tr(),
                           textRight:
                               '${convertVND(double.parse(widget.model.order.shipping))}'),
                       _buildRow(
-                          textLeft: 'Voucher discount',
+                          textLeft: LocaleKeys.voucher_discount.tr(),
                           textRight:
                               '- ${convertVND(double.parse(widget.model.order.voucherDiscount))}'),
                       _buildRow(
-                          textLeft: 'Shipping discount',
+                          textLeft: LocaleKeys.shipping_discount.tr(),
                           textRight:
                               '- ${convertVND(double.parse(widget.model.order.shippingDiscount))}'),
                       DividerCustom(
@@ -92,7 +93,7 @@ class _OrderDetailState extends State<OrderDetail> {
                       ),
                       _buildRow(
                           isLarge: true,
-                          textLeft: 'Order total',
+                          textLeft: LocaleKeys.order_total.tr(),
                           textRight:
                               '${convertVND(double.parse(widget.model.order.grandtotal))}'),
                       DividerCustom(
@@ -100,7 +101,7 @@ class _OrderDetailState extends State<OrderDetail> {
                       ),
                       _buildRow(
                           isLarge: true,
-                          textLeft: 'Payment by',
+                          textLeft: LocaleKeys.payment_by.tr(),
                           textRight: '${widget.model.type.capitalize()}'),
                       DividerCustom(
                         height: 40.0,
@@ -113,19 +114,19 @@ class _OrderDetailState extends State<OrderDetail> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Order code',
+                                Text(LocaleKeys.order_code.tr(),
                                     style:
                                         TextStyle(fontWeight: FontWeight.w600)),
                                 SizedBox(height: 8.0),
-                                Text('Name',
+                                Text(LocaleKeys.receiver_name.tr(),
                                     style:
                                         TextStyle(fontWeight: FontWeight.w600)),
                                 SizedBox(height: 8.0),
-                                Text('Phone',
+                                Text(LocaleKeys.phone.tr(),
                                     style:
                                         TextStyle(fontWeight: FontWeight.w600)),
                                 SizedBox(height: 8.0),
-                                Text('Address',
+                                Text(LocaleKeys.address.tr(),
                                     style:
                                         TextStyle(fontWeight: FontWeight.w600)),
                               ],
@@ -256,6 +257,6 @@ class _OrderDetailState extends State<OrderDetail> {
                       ],
                     )))
         : Text(
-            'Can\'t load order items. Please contact us to slove this prolem.');
+            LocaleKeys.can_load_order_item.tr());
   }
 }

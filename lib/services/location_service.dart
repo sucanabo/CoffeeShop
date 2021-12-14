@@ -5,7 +5,6 @@ import 'package:coffee_shop/models/tomtom_routes.dart';
 import 'package:coffee_shop/models/vietmap_location_suggestion.dart';
 import 'package:coffee_shop/untils/app_information.dart';
 import 'package:coffee_shop/values/api_end_point.dart';
-// import 'package:coffee_shop/models/vietmap_location_suggestion.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
