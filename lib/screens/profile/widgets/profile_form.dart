@@ -81,7 +81,7 @@ class _ProfileFormState extends State<ProfileForm> {
           RoundedTextField(
               validator: (value) => Validate.displayNameValidate(value),
               controller: _txtDisplayName,
-              label: LocaleKeys.search_product.tr(),
+              label: LocaleKeys.display_name.tr(),
               hintText: LocaleKeys.display_name.tr()),
           SizedBox(height: SizeConfig.screenHeigh * 0.025),
           RoundedTextField(

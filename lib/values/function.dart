@@ -3,14 +3,17 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:coffee_shop/providers/navigation_provider.dart';
+import 'package:coffee_shop/res.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
+import 'package:collection/collection.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:collection/collection.dart';
 
 //decode image base64
 MemoryImage base64StringToImage(String base64String) {
@@ -76,17 +79,18 @@ Widget greeting(String userName) {
   var hour = DateTime.now().hour;
   String session = '';
   if (hour < 12) {
-    session = 'Morning';
+    session = LocaleKeys.morning.tr();
   } else if (hour < 17)
-    session = 'Afternoon';
+    session = LocaleKeys.afternoon.tr();
   else
-    session = 'Evening';
+    session = LocaleKeys.evening.tr();
   return Row(children: <Widget>[
     SvgPicture.asset(
-        hour < 17 ? 'assets/icons/sun.svg' : 'assets/icons/moon.svg'),
+      hour < 17 ? Res.ic_sun : Res.ic_moon,
+    ),
     SizedBox(width: 10.0),
     Text(
-      'Good $session, ${userName.split(' ').last}',
+      '${LocaleKeys.gretting.tr()} $session, ${userName.split(' ').last}',
       style: TextStyle(
           color: AppColors.textColor,
           fontSize: 20.0,
@@ -97,8 +101,9 @@ Widget greeting(String userName) {
 
 //copy clipboard
 void coppyClipBoard(String text, context) {
-  Clipboard.setData(ClipboardData(text: text)).then((value) =>
-      showMess(text: 'Copied $text into clipboard.', context: context));
+  Clipboard.setData(ClipboardData(text: text)).then((value) => showMess(
+      text: LocaleKeys.copied_into_clipboard.tr(args: [text]),
+      context: context));
 }
 
 //show Toast

@@ -7,4 +7,5 @@ class PrefKey {
   static const String GOOGLE_SIGN_IN = 'google_sign_in';//boolean
   static const String FACEBOOK_SIGN_IN = 'facebook_sign_in';//boolean
   static const String FIREBASE_TOKEN = 'firebase_token';
+  static const String LOCALE = 'locale';
 }

@@ -1,5 +1,7 @@
 import 'package:coffee_shop/providers/auth_provider.dart';
 import 'package:coffee_shop/providers/cart_provider.dart';
+import 'package:coffee_shop/screens/cart/cart_screen.dart';
+import 'package:coffee_shop/screens/notification/notification.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:flutter/material.dart';
@@ -34,14 +36,14 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               icon: LineIcon.bell(
                 color: AppColors.primaryColor,
               ),
-              onPress: () => Navigator.pushNamed(context, '/notification')),
+              onPress: () => Navigator.pushNamed(context, NotificationScreen.routeName)),
           Consumer<CartProvider>(
               builder: (context, provider, child) => _buildAcitonButton(
                   quantity: provider.itemCount,
                   icon: LineIcon.shoppingBasket(
                     color: AppColors.primaryColor,
                   ),
-                  onPress: () => Navigator.pushNamed(context, '/cart')))
+                  onPress: () => Navigator.pushNamed(context, CartScreen.routeName)))
         ], systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
     );

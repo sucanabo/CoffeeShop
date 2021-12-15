@@ -4,6 +4,7 @@ import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/values/size_config.dart';
+import 'package:coffee_shop/widgets/language_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,7 @@ class MoreScreenSliverDelegate extends SliverPersistentHeaderDelegate {
     return Stack(
       children: <Widget>[
         Image.asset(
-          'assets/images/more_background.jpg',
+          Res.more_background,
           fit: BoxFit.cover,
           width: SizeConfig.screenWidth,
         ),
@@ -106,6 +107,11 @@ class MoreScreenSliverDelegate extends SliverPersistentHeaderDelegate {
             );
           }),
         ),
+        Positioned(
+          top: 10,
+          right: 10,
+          child: LanguagePicker(),
+        )
       ],
     );
   }

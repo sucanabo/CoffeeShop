@@ -1,8 +1,11 @@
 import 'package:coffee_shop/providers/navigation_provider.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
+import 'package:coffee_shop/untils/app_information.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ScreenBody extends StatelessWidget {
   final Widget child;
@@ -36,10 +39,10 @@ class ScreenBody extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('Welcome to',
+                        Text(LocaleKeys.welcome_to.tr(),
                             style:
                                 TextStyle(fontSize: 26.0, color: Colors.white)),
-                        Text('KOFEHOLIC',
+                        Text(AppInformation.appName,
                             style: TextStyle(
                                 fontSize: 36.0,
                                 color: Colors.white,
@@ -89,7 +92,7 @@ class ScreenBody extends StatelessWidget {
                                         AppColors.primaryColor)),
                               ),
                               SizedBox(width: getWidth(10.0)),
-                              Text('Please wait ...'),
+                              Text(LocaleKeys.please_wait.tr()),
                             ]),
                       )),
                     )

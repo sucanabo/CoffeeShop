@@ -1,10 +1,11 @@
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/size_config.dart';
 import 'package:coffee_shop/widgets/pill_button.dart';
 import 'package:flutter/material.dart';
 
 import 'divider_custom.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class PopUpNotify extends StatelessWidget {
   const PopUpNotify({this.title, this.content, this.actions});
   final String title;
@@ -29,7 +30,7 @@ class PopUpNotify extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                title ?? 'Notification',
+                title ?? LocaleKeys.notification.tr(),
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
               ),
               DividerCustom(
@@ -37,7 +38,7 @@ class PopUpNotify extends StatelessWidget {
               ),
               content ??
                   Text(
-                    'Notification',
+                    LocaleKeys.notification.tr(),
                     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
                     textAlign: TextAlign.center,
                   ),
@@ -48,7 +49,7 @@ class PopUpNotify extends StatelessWidget {
                     [
                       PillButton(
                         onPressed: () => Navigator.of(context).pop(),
-                        child: Text('Close'),
+                        child: Text(LocaleKeys.close.tr()),
                       )
                     ],
               ),

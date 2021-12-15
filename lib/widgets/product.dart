@@ -1,6 +1,7 @@
 import 'package:coffee_shop/models/product.dart';
 import 'package:coffee_shop/providers/cart_provider.dart';
 import 'package:coffee_shop/screens/product_detail/product_detail_screen.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/values/size_config.dart';
@@ -9,7 +10,7 @@ import 'package:coffee_shop/widgets/rounded_container.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ProductWidget extends StatelessWidget {
   final ProductModel product;
   final bool isLarge;
@@ -121,7 +122,7 @@ class ProductWidget extends StatelessWidget {
                                       children: [
                                         Row(
                                           children: [
-                                            Text('price ',
+                                            Text(LocaleKeys.price.tr() + ' ',
                                                 style: TextStyle(
                                                     color:
                                                         AppColors.mutedColor)),
@@ -146,7 +147,7 @@ class ProductWidget extends StatelessWidget {
                                     )
                                   : Row(
                                       children: [
-                                        Text('price ',
+                                        Text(LocaleKeys.price.tr() + ' ',
                                             style: TextStyle(
                                                 color: AppColors.mutedColor)),
                                         Text(
@@ -321,7 +322,7 @@ class ProductWidget extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  Text('price ',
+                                  Text(LocaleKeys.price.tr() + ' ',
                                       style: TextStyle(
                                           color: AppColors.mutedColor)),
                                   if (product.discount != 0)

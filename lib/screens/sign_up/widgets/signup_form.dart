@@ -3,6 +3,7 @@ import 'package:coffee_shop/providers/firebase_provider.dart';
 import 'package:coffee_shop/providers/navigation_provider.dart';
 import 'package:coffee_shop/screens/otp/otp_screen.dart';
 import 'package:coffee_shop/services/user_service.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/values/size_config.dart';
@@ -15,7 +16,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key key}) : super(key: key);
 
@@ -76,9 +77,9 @@ class _SignUpFormState extends State<SignUpForm> {
         showDialog(
             context: context,
             builder: (context) => PopUpNotify(
-                  title: 'Opps!!!',
+                  title: LocaleKeys.opps.tr(),
                   content: Text(
-                      'This phone number is already taken. Try again with difference phone number.'),
+                      LocaleKeys.phone_taken.tr()),
                 ));
       }
       naviProvider.setLoading(false);
@@ -98,7 +99,7 @@ class _SignUpFormState extends State<SignUpForm> {
               RoundedTextField(
                 controller: _txtDisplayName,
                 validator: (value) => Validate.displayNameValidate(value),
-                hintText: 'Display name',
+                hintText: LocaleKeys.display_name.tr(),
                 textInputAction: TextInputAction.next,
               ),
               SizedBox(height: 15.0),
@@ -112,7 +113,7 @@ class _SignUpFormState extends State<SignUpForm> {
               SizedBox(height: 15.0),
               RoundedTextField(
                 controller: _txtPhone,
-                hintText: 'Phone number',
+                hintText: LocaleKeys.phone.tr(),
                 validator: (value) => Validate.phoneValidate(value),
                 keyboardType: TextInputType.phone,
                 textInputAction: TextInputAction.next,
@@ -127,7 +128,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 keyboardType: TextInputType.datetime,
                 readOnly: true,
                 isDate: true,
-                hintText: 'Birthday',
+                hintText: LocaleKeys.birthday.tr(),
               ),
               SizedBox(height: 15.0),
               RoundedDropDown(
@@ -144,7 +145,7 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
               RoundedButton(
                 onPressed: submitForm,
-                title: 'Next',
+                title: LocaleKeys.continue_text.tr(),
                 color: AppColors.primaryColor,
               )
             ],

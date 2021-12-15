@@ -1,6 +1,8 @@
 import 'package:coffee_shop/models/voucher.dart';
 import 'package:coffee_shop/providers/voucher_provider.dart';
+import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/screens/voucher/widgets/my_voucher/voucher_detail.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/values/size_config.dart';
@@ -9,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class VoucherWidget extends StatefulWidget {
   final VoucherModel voucher;
   final bool isUserVoucher;
@@ -67,7 +69,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
         margin: const EdgeInsets.symmetric(vertical: 5.0),
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/voucher_background.png'),
+                image: AssetImage(Res.voucher_background),
                 colorFilter: widget.enable
                     ? null
                     : ColorFilter.mode(Colors.grey[300], BlendMode.srcATop),
@@ -128,7 +130,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                               color: AppColors.darkColor,
                                             ),
                                             Text(
-                                              'Rules',
+                                              LocaleKeys.rule.tr(),
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: AppColors.darkColor),
@@ -187,7 +189,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
             child: Text(
               widget.voucher.applyFor != null
                   ? widget.voucher.applyFor.capitalize()
-                  : 'unknow',
+                  : LocaleKeys.unkown.tr(),
               style: TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.w600,
@@ -224,7 +226,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
           Future<bool> success = provider.saveVoucher(this.widget.voucher.id);
           // ignore: unrelated_type_equality_checks
           if (success == false) {
-            showMess(context: context, text: 'Save voucher failed.');
+            showMess(context: context, text: LocaleKeys.save_voucher_fail.tr());
             this.setState(() {
               this.isSaved = false;
             });
@@ -237,7 +239,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
             borderRadius: BorderRadius.circular(5.0),
             color: isSaved ? Colors.grey : AppColors.darkColor),
         child: Text(
-          'Save',
+          LocaleKeys.save.tr(),
           style: TextStyle(color: Colors.white),
         ),
       ),

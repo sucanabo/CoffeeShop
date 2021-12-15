@@ -1,5 +1,8 @@
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee_shop/values/color_theme.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 class SeeAllButton extends StatelessWidget {
   const SeeAllButton({@required this.onPressed});
   final Function onPressed;
@@ -9,11 +12,12 @@ class SeeAllButton extends StatelessWidget {
         child: TextButton(
       onPressed: onPressed,
       child: Text(
-        'See all',
+        LocaleKeys.see_all.tr(),
         style: TextStyle(color: AppColors.primaryColor),
       ),
       style: ButtonStyle(
-          padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0)),
+          padding: MaterialStateProperty.all<EdgeInsets>(
+              EdgeInsets.symmetric(horizontal: 10.0)),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0),
@@ -23,3 +27,5 @@ class SeeAllButton extends StatelessWidget {
     ));
   }
 }
+
+class LocalKeys {}

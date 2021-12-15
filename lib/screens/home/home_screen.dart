@@ -53,16 +53,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(
-        appBar: AppBar(),
-      ),
-      body: ScreenBody(
-          isHomeScreen: true,
-          padding: EdgeInsets.all(20.0),
-          child: Consumer<ProductProvider>(
-            builder: (context,provider,child)=> provider.isLoading? Center(child: Loading()): Body(),
-          )
-      )   
-    );
+        appBar: MyAppBar(
+          appBar: AppBar(),
+        ),
+        body: ScreenBody(
+            isHomeScreen: true,
+            padding: EdgeInsets.all(20.0),
+            child: Consumer<ProductProvider>(
+              builder: (context, provider, child) =>
+                  provider.isLoading ? Center(child: Loading()) : Body(),
+            )));
   }
 }

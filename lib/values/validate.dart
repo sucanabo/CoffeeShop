@@ -1,9 +1,12 @@
+import 'package:coffee_shop/translations/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 class Validate {
   static String passwordValidate(String pwd) {
     if (pwd.isEmpty || pwd == null || pwd == '') {
-      return 'Please enter password.';
+      return LocaleKeys.validate_enter_pwd.tr();
     }
-    if (pwd.length < 6) return 'Required at least 6 chars.';
+    if (pwd.length < 6) return LocaleKeys.validate_least_6_char.tr();
     return null;
   }
 
@@ -11,23 +14,24 @@ class Validate {
     if (value.trim().isEmpty ||
         value.trim() == '' ||
         value.trim().length == 0) {
-      return 'Please enter phone number';
+      return LocaleKeys.validate_enter_phone.tr();
     }
     if (value.trim().length < 9 || value.trim().length > 11) {
-      return 'Valid phone number from 9-11 character';
+      return LocaleKeys.validate_phone_char.tr();
     }
     return null;
   }
 
   static String notEmptyValidate(String value) {
-    return value.trim().isEmpty ? 'Please fill this field' : null;
+    return value.trim().isEmpty ? LocaleKeys.validate_not_null.tr() : null;
   }
 
   static String reEnterPasswordValidate(String value, String value2) {
-    if (value.trim().isEmpty) return 'Please fill this field';
+    if (value.trim().isEmpty) return LocaleKeys.validate_not_null.tr();
 
-    if (value.trim().length < 6) return 'Required at least 6 chars.';
-    if (value.trim() != value2.trim()) return 'New password does not match.';
+    if (value.trim().length < 6) return LocaleKeys.validate_least_6_char.tr();
+    if (value.trim() != value2.trim())
+      return LocaleKeys.validate_pwd_not_match.tr();
     return null;
   }
 
@@ -38,15 +42,16 @@ class Validate {
         r"{0,253}[a-zA-Z0-9])?)*$";
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value) || value == null)
-      return 'Enter a valid email address';
+      return LocaleKeys.validate_enter_valid_email.tr();
     else
       return null;
   }
 
   static String displayNameValidate(String value) {
     if (value.isEmpty)
-      return 'Display name is requried';
-    else if (value.length > 16) return 'Valid display name length is 16 chars.';
+      return LocaleKeys.validate_displayname_required.tr();
+    else if (value.length > 16)
+      return LocaleKeys.validate_displayname_length.tr();
     return null;
   }
 }

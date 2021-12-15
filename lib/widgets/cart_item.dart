@@ -1,5 +1,6 @@
 import 'package:coffee_shop/models/cart_item.dart';
 import 'package:coffee_shop/screens/product_detail/product_detail_screen.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/values/size_config.dart';
@@ -7,7 +8,7 @@ import 'package:coffee_shop/widgets/quantity.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:coffee_shop/providers/cart_provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class CartItem extends StatefulWidget {
   final CartItemModel item;
   const CartItem({@required this.item});
@@ -116,7 +117,7 @@ class _CartItemState extends State<CartItem> {
                                           TextStyle(color: AppColors.textColor),
                                       children: <TextSpan>[
                                         TextSpan(
-                                            text: 'Options: ',
+                                            text: LocaleKeys.product_option.tr() + ': ',
                                             style: TextStyle(
                                                 fontSize: 13.0,
                                                 fontWeight: FontWeight.w500)),

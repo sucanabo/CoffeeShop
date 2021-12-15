@@ -1,8 +1,9 @@
 import 'package:coffee_shop/providers/firebase_provider.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'widgets/body.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -29,7 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             title: Text(
-              'Sign up',
+              LocaleKeys.sign_up.tr(),
             ),
           ),
           body: Body()),

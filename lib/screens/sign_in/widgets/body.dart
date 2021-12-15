@@ -1,9 +1,10 @@
 import 'package:coffee_shop/screens/sign_in/widgets/sign_in_with.dart';
 import 'package:coffee_shop/screens/sign_up/sign_up_screen.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/size_config.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'signin_form.dart';
 
 class Body extends StatefulWidget {
@@ -22,7 +23,7 @@ class _BodyState extends State<Body> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Let\'s sign you in',
+                LocaleKeys.hint_let_sign_in.tr(),
                 style: TextStyle(
                     color: AppColors.primaryColor,
                     fontSize: getWidth(28.0),
@@ -30,7 +31,7 @@ class _BodyState extends State<Body> {
               ),
               SizedBox(
                 child: Text(
-                  'Welcome back, you have been missed.',
+                  LocaleKeys.welcome_back.tr(),
                   style: TextStyle(fontSize: 16.0, height: 1.5),
                   textAlign: TextAlign.center,
                 ),
@@ -44,7 +45,7 @@ class _BodyState extends State<Body> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Don\'t you have an account ?'),
+              Text(LocaleKeys.dont_have_account.tr()),
               TextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, SignUpScreen.routeName);
@@ -53,7 +54,7 @@ class _BodyState extends State<Body> {
                     alignment: Alignment.topCenter, padding: EdgeInsets.zero),
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text('Sign up',
+                  Text(LocaleKeys.sign_up.tr(),
                       style: TextStyle(color: AppColors.primaryMediumColor)),
                   Icon(
                     Icons.chevron_right_rounded,

@@ -1,8 +1,10 @@
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/size_config.dart';
 import 'package:coffee_shop/widgets/close_bottom_sheet.dart';
 import 'package:coffee_shop/widgets/pill_button.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 Widget openBottomSheet(
     {@required context, @required Widget child, rewardPoint}) {
@@ -12,7 +14,9 @@ Widget openBottomSheet(
     minChildSize: 0.85,
     builder: (_, controller) => ClipRRect(
       borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
+        topLeft: Radius.circular(20.0),
+        topRight: Radius.circular(20.0),
+      ),
       child: Stack(children: [
         Container(
           decoration: BoxDecoration(
@@ -41,7 +45,8 @@ Align _buildRewardBottom(rewardPoint) {
       child: Container(
         padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
-            color: AppColors.primaryColor, borderRadius: BorderRadius.circular(10.0)),
+            color: AppColors.primaryColor,
+            borderRadius: BorderRadius.circular(10.0)),
         width: SizeConfig.screenWidth * 0.9,
         height: SizeConfig.screenHeigh * 0.07,
         child: Row(
@@ -51,11 +56,11 @@ Align _buildRewardBottom(rewardPoint) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Use $rewardPoint points ',
+                  LocaleKeys.use_point.tr(args: [rewardPoint.toString()]),
                   style: TextStyle(fontSize: 16.0, color: Colors.white),
                 ),
                 Text(
-                  'to get this reward',
+                  LocaleKeys.to_get_reward.tr(),
                   style: TextStyle(fontSize: 16.0, color: Colors.white),
                 ),
               ],
@@ -65,7 +70,7 @@ Align _buildRewardBottom(rewardPoint) {
               child: PillButton(
                 onPressed: () {},
                 child: Text(
-                  'Redeem',
+                  LocaleKeys.redeem.tr(),
                   style: TextStyle(color: AppColors.primaryColor),
                 ),
                 elevation: 0,

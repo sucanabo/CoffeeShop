@@ -133,12 +133,12 @@ class _OrderScreenState extends State<OrderScreen>
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
-              plural(LocaleKeys.result_args, totalRow),
+              LocaleKeys.result_args,
               style: TextStyle(
                   color: AppColors.primaryColor,
                   fontSize: AppStyles.textSize14,
                   decoration: TextDecoration.underline),
-            ),
+            ).plural(totalRow),
           ),
           SizedBox(height: getHeight(10.0)),
           _loading

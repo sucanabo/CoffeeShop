@@ -173,5 +173,36 @@ abstract class  LocaleKeys {
   static const point = 'point';
   static const point_left = 'point_left';
   static const redeem_not_affect = 'redeem_not_affect';
+  static const use_point = 'use_point';
+  static const to_get_reward = 'to_get_reward';
+  static const redeem = 'redeem';
+  static const hint = 'hint';
+  static const enter_message = 'enter_message';
+  static const close = 'close';
+  static const select_gender = 'select_gender';
+  static const welcome_to = 'welcome_to';
+  static const please_wait = 'please_wait';
+  static const rule = 'rule';
+  static const unkown = 'unkown';
+  static const save_voucher_fail = 'save_voucher_fail';
+  static const save = 'save';
+  static const reward = 'reward';
+  static const your_voucher = 'your_voucher';
+  static const accumulate = 'accumulate';
+  static const validate_enter_pwd = 'validate_enter_pwd';
+  static const validate_least_6_char = 'validate_least_6_char';
+  static const validate_enter_phone = 'validate_enter_phone';
+  static const validate_phone_char = 'validate_phone_char';
+  static const validate_pwd_not_match = 'validate_pwd_not_match';
+  static const validate_enter_valid_email = 'validate_enter_valid_email';
+  static const validate_displayname_required = 'validate_displayname_required';
+  static const validate_displayname_length = 'validate_displayname_length';
+  static const copied_into_clipboard = 'copied_into_clipboard';
+  static const morning = 'morning';
+  static const afternoon = 'afternoon';
+  static const evening = 'evening';
+  static const gretting = 'gretting';
+  static const great_to_see_you_here = 'great_to_see_you_here';
+  static const sign_up_couple_step = 'sign_up_couple_step';
 
 }
