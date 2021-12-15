@@ -9,7 +9,9 @@ import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:coffee_shop/widgets/screen_body_loading.dart';
 import 'package:coffee_shop/widgets/voucher.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -29,7 +31,7 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
   VoucherModel _shippingSelected;
   VoucherModel _discountSelected;
   List<CartItemModel> _cartItemValid;
-
+  bool isHaveData = false;
   getVouchers() {
     _shippingVouchers = _vouchersProvider.userVoucherItems
         .where((element) => element.applyFor == 'shipping')
@@ -79,15 +81,16 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.isEdit) {
-      final data = ModalRoute.of(context).settings.arguments as Map;
-      if (data != null) {
+    if (widget.isEdit && !isHaveData) {
+      final args = ModalRoute.of(context).settings.arguments as Map;
+      if (args != null) {
+        isHaveData = true;
         _shippingSelected = _shippingSelected != null
             ? _shippingSelected
-            : data['shippingVoucher'];
+            : args['shippingVoucher'];
         _discountSelected = _discountSelected != null
             ? _discountSelected
-            : data['discountVoucher'];
+            : args['discountVoucher'];
       }
     }
     return Scaffold(
@@ -118,8 +121,32 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
                 ? ScreenBodyLoading()
                 : ScreenBody(
                     child: ListView(
-                    padding: EdgeInsets.all(20.0),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.0,
+                      vertical: 10.0,
+                    ),
                     children: [
+                      InkWell(
+                        child: Text(
+                          'Deselected',
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.redColor,
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+                        onTap: () {
+                          print('aa');
+                          setState(() {
+                            _shippingSelected = null;
+                            _discountSelected = null;
+                          });
+                          print(_shippingSelected);
+                          print(_discountSelected);
+                        },
+                      ),
                       Text(
                         LocaleKeys.shipping.tr(),
                         style: TextStyle(
@@ -329,6 +356,16 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
   }
 
   void setDiscountVoucher(voucher) {
+    if (voucher == _discountSelected) {
+      print('trung');
+      setState(() {
+        _discountSelected = null;
+      });
+      return;
+    } else {
+      print('khong trung');
+    }
+    print('tiep tuc');
     if (_discountSelected != null) {
       if (_discountSelected.id == voucher.id) {
         setState(() {

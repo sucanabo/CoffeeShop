@@ -36,7 +36,8 @@
     "zero": "chưa có món nào",
     "one": "{} món",
     "many": "{} món",
-    "other": "{} món"
+    "other": "{} món",
+    "two": "{} món"
   },
   "deliver_address": "Địa chỉ giao hàng",
   "change": "Đổi",

@@ -67,11 +67,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       return;
     }
     String promoStr = _voucherData['shippingVoucher'] != null
-        ? _voucherData['shippingVoucher'].id.toString()
+        ? _voucherData['shippingVoucher'].id.toString() + ','
         : '';
     promoStr += _voucherData['discountVoucher'] != null
         ? _voucherData['discountVoucher'].id.toString()
         : '';
+
     setLoading(context, loading: true);
 
     final response = await createOrder(
@@ -487,8 +488,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     _voucherData.forEach((key, value) {
       if (value != null && key != 'cartItemValid') list.add(value);
     });
-    // print(list[0].title);
-    // print(list[1].title);
     return ListView.separated(
       shrinkWrap: true,
       itemCount: list.length,

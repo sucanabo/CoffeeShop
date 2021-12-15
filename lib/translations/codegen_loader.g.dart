@@ -49,10 +49,11 @@ class CodegenLoader extends AssetLoader{
   "go_shop_now": "Go shop now",
   "subtotal": "Subtotal",
   "product_item_args": {
-    "zero": "{} item",
+    "zero": "no item",
     "one": "{} item",
     "many": "{} items",
-    "other": "{} items"
+    "other": "{} items",
+    "two": "{} items"
   },
   "deliver_address": "Delivery Address",
   "change": "Change",
@@ -227,7 +228,7 @@ class CodegenLoader extends AssetLoader{
   "evening": "Evening",
   "gretting": "Good",
   "great_to_see_you_here": "Great to see you here!",
-  "sign_up_couple_step": "Let’s set up your account in just a couple of steps."
+  "sign_up_couple_step": "Let's set up your account in just a couple of steps."
 };
 static const Map<String,dynamic> vi_VN = {
   "hi_text": "Xin chào",
@@ -264,10 +265,11 @@ static const Map<String,dynamic> vi_VN = {
   "go_shop_now": "Mua hàng ngay",
   "subtotal": "Tạm tính",
   "product_item_args": {
-    "zero": "{} món",
+    "zero": "chưa có món nào",
     "one": "{} món",
     "many": "{} món",
-    "other": "{} món"
+    "other": "{} món",
+    "two": "{} món"
   },
   "deliver_address": "Địa chỉ giao hàng",
   "change": "Đổi",

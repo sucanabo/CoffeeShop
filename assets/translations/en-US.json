@@ -36,7 +36,8 @@
     "zero": "no item",
     "one": "{} item",
     "many": "{} items",
-    "other": "{} items"
+    "other": "{} items",
+    "two": "{} items"
   },
   "deliver_address": "Delivery Address",
   "change": "Change",
