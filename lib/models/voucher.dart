@@ -1,4 +1,6 @@
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class VoucherModel {
   final int id;
@@ -12,6 +14,7 @@ class VoucherModel {
   final String discountUnit;
   final int discount;
   final String applyFor;
+  final String displayApplyFor;
   final List discountObj;
   final int quantityRule;
   final int maxQuantity;
@@ -33,6 +36,7 @@ class VoucherModel {
     @required this.discountUnit,
     @required this.discount,
     @required this.applyFor,
+    this.displayApplyFor,
     this.content,
     this.image,
     this.quantityRule,
@@ -57,11 +61,12 @@ class VoucherModel {
       startDate: DateTime.parse(json['start_date']),
       expiryDate: DateTime.parse(json['expiry_date']),
       discountUnit: json['discount_unit'],
-      discount: json['discount'] != null ? json['discount']:0,
+      discount: json['discount'] != null ? json['discount'] : 0,
       applyFor: json['apply_for'],
+      displayApplyFor: _getDpApplyFor(json['apply_for']),
       maxQuantity: json['max_quantity'],
       quantityRule: json['quantity_rule'] != null ? json['quantity_rule'] : 0,
-      maxPrice: json['max_price'] != null ?double.parse(json['max_price']):0,
+      maxPrice: json['max_price'] != null ? double.parse(json['max_price']) : 0,
       priceRule:
           json['price_rule'] != null ? double.parse(json['price_rule']) : 0,
       isUserUsed: json['status'] == 1,
@@ -76,5 +81,19 @@ class VoucherModel {
       sizeRule: json['size_rule'],
       deliveryRule: json['delivery_rule'],
     );
+  }
+  static _getDpApplyFor(String str) {
+    switch (str) {
+      case 'order':
+        return LocaleKeys.order.tr();
+      case 'product':
+        return LocaleKeys.product.tr();
+      case 'category':
+        return LocaleKeys.category.tr();
+      case 'shipping':
+        return LocaleKeys.shipping_type.tr();
+      default:
+        return '';
+    }
   }
 }

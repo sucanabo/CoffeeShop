@@ -204,5 +204,10 @@ abstract class  LocaleKeys {
   static const gretting = 'gretting';
   static const great_to_see_you_here = 'great_to_see_you_here';
   static const sign_up_couple_step = 'sign_up_couple_step';
+  static const deselected = 'deselected';
+  static const order = 'order';
+  static const product = 'product';
+  static const category = 'category';
+  static const shipping_type = 'shipping_type';
 
 }

@@ -12,6 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class VoucherWidget extends StatefulWidget {
   final VoucherModel voucher;
   final bool isUserVoucher;
@@ -163,24 +164,15 @@ class _VoucherWidgetState extends State<VoucherWidget> {
     );
   }
 
-  Stack _buidDefaultVoucher() {
-    return new Stack(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: Container(
-                height: 80.0,
-              ),
-            )
-          ],
-        ),
-        Align(
-          alignment: Alignment.topCenter + Alignment(0, 0.3),
-          child: Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 2.0),
+  Widget _buidDefaultVoucher() {
+    return Container(
+      height: 100.0,
+      padding: EdgeInsets.all(10.0),
+      child: new Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(3.0),
                 color: widget.enable
@@ -188,30 +180,32 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                     : AppColors.mutedColor),
             child: Text(
               widget.voucher.applyFor != null
-                  ? widget.voucher.applyFor.capitalize()
+                  ? widget.voucher.displayApplyFor
                   : LocaleKeys.unkown.tr(),
+              textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.w600,
                   color: Colors.white),
             ),
           ),
-        ),
-        Align(
-          alignment: Alignment.center + Alignment(0, 0.3),
-          child: Text(
-            widget.voucher.discountUnit == 'cash'
-                ? '\đ${widget.voucher.discount}'
-                : '${widget.voucher.discount}%',
-            style: TextStyle(
-                fontSize: 26.0,
-                fontWeight: FontWeight.w600,
-                color: widget.enable
-                    ? AppColors.primaryColor
-                    : AppColors.mutedColor),
-          ),
-        )
-      ],
+          Expanded(
+            child: Center(
+              child: Text(
+                widget.voucher.discountUnit == 'cash'
+                    ? '\đ${widget.voucher.discount}'
+                    : '${widget.voucher.discount}%',
+                style: TextStyle(
+                    fontSize: 26.0,
+                    fontWeight: FontWeight.w600,
+                    color: widget.enable
+                        ? AppColors.primaryColor
+                        : AppColors.mutedColor),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 

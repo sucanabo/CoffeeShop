@@ -212,5 +212,10 @@
   "evening": "Evening",
   "gretting": "Good",
   "great_to_see_you_here": "Great to see you here!",
-  "sign_up_couple_step": "Let's set up your account in just a couple of steps."
+  "sign_up_couple_step": "Let's set up your account in just a couple of steps.",
+  "deselected": "Deselected",
+  "order": "Order",
+  "product": "Product",
+  "category": "Category",
+  "shipping_type": "Shipping"
 }

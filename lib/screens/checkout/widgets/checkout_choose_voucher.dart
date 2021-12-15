@@ -128,7 +128,7 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
                     children: [
                       InkWell(
                         child: Text(
-                          'Deselected',
+                          LocaleKeys.deselected.tr(),
                           style: TextStyle(
                             decoration: TextDecoration.underline,
                             fontSize: 16.0,
@@ -138,13 +138,10 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
                           textAlign: TextAlign.right,
                         ),
                         onTap: () {
-                          print('aa');
                           setState(() {
                             _shippingSelected = null;
                             _discountSelected = null;
                           });
-                          print(_shippingSelected);
-                          print(_discountSelected);
                         },
                       ),
                       Text(
@@ -160,7 +157,7 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
                               : _buildShippingList(_shippingVouchers),
                       SizedBox(height: 20.0),
                       Text(
-                        'Discount',
+                        LocaleKeys.discount.tr(),
                         style: TextStyle(
                             fontSize: 20.0, fontWeight: FontWeight.w500),
                       ),

@@ -228,7 +228,12 @@ class CodegenLoader extends AssetLoader{
   "evening": "Evening",
   "gretting": "Good",
   "great_to_see_you_here": "Great to see you here!",
-  "sign_up_couple_step": "Let's set up your account in just a couple of steps."
+  "sign_up_couple_step": "Let's set up your account in just a couple of steps.",
+  "deselected": "Deselected",
+  "order": "Order",
+  "product": "Product",
+  "category": "Category",
+  "shipping_type": "Shipping"
 };
 static const Map<String,dynamic> vi_VN = {
   "hi_text": "Xin chào",
@@ -444,7 +449,12 @@ static const Map<String,dynamic> vi_VN = {
   "evening": "Buổi tối",
   "gretting": "Chào",
   "great_to_see_you_here": "Rất vui vì bạn đã ở đây!",
-  "sign_up_couple_step": "Hãy đăng ký tài khoản của bạn. Chỉ vài bước nữa thôi."
+  "sign_up_couple_step": "Hãy đăng ký tài khoản của bạn. Chỉ vài bước nữa thôi.",
+  "deselected": "Bỏ chọn",
+  "order": "Hóa đơn",
+  "product": "Sản phẩm",
+  "category": "Loại SP",
+  "shipping_type": "Vận chuyển"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en_US": en_US, "vi_VN": vi_VN};
 }

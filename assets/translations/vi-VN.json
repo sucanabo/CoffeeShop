@@ -212,5 +212,10 @@
   "evening": "Buổi tối",
   "gretting": "Chào",
   "great_to_see_you_here": "Rất vui vì bạn đã ở đây!",
-  "sign_up_couple_step": "Hãy đăng ký tài khoản của bạn. Chỉ vài bước nữa thôi."
+  "sign_up_couple_step": "Hãy đăng ký tài khoản của bạn. Chỉ vài bước nữa thôi.",
+  "deselected": "Bỏ chọn",
+  "order": "Hóa đơn",
+  "product": "Sản phẩm",
+  "category": "Loại SP",
+  "shipping_type": "Vận chuyển"
 }
