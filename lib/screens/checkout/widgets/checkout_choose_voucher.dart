@@ -12,6 +12,7 @@ import 'package:coffee_shop/widgets/voucher.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class ChooseVoucher extends StatefulWidget {
   final bool isDeliveryMethod;
   final bool isEdit;
@@ -128,8 +129,7 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
                       _shippingVouchers.isEmpty
                           ? Text(LocaleKeys.dont_have_shipping_voucher.tr())
                           : !widget.isDeliveryMethod
-                              ? Text(
-                                  LocaleKeys.delivery_method_only.tr())
+                              ? Text(LocaleKeys.delivery_method_only.tr())
                               : _buildShippingList(_shippingVouchers),
                       SizedBox(height: 20.0),
                       Text(
@@ -158,7 +158,10 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
           enable: validate['valid'] && widget.isDeliveryMethod,
           initChoose:
               _shippingSelected == null ? false : _shippingSelected.id == v.id,
-          chooseVoucherPress: (voucher) => setShippingVoucher(v),
+          chooseVoucherPress: (voucher) {
+            _cartItemValid = validate['validList'];
+            setShippingVoucher(v);
+          },
         ),
         if (validate['valid'])
           Positioned(
@@ -168,7 +171,10 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
                 activeColor: AppColors.primaryColor,
                 value: v,
                 groupValue: _shippingSelected,
-                onChanged: (val) => setShippingVoucher(val)),
+                onChanged: (val) {
+                  _cartItemValid = validate['validList'];
+                  setShippingVoucher(val);
+                }),
           )
       ]);
     }).toList());
@@ -257,7 +263,7 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
           result = cartItem.price >= voucher.priceRule;
           break;
         case 'order':
-          result = cartProvider.totalAmount >= voucher.priceRule * 1000;
+          result = cartProvider.totalAmount >= voucher.priceRule;
           break;
         default:
           result = true;
@@ -308,6 +314,7 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
 
     String type = voucher.applyFor;
     List<CartItemModel> validList = [];
+
     for (var item in cartItems.values) {
       if (checkObj(voucher.discountObj, type, item) &&
           checkQuantity(item, type) &&
@@ -317,6 +324,7 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
         validList.add(item);
       }
     }
+
     return {'valid': validList.isNotEmpty, 'validList': validList};
   }
 

@@ -33,7 +33,7 @@
   "go_shop_now": "Mua hàng ngay",
   "subtotal": "Tạm tính",
   "product_item_args": {
-    "zero": "{} món",
+    "zero": "chưa có món nào",
     "one": "{} món",
     "many": "{} món",
     "other": "{} món"

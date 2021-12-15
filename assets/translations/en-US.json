@@ -33,7 +33,7 @@
   "go_shop_now": "Go shop now",
   "subtotal": "Subtotal",
   "product_item_args": {
-    "zero": "{} item",
+    "zero": "no item",
     "one": "{} item",
     "many": "{} items",
     "other": "{} items"
@@ -211,5 +211,5 @@
   "evening": "Evening",
   "gretting": "Good",
   "great_to_see_you_here": "Great to see you here!",
-  "sign_up_couple_step": "Let’s set up your account in just a couple of steps."
+  "sign_up_couple_step": "Let's set up your account in just a couple of steps."
 }

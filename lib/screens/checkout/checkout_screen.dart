@@ -151,6 +151,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       });
     }
   }
+
   Map caculateOrder() {
     double subtotal = _cartProvider.totalAmount;
     double deliveryPrice = _isDeleverySelected ? _deliveryPrice : 0;
@@ -289,8 +290,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                    flex: 2, child: Image.asset(Res.momoLogo)),
+                Expanded(flex: 2, child: Image.asset(Res.momoLogo)),
                 Expanded(
                     flex: 10,
                     child: Container(
@@ -487,12 +487,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     _voucherData.forEach((key, value) {
       if (value != null && key != 'cartItemValid') list.add(value);
     });
+    // print(list[0].title);
+    // print(list[1].title);
     return ListView.separated(
       shrinkWrap: true,
       itemCount: list.length,
       separatorBuilder: (context, index) => Divider(),
       itemBuilder: (context, index) => Container(
-        color: AppColors.primaryLightColor,
+        color: AppColors.darkColor.withOpacity(0.3),
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
