@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key key}) : super(key: key);
 
@@ -36,22 +37,22 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   void dispose() {
-    super.dispose();
     _txtEmail.dispose();
     _txtPhone.dispose();
     _txtDisplayName.dispose();
     _txtBirthday.dispose();
+    super.dispose();
   }
 
   @override
   void initState() {
-    super.initState();
     final provider = Provider.of<FirebaseProvider>(context, listen: false);
     if (provider.user != null) {
       _txtEmail.text = provider.user.email;
       _txtDisplayName.text = provider.user.displayName;
       _isSocialSignup = true;
     }
+    super.initState();
   }
 
   submitForm() async {
@@ -70,7 +71,7 @@ class _SignUpFormState extends State<SignUpForm> {
             gender: _dropdownGender,
             phone: _txtPhone.text.trim(),
             email: _txtEmail.text.trim());
-       
+
         Navigator.of(context)
             .pushNamed(OTPScreen.routeName, arguments: instance);
       } else {
@@ -78,8 +79,7 @@ class _SignUpFormState extends State<SignUpForm> {
             context: context,
             builder: (context) => PopUpNotify(
                   title: LocaleKeys.opps.tr(),
-                  content: Text(
-                      LocaleKeys.phone_taken.tr()),
+                  content: Text(LocaleKeys.phone_taken.tr()),
                 ));
       }
       naviProvider.setLoading(false);

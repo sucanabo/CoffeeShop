@@ -63,10 +63,8 @@ class _RoundedTextFieldState extends State<RoundedTextField> {
         _showClearButton = widget.controller.text.length > 0;
       });
     });
-
     super.initState();
   }
-
   showCustomDatePicker() {
     showDatePicker(
             context: context,

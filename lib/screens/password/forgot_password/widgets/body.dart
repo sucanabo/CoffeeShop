@@ -60,25 +60,43 @@ class _BodyState extends State<Body> {
             SizedBox(height: SizeConfig.screenHeigh * 0.1),
             ForgotPassForm(),
             SizedBox(
-              height: SizeConfig.screenHeigh * 0.025,
+              height: getHeight(40.0),
             ),
-            Text(LocaleKeys.hint_please_check_spam.tr()),
-            SizedBox(
-              height: SizeConfig.screenHeigh * 0.005,
+            Row(
+              children: [
+                Expanded(
+                  flex: 6,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        LocaleKeys.hint_please_check_spam.tr(),
+                        overflow: TextOverflow.clip,
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Text(hiddenEmail('sucanabo@gmail.com'))
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 4,
+                  child: Align(
+                    child: RoundedButton.outline(
+                      title: LocaleKeys.resend_email.tr(),
+                      fontSize: 14.0,
+                      onPressed: () => _sendMail,
+                      color: AppColors.primaryColor,
+                      textColor: AppColors.primaryColor,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Text(hiddenEmail('sucanabo@gmail.com')),
-            SizedBox(
-              height: SizeConfig.screenHeigh * 0.025,
-            ),
-            RoundedButton.outline(
-              title: LocaleKeys.resend_email.tr(),
-              onPressed: () => _sendMail,
-              color: AppColors.primaryColor,
-              textColor: AppColors.primaryColor,
-            ),
-            SizedBox(height: SizeConfig.screenHeigh * 0.1),
+            SizedBox(height: getHeight(40)),
             SignButton(text: LocaleKeys.sign_in.tr(), onSubmit: () {}),
-            SizedBox(height: SizeConfig.screenHeigh * 0.1),
+            SizedBox(height: getHeight(40)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,

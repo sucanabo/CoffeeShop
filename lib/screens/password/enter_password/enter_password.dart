@@ -13,6 +13,7 @@ import 'package:coffee_shop/widgets/sign_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class EnterPassword extends StatelessWidget {
   static const String routeName = '/enterPassword';
   const EnterPassword({Key key}) : super(key: key);
@@ -43,8 +44,7 @@ class EnterPassword extends StatelessWidget {
       appBar: AppBar(
         title: Text(LocaleKeys.enter_password.tr()),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      child: ListView(
         children: [
           Text(
             LocaleKeys.hint_enter_pwd_login.tr(),
@@ -65,7 +65,7 @@ class EnterPassword extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           SizedBox(
-            height: SizeConfig.screenHeigh * 0.07,
+            height: getHeight(100.0),
           ),
           Form(
             key: _formKey,
@@ -79,7 +79,7 @@ class EnterPassword extends StatelessWidget {
               validator: (value) => Validate.passwordValidate(value),
             ),
           ),
-          SizedBox(height: 15.0),
+          SizedBox(height: getHeight(15)),
           SizedBox(
             width: double.infinity,
             child: GestureDetector(
@@ -96,7 +96,7 @@ class EnterPassword extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 30.0),
+          SizedBox(height: getHeight(100.0)),
           SignButton(
               text: LocaleKeys.sign_in.tr(),
               onSubmit: () async {

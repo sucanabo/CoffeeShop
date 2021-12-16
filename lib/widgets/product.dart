@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class ProductWidget extends StatelessWidget {
   final ProductModel product;
   final bool isLarge;
@@ -242,70 +243,66 @@ class ProductWidget extends StatelessWidget {
           onTap: () {
             _navigateToDetail(context);
           },
-          child: Container(
-            width: getWidth(160),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(16.0)),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    blurRadius: 4.0,
-                    spreadRadius: 5.0)
-              ],
-            ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
             child: Container(
-              height: getHeight(275),
+              width: getWidth(160),
               decoration: BoxDecoration(
-                  color: AppColors.whiteColor,
-                  borderRadius: BorderRadius.circular(10.0)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Stack(
-                    children: <Widget>[
-                      Hero(
-                        tag: product.title,
-                        child: Container(
-                          height: 150.0,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              image: DecorationImage(
-                                  image: base64StringToImage(product.imgPath),
-                                  fit: BoxFit.cover)),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      blurRadius: 4.0,
+                      spreadRadius: 5.0)
+                ],
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: AppColors.whiteColor,
+                    borderRadius: BorderRadius.circular(10.0)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Stack(
+                      children: <Widget>[
+                        Container(
+                          child: Hero(
+                              tag: product.title,
+                              child: Image(
+                                image: base64StringToImage(product.imgPath),
+                                fit: BoxFit.fitWidth,
+                              )),
                         ),
-                      ),
-                      Positioned(
-                          top: 5.0,
-                          right: 5.0,
-                          child: ClipOval(
-                            child: Material(
-                              color: AppColors.darkColor,
-                              child: InkWell(
-                                splashColor: AppColors.primaryMediumColor,
-                                child: SizedBox(
-                                  width: 30.0,
-                                  height: 30.0,
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.white,
+                        Positioned(
+                            top: 5.0,
+                            right: 5.0,
+                            child: ClipOval(
+                              child: Material(
+                                color: AppColors.darkColor,
+                                child: InkWell(
+                                  splashColor: AppColors.primaryMediumColor,
+                                  child: SizedBox(
+                                    width: 30.0,
+                                    height: 30.0,
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    ),
                                   ),
+                                  onTap: () {
+                                    quickAddCart(cart);
+                                  },
                                 ),
-                                onTap: () {
-                                  quickAddCart(cart);
-                                },
                               ),
-                            ),
-                          )),
-                      if (product.discount != 0)
-                        DiscountBadge(
-                          discount: product.discount.toString(),
-                        ),
-                    ],
-                  ),
-                  Expanded(
-                    child: Padding(
+                            )),
+                        if (product.discount != 0)
+                          DiscountBadge(
+                            discount: product.discount.toString(),
+                          ),
+                      ],
+                    ),
+                    Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -358,38 +355,39 @@ class ProductWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 10.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(left: 0.0),
-                          width: 25.0,
-                          child: Icon(Icons.favorite_border,
-                              color: Colors.red[400], size: 20.0),
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 35.0,
-                              child: Icon(Icons.star_border,
-                                  color: Colors.yellow[600], size: 20.0),
-                            ),
-                            Text(
-                              product.star.toString(),
-                              style: TextStyle(
-                                  fontSize: 16.0, fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 10.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(left: 0.0),
+                            width: 25.0,
+                            child: Icon(Icons.favorite_border,
+                                color: Colors.red[400], size: 20.0),
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                width: 35.0,
+                                child: Icon(Icons.star_border,
+                                    color: Colors.yellow[600], size: 20.0),
+                              ),
+                              Text(
+                                product.star.toString(),
+                                style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

@@ -8,13 +8,14 @@ class RoundedButton extends StatelessWidget {
   final Color color;
   final String title;
   final Color textColor;
+  final double fontSize;
   final RoundedButtonType _buttonType;
   RoundedButton(
-      {Key key, this.onPressed, this.color, this.title, this.textColor})
+      {Key key, this.onPressed, this.color, this.title, this.textColor,this.fontSize})
       : _buttonType = RoundedButtonType.normal,
         super(key: key);
   RoundedButton.outline(
-      {Key key, this.onPressed, this.color, this.title, this.textColor})
+      {Key key, this.onPressed, this.color, this.title, this.textColor,this.fontSize})
       : _buttonType = RoundedButtonType.outline,
         super(key: key);
   @override
@@ -35,7 +36,7 @@ class RoundedButton extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: textColor ?? Colors.white,
-                fontSize: 20.0,
+                fontSize: fontSize?? 20.0,
                 fontWeight: FontWeight.w600)));
   }
 }

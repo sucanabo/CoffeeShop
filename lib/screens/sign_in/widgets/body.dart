@@ -15,58 +15,55 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return SingleChildScrollView(
+        child: ListView(
+      shrinkWrap: true,
       children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                LocaleKeys.hint_let_sign_in.tr(),
-                style: TextStyle(
-                    color: AppColors.primaryColor,
-                    fontSize: getWidth(28.0),
-                    fontWeight: FontWeight.w600),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              LocaleKeys.hint_let_sign_in.tr(),
+              style: TextStyle(
+                  color: AppColors.primaryColor,
+                  fontSize: getWidth(28.0),
+                  fontWeight: FontWeight.w600),
+            ),
+            SizedBox(
+              child: Text(
+                LocaleKeys.welcome_back.tr(),
+                style: TextStyle(fontSize: 16.0, height: 1.5),
+                textAlign: TextAlign.center,
               ),
-              SizedBox(
-                child: Text(
-                  LocaleKeys.welcome_back.tr(),
-                  style: TextStyle(fontSize: 16.0, height: 1.5),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
         SignForm(),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(LocaleKeys.dont_have_account.tr()),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, SignUpScreen.routeName);
-                },
-                style: TextButton.styleFrom(
-                    alignment: Alignment.topCenter, padding: EdgeInsets.zero),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(LocaleKeys.sign_up.tr(),
-                      style: TextStyle(color: AppColors.primaryMediumColor)),
-                  Icon(
-                    Icons.chevron_right_rounded,
-                    color: AppColors.primaryMediumColor,
-                  )
-                ]),
-              ),
-            ],
-          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(LocaleKeys.dont_have_account.tr()),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, SignUpScreen.routeName);
+              },
+              style: TextButton.styleFrom(
+                  alignment: Alignment.topCenter, padding: EdgeInsets.zero),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text(LocaleKeys.sign_up.tr(),
+                    style: TextStyle(color: AppColors.primaryMediumColor)),
+                Icon(
+                  Icons.chevron_right_rounded,
+                  color: AppColors.primaryMediumColor,
+                )
+              ]),
+            ),
+          ],
         ),
         SignInWith()
       ],
-    );
+    ));
   }
 }

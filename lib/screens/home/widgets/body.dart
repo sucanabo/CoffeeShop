@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import 'home_carousel.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -45,6 +46,7 @@ class Body extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: List.generate(newList.length,
                   (index) => ProductWidget(product: newList[index]))),
         ),
@@ -65,11 +67,10 @@ class Body extends StatelessWidget {
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Container(
-            child: Row(
-                children: List.generate(saleList.length,
-                    (index) => ProductWidget(product: saleList[index]))),
-          ),
+          child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: List.generate(saleList.length,
+                  (index) => ProductWidget(product: saleList[index]))),
         ),
       ],
     );

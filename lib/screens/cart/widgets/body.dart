@@ -142,7 +142,7 @@ class _BodyState extends State<Body> {
                         borderRadius: BorderRadius.circular(10.0),
                         child: IconSlideAction(
                           onTap: () => onDissmissed(index, CartItemAction.edit),
-                          caption: LocaleKeys.edit_address.tr(),
+                          caption: LocaleKeys.edit.tr(),
                           color: AppColors.primaryMediumColor,
                           icon: Icons.edit,
                         ),

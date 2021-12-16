@@ -217,5 +217,6 @@
   "order": "Hóa đơn",
   "product": "Sản phẩm",
   "category": "Loại SP",
-  "shipping_type": "Vận chuyển"
+  "shipping_type": "Vận chuyển",
+  "edit": "Sửa"
 }

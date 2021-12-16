@@ -49,7 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
     retriveData();
     super.initState();
   }
-
+  @override
+  void dispose() { 
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

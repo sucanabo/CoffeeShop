@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class SignForm extends StatefulWidget {
   SignForm({Key key}) : super(key: key);
 
@@ -37,30 +38,34 @@ class _SignFormState extends State<SignForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          RoundedTextField(
-            controller: _txtPhone,
-            hintText: LocaleKeys.enter_phone_number.tr(),
-            label: LocaleKeys.phone.tr(),
-            prefixIcon: Res.ic_phone,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            keyboardType: TextInputType.phone,
-            textInputAction: TextInputAction.next,
-            validator: (value) => Validate.phoneValidate(value),
-          ),
-          SizedBox(height: SizeConfig.screenHeigh * 0.1),
-          SignButton(
-              text: LocaleKeys.continue_text.tr(),
-              onSubmit: () async {
-                if (_formKey.currentState.validate()) {
-                  hideKeyboard(context);
-                  Navigator.of(context).pushNamed(EnterPassword.routeName,arguments: _txtPhone.text);
-                }
-              }),
-        ],
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: getHeight(100.0)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            RoundedTextField(
+              controller: _txtPhone,
+              hintText: LocaleKeys.enter_phone_number.tr(),
+              label: LocaleKeys.phone.tr(),
+              prefixIcon: Res.ic_phone,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              keyboardType: TextInputType.phone,
+              textInputAction: TextInputAction.done,
+              validator: (value) => Validate.phoneValidate(value),
+            ),
+            SizedBox(height: SizeConfig.screenHeigh * 0.05),
+            SignButton(
+                text: LocaleKeys.continue_text.tr(),
+                onSubmit: () async {
+                  if (_formKey.currentState.validate()) {
+                    hideKeyboard(context);
+                    Navigator.of(context).pushNamed(EnterPassword.routeName,
+                        arguments: _txtPhone.text);
+                  }
+                }),
+          ],
+        ),
       ),
     );
   }

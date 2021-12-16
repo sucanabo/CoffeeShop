@@ -233,7 +233,8 @@ class CodegenLoader extends AssetLoader{
   "order": "Order",
   "product": "Product",
   "category": "Category",
-  "shipping_type": "Shipping"
+  "shipping_type": "Shipping",
+  "edit": "Edit"
 };
 static const Map<String,dynamic> vi_VN = {
   "hi_text": "Xin chào",
@@ -454,7 +455,8 @@ static const Map<String,dynamic> vi_VN = {
   "order": "Hóa đơn",
   "product": "Sản phẩm",
   "category": "Loại SP",
-  "shipping_type": "Vận chuyển"
+  "shipping_type": "Vận chuyển",
+  "edit": "Sửa"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en_US": en_US, "vi_VN": vi_VN};
 }

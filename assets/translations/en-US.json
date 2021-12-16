@@ -217,5 +217,6 @@
   "order": "Order",
   "product": "Product",
   "category": "Category",
-  "shipping_type": "Shipping"
+  "shipping_type": "Shipping",
+  "edit": "Edit"
 }

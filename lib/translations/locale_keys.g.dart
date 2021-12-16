@@ -209,5 +209,6 @@ abstract class  LocaleKeys {
   static const product = 'product';
   static const category = 'category';
   static const shipping_type = 'shipping_type';
+  static const edit = 'edit';
 
 }
