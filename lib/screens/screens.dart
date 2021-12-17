@@ -8,9 +8,8 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:coffee_shop/models/models.dart';
 import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/services/services.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/untils/app_information.dart';
-import 'package:coffee_shop/untils/url_laucher.dart';
+import 'package:coffee_shop/translations/translations.dart';
+import 'package:coffee_shop/untils/untils.dart';
 import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/widgets.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -76,7 +75,7 @@ part 'order/order_detail.dart';
 //Order
 part 'order/order_screeen.dart';
 part 'order/widgets/transaction.dart';
-//OTP 
+//OTP
 part 'otp/otp_screen.dart';
 part 'otp/widgets/body.dart';
 part 'otp/widgets/otp_form.dart';
@@ -93,7 +92,7 @@ part 'product/widgets/body.dart';
 part 'product/widgets/floating_cart.dart';
 part 'product/widgets/product_header.dart';
 part 'product/widgets/tab_category.dart';
-//Product detail 
+//Product detail
 part 'product_detail/product_detail_screen.dart';
 part 'product_detail/widgets/action_button.dart';
 part 'product_detail/widgets/body.dart';

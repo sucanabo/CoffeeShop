@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+part of untils;
 
 class Languages {
   Languages._();

@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
-
+part of translations;
 abstract class  LocaleKeys {
   static const hi_text = 'hi_text';
   static const update_success = 'update_success';

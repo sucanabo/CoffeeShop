@@ -1,5 +1,4 @@
-import 'package:coffee_shop/values/values.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+part of untils;
 
 class AppInformation {
   static const String appName = 'Koffeeholic';

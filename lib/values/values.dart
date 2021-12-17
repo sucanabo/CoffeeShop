@@ -5,8 +5,8 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/untils/app_information.dart';
+import 'package:coffee_shop/translations/translations.dart';
+import 'package:coffee_shop/untils/untils.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
