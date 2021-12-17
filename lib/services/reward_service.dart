@@ -27,3 +27,31 @@ Future<ApiResponse> getAllReward() async {
   }
   return apiResponse;
 }
+Future<ApiResponse> redeemReward(String id) async {
+  ApiResponse apiResponse = ApiResponse();
+  try {
+    String token = await getToken();
+    final response = await http.get(Uri.parse('$rewardsURL/$id/redeem'), headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    });
+    switch (response.statusCode) {
+      case 200:
+        apiResponse.data = 'Reward has been move in Your voucher.';
+        break;
+      case 400:
+      apiResponse.error = 'You not enough point to redeem this reward';
+        break;
+      case 401:
+        apiResponse.error = unauthorized;
+        break;
+      default:
+        apiResponse.error = somethingWentWrong;
+        break;
+    }
+  } catch (e) {
+    apiResponse.error = serverError;
+    print('error redeem reward');
+  }
+  return apiResponse;
+}

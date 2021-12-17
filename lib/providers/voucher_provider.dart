@@ -80,6 +80,6 @@ class VoucherProvider with ChangeNotifier {
       notifyListeners();
       return null;
     }
-    return 'Fetch Failed.';
+    return LocaleKeys.fetch_data_fail.tr();
   }
 }
