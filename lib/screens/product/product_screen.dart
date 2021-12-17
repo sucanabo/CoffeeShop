@@ -27,6 +27,12 @@ class _ProductScreenState extends State<ProductScreen> {
         Provider.of<ProductProvider>(context, listen: false);
     CategoryProvider categoryProvider =
         Provider.of<CategoryProvider>(context, listen: false);
+    if (!refresh)
+      return;
+    else {
+      productProvider.setLoading(true);
+    }
+
     if (productProvider.isLoading == true && refresh) {
       ApiResponse productResponse = await getProducts();
       ApiResponse categoryResponse = await getCategories();
@@ -58,6 +64,6 @@ class _ProductScreenState extends State<ProductScreen> {
         body: Consumer<ProductProvider>(
             builder: (_, provider, __) => provider.isLoading
                 ? ScreenBodyLoading()
-                : Body(onRefresh: retriveData)));
+                : Body(onRefresh: () => retriveData(refresh: true))));
   }
 }

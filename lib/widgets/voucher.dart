@@ -251,16 +251,16 @@ class _VoucherWidgetState extends State<VoucherWidget> {
 }
 
 class CardItem extends StatelessWidget {
-  final Map item;
-  const CardItem({@required this.item});
+  final String text;
+  final String icon;
+  final VoidCallback onPressed;
+  const CardItem({@required this.text,this.onPressed,this.icon});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       splashColor: AppColors.primaryLightColor,
-      onTap: () {
-        print('hi');
-      },
+      onTap: onPressed,
       child: Container(
         width: SizeConfig.screenWidth * 0.43,
         height: SizeConfig.screenHeigh * 0.10,
@@ -284,7 +284,7 @@ class CardItem extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle, color: AppColors.primaryLightColor),
-                child: SvgPicture.asset('assets/icons/${item['icon']}'),
+                child: SvgPicture.asset('assets/icons/$icon'),
               ),
             ),
             Expanded(
@@ -292,7 +292,7 @@ class CardItem extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  item['text'],
+                  text,
                   style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
                 ),
               ),

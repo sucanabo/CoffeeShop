@@ -13,6 +13,7 @@ import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class NewPasswordScreen extends StatefulWidget {
   static String routeName = '/new_password';
   @override
@@ -29,9 +30,10 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
       bool result = await Provider.of<AuthProvider>(context, listen: false)
           .signup(user: user, password: _txtPassword.text.trim());
       if (result) {
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => MainBody()),
-            (route) => false);
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => MainBody()),
+            (Route<dynamic> route ) => false);
       } else {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => SignInScreen()),
@@ -40,6 +42,13 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
 
       setLoading(context, loading: false);
     }
+  }
+
+  @override
+  void dispose() {
+    _txtPassword.dispose();
+    _txtReEnterPassword.dispose();
+    super.dispose();
   }
 
   @override

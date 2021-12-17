@@ -31,7 +31,16 @@ class _SignUpFormState extends State<SignUpForm> {
   TextEditingController _txtPhone = TextEditingController();
   TextEditingController _txtDisplayName = TextEditingController();
   TextEditingController _txtBirthday = TextEditingController();
-  List<String> listGender = ['male', 'female', 'other'];
+  List<String> listGender = [
+    'male',
+    'female',
+    'other',
+  ];
+  List<String> listGenderData = [
+    LocaleKeys.gender_male.tr(),
+    LocaleKeys.gender_female.tr(),
+    LocaleKeys.gender_other.tr(),
+  ];
   String _dropdownGender;
   bool _isSocialSignup = false;
 
@@ -59,7 +68,6 @@ class _SignUpFormState extends State<SignUpForm> {
     hideKeyboard(context);
     final naviProvider =
         Provider.of<NavigationProvider>(context, listen: false);
-
     if (_formKey.currentState.validate()) {
       naviProvider.setLoading(true);
       bool phoneCheck = await isPhoneExisted(_txtPhone.text.trim());
@@ -134,6 +142,7 @@ class _SignUpFormState extends State<SignUpForm> {
               RoundedDropDown(
                   value: _dropdownGender,
                   listItem: listGender,
+                  listItemDisplay: listGenderData,
                   validator: (value) => Validate.notEmptyValidate(value),
                   onChanged: (value) {
                     setState(() {

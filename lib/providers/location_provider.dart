@@ -1,8 +1,12 @@
 import 'package:coffee_shop/services/location_service.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
+import 'package:coffee_shop/values/function.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LocationProvider with ChangeNotifier {
   final geolocatorService = GeolocatorService();
@@ -14,28 +18,29 @@ class LocationProvider with ChangeNotifier {
     print('location provider create ');
     setCurrentLocation();
   }
-  setCurrentAddress (String address){
+  setCurrentAddress(String address) {
     currentAddrses = address;
     notifyListeners();
   }
+
   setCurrentLocation() async {
-    // bool serviceEnabled;
-    // LocationPermission permission;
-    // serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    // if (!serviceEnabled) {
-    //   showToast('Please keep your location on', toastLength: Toast.LENGTH_LONG);
-    // }
-    // permission = await Geolocator.checkPermission();
-    // if (permission == LocationPermission.denied) {
-    //   permission = await Geolocator.requestPermission();
-    //   if (permission == LocationPermission.denied) {
-    //     showToast('Location permission is denied.',
-    //         toastLength: Toast.LENGTH_LONG);
-    //   }
-    // }
-    // if (permission == LocationPermission.deniedForever) {
-    //   showToast('Location permission is denied forever');
-    // }
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      showToast(LocaleKeys.keep_location.tr(), toastLength: Toast.LENGTH_LONG);
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        showToast(LocaleKeys.location_denied.tr(),
+            toastLength: Toast.LENGTH_LONG);
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      showToast(LocaleKeys.location_denied_forever.tr());
+    }
     Position position = await geolocatorService.getCureentLocation();
     List<Placemark> placemarks =
         await placemarkFromCoordinates(position.latitude, position.longitude);
@@ -52,7 +57,7 @@ class LocationProvider with ChangeNotifier {
   setMarker(LatLng latlong) {
     markers.clear();
     markers.add(Marker(
-      markerId: MarkerId('Your location'),
+      markerId: MarkerId(LocaleKeys.your_location.tr()),
       position: latlong,
     ));
     notifyListeners();

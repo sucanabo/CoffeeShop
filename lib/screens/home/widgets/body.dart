@@ -47,6 +47,7 @@ class Body extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: List.generate(newList.length,
                   (index) => ProductWidget(product: newList[index]))),
         ),
@@ -68,6 +69,7 @@ class Body extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: List.generate(saleList.length,
                   (index) => ProductWidget(product: saleList[index]))),

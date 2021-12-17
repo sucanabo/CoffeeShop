@@ -11,6 +11,5 @@ class TransactionProvider with ChangeNotifier {
 
   clear() {
     _transactions.clear();
-    // notifyListeners();
   }
 }

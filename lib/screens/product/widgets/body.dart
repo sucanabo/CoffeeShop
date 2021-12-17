@@ -44,9 +44,6 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
     _drinkTabController = TabController(vsync: this, length: _drinkCate.length);
     _foodTabController = TabController(vsync: this, length: _foodCate.length);
   }
-
-  void setCateIndex(int index) {}
-
   void setTabActive() {}
   @override
   Widget build(BuildContext context) {

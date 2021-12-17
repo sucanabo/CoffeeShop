@@ -18,19 +18,16 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
     LocaleKeys.reward.tr(),
     'Voucher'
   ];
-  final List cardList = [
-    {'text': LocaleKeys.reward.tr(), 'icon': 'transfer.svg'},
-    {'text': LocaleKeys.your_voucher.tr(), 'icon': 'voucher.svg'},
-    {'text': LocaleKeys.transaction_history.tr(), 'icon': 'history_2.svg'},
-    {'text': LocaleKeys.privacy_policy.tr(), 'icon': 'policy.svg'},
-  ];
+
   TabController _tabController;
-  int indexTab;
   @override
   // ignore: must_call_super
   void initState() {
-    indexTab = 0;
     _tabController = TabController(vsync: this, length: tabList.length);
+  }
+
+  _setTab(int index) {
+    _tabController.index = index;
   }
 
   @override
@@ -59,7 +56,11 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
           ),
           Expanded(
             child: TabBarView(controller: _tabController, children: <Widget>[
-              AccumulateTab(cardList: cardList),
+              AccumulateTab(
+                onChangedTab: (val) {
+                  _setTab(val);
+                },
+              ),
               RewardTab(),
               VoucherTab(),
             ]),

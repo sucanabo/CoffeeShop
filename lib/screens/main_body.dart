@@ -39,7 +39,11 @@ class _MainBodyState extends State<MainBody> {
   Widget build(BuildContext context) {
     final provider = Provider.of<NavigationProvider>(context);
     return Scaffold(
-      body: SafeArea(child: _pageOption[provider.currentIndex]),
+      body: SafeArea(
+        child: WillPopScope(
+            onWillPop: () => provider.onWillPop(context),
+            child: _pageOption[provider.currentIndex]),
+      ),
       key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       bottomNavigationBar: CurvedNavigationBar(

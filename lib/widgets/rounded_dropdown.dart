@@ -4,17 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class RoundedDropDown extends StatelessWidget {
   const RoundedDropDown(
       {this.validator,
       this.onChanged,
       this.label,
       @required this.value,
-      @required this.listItem});
+      @required this.listItem,
+      @required this.listItemDisplay});
   final Function(dynamic) validator;
   final dynamic value;
   final Function(dynamic) onChanged;
   final List listItem;
+  final List listItemDisplay;
   final String label;
   @override
   Widget build(BuildContext context) {
@@ -38,9 +41,10 @@ class RoundedDropDown extends StatelessWidget {
         hint: Text(LocaleKeys.select_gender.tr()),
         style: TextStyle(color: AppColors.textColor),
         onChanged: onChanged,
-        items: listItem
-            .map((gender) => DropdownMenuItem(
-                value: gender, child: Text(gender.toString().capitalize())))
-            .toList());
+        items: List.generate(
+            listItem.length,
+            (index) => DropdownMenuItem(
+                value: listItem[index],
+                child: Text(listItemDisplay[index].toString().capitalize()))));
   }
 }

@@ -13,7 +13,7 @@ class OTPScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
-           LocaleKeys.otp_verification.tr(),
+            LocaleKeys.otp_verification.tr(),
           ),
         ),
         body: Body(user: user));

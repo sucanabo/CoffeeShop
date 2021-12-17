@@ -42,8 +42,7 @@ class Res {
       'assets/images/banner/20200316_AppVinID_BannerWeb_TCH_25.jpg';
   static const String baner3 =
       'assets/images/banner/20200316_AppVinID_BannerWeb_TCH_30k.jpg';
-  static const String success =
-      'assets/images/banner/assets/images/Success.gif';
+  static const String success = 'assets/images/Success.gif';
   static const String voucher_background =
       'assets/images/voucher_background.png';
   static const String more_background = 'assets/images/more_background.jpg';

@@ -243,151 +243,150 @@ class ProductWidget extends StatelessWidget {
           onTap: () {
             _navigateToDetail(context);
           },
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          child: Container(
+            width: getWidth(160),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    blurRadius: 4.0,
+                    spreadRadius: 5.0)
+              ],
+            ),
             child: Container(
-              width: getWidth(160),
               decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
-                      blurRadius: 4.0,
-                      spreadRadius: 5.0)
-                ],
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: AppColors.whiteColor,
-                    borderRadius: BorderRadius.circular(10.0)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Stack(
-                      children: <Widget>[
-                        Container(
-                          child: Hero(
-                              tag: product.title,
+                  color: AppColors.whiteColor,
+                  borderRadius: BorderRadius.circular(10.0)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Stack(
+                    children: <Widget>[
+                      Container(
+                        child: Hero(
+                            tag: product.title,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
                               child: Image(
                                 image: base64StringToImage(product.imgPath),
                                 fit: BoxFit.fitWidth,
-                              )),
-                        ),
-                        Positioned(
-                            top: 5.0,
-                            right: 5.0,
-                            child: ClipOval(
-                              child: Material(
-                                color: AppColors.darkColor,
-                                child: InkWell(
-                                  splashColor: AppColors.primaryMediumColor,
-                                  child: SizedBox(
-                                    width: 30.0,
-                                    height: 30.0,
-                                    child: Icon(
-                                      Icons.add,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    quickAddCart(cart);
-                                  },
-                                ),
                               ),
                             )),
-                        if (product.discount != 0)
-                          DiscountBadge(
-                            discount: product.discount.toString(),
-                          ),
+                      ),
+                      Positioned(
+                          top: 5.0,
+                          right: 5.0,
+                          child: ClipOval(
+                            child: Material(
+                              color: AppColors.darkColor,
+                              child: InkWell(
+                                splashColor: AppColors.primaryMediumColor,
+                                child: SizedBox(
+                                  width: 30.0,
+                                  height: 30.0,
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                onTap: () {
+                                  quickAddCart(cart);
+                                },
+                              ),
+                            ),
+                          )),
+                      if (product.discount != 0)
+                        DiscountBadge(
+                          discount: product.discount.toString(),
+                        ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: getHeight(45.0),
+                          child: Text(product.title,
+                              style: TextStyle(
+                                  fontSize: 18.0, fontWeight: FontWeight.w500),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Row(
+                              children: [
+                                Text(LocaleKeys.price.tr() + ' ',
+                                    style:
+                                        TextStyle(color: AppColors.mutedColor)),
+                                if (product.discount != 0)
+                                  Text(
+                                    convertVND(product.price),
+                                    style: TextStyle(
+                                        color: AppColors.mutedColor,
+                                        decoration: TextDecoration.lineThrough),
+                                  ),
+                                if (product.discount == 0)
+                                  Text(
+                                      convertVND(caculatePrice(
+                                          price: product.price,
+                                          discount: product.discount)),
+                                      style: TextStyle(
+                                          color: AppColors.primaryColor,
+                                          fontSize: 17.0,
+                                          fontWeight: FontWeight.w600))
+                              ],
+                            ),
+                            if (product.discount != 0)
+                              Text(
+                                  convertVND(caculatePrice(
+                                      price: product.price,
+                                      discount: product.discount)),
+                                  style: TextStyle(
+                                      color: AppColors.primaryColor,
+                                      fontSize: 17.0,
+                                      fontWeight: FontWeight.w600))
+                          ],
+                        ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(
-                              child: Text(product.title,
-                                  style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w500),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis)),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(LocaleKeys.price.tr() + ' ',
-                                      style: TextStyle(
-                                          color: AppColors.mutedColor)),
-                                  if (product.discount != 0)
-                                    Text(
-                                      convertVND(product.price),
-                                      style: TextStyle(
-                                          color: AppColors.mutedColor,
-                                          decoration:
-                                              TextDecoration.lineThrough),
-                                    ),
-                                  if (product.discount == 0)
-                                    Text(
-                                        convertVND(caculatePrice(
-                                            price: product.price,
-                                            discount: product.discount)),
-                                        style: TextStyle(
-                                            color: AppColors.primaryColor,
-                                            fontSize: 17.0,
-                                            fontWeight: FontWeight.w600))
-                                ],
-                              ),
-                              if (product.discount != 0)
-                                Text(
-                                    convertVND(caculatePrice(
-                                        price: product.price,
-                                        discount: product.discount)),
-                                    style: TextStyle(
-                                        color: AppColors.primaryColor,
-                                        fontSize: 17.0,
-                                        fontWeight: FontWeight.w600))
-                            ],
-                          ),
-                        ],
-                      ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 10.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(left: 0.0),
+                          width: 25.0,
+                          child: Icon(Icons.favorite_border,
+                              color: Colors.red[400], size: 20.0),
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 35.0,
+                              child: Icon(Icons.star_border,
+                                  color: Colors.yellow[600], size: 20.0),
+                            ),
+                            Text(
+                              product.star.toString(),
+                              style: TextStyle(
+                                  fontSize: 16.0, fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        )
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 10.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(left: 0.0),
-                            width: 25.0,
-                            child: Icon(Icons.favorite_border,
-                                color: Colors.red[400], size: 20.0),
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                width: 35.0,
-                                child: Icon(Icons.star_border,
-                                    color: Colors.yellow[600], size: 20.0),
-                              ),
-                              Text(
-                                product.star.toString(),
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w500),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
             ),
           ),

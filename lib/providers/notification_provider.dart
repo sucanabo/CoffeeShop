@@ -1,10 +1,11 @@
 import 'dart:io';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class FirebaseNotifications {
   FirebaseMessaging _messaging;
   BuildContext myContext;
@@ -58,7 +59,7 @@ class FirebaseNotifications {
                   content: Text(remoteMessage.notification.body),
                   actions: [
                     CupertinoDialogAction(
-                      child: Text('OK'),
+                      child: Text(LocaleKeys.ok.tr()),
                       isDefaultAction: true,
                       onPressed: () {
                         print('clicked dialog');
@@ -127,7 +128,7 @@ class NotificationHandler {
               content: Text(body),
               actions: [
                 CupertinoDialogAction(
-                  child: Text('OK'),
+                  child: Text(LocaleKeys.ok.tr()),
                   isDefaultAction: true,
                   onPressed: () {
                     print('clicked dialog');

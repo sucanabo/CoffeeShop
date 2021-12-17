@@ -210,5 +210,24 @@ abstract class  LocaleKeys {
   static const category = 'category';
   static const shipping_type = 'shipping_type';
   static const edit = 'edit';
+  static const gender_male = 'gender_male';
+  static const gender_female = 'gender_female';
+  static const gender_other = 'gender_other';
+  static const rank_bzone = 'rank_bzone';
+  static const rank_silver = 'rank_silver';
+  static const rank_gold = 'rank_gold';
+  static const rank_platinum = 'rank_platinum';
+  static const update_profile_success = 'update_profile_success';
+  static const update_profile_fail = 'update_profile_fail';
+  static const keep_location = 'keep_location';
+  static const location_denied = 'location_denied';
+  static const location_denied_forever = 'location_denied_forever';
+  static const your_location = 'your_location';
+  static const cate_coffee = 'cate_coffee';
+  static const cate_milk_tea = 'cate_milk_tea';
+  static const cate_tea = 'cate_tea';
+  static const cate_ice_blended = 'cate_ice_blended';
+  static const are_your_sure = 'are_your_sure';
+  static const exit_app = 'exit_app';
 
 }

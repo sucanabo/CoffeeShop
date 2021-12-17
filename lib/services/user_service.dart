@@ -435,9 +435,10 @@ Future<void> logout(BuildContext context) async {
     pref.setBool(PrefKey.FACEBOOK_SIGN_IN, false);
   }
   return await pref.remove('token').then((value) {
-    Navigator.of(context).pushAndRemoveUntil(
+    Navigator.pushAndRemoveUntil(
+        context,
         MaterialPageRoute(builder: (context) => SignInScreen()),
         (route) => false);
-    navigationProvider.setCurrentIndex(0);
+    navigationProvider.clear();
   });
 }

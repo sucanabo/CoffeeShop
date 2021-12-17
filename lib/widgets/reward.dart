@@ -1,9 +1,11 @@
 import 'package:coffee_shop/models/reward.dart';
+import 'package:coffee_shop/providers/auth_provider.dart';
 import 'package:coffee_shop/screens/voucher/widgets/reward/reward_detail.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee_shop/widgets/custom_bottom_sheet.dart';
+import 'package:provider/provider.dart';
 
 class RewardWidget extends StatelessWidget {
   final bool isLarge;
@@ -12,6 +14,7 @@ class RewardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<AuthProvider>(context, listen: false);
     Size size = MediaQuery.of(context).size;
     if (isLarge) {
       return Container(
@@ -81,7 +84,10 @@ class RewardWidget extends StatelessWidget {
                                 height: 35.0,
                                 width: 35.0,
                                 decoration: BoxDecoration(
-                                    color: AppColors.darkColor,
+                                    color: userProvider.getUser.point >=
+                                            reward.point
+                                        ? AppColors.darkColor
+                                        : AppColors.mutedColor,
                                     shape: BoxShape.circle),
                                 child: Center(
                                     child: Text(
@@ -154,7 +160,10 @@ class RewardWidget extends StatelessWidget {
                         height: 35.0,
                         width: 35.0,
                         decoration: BoxDecoration(
-                            color: AppColors.darkColor, shape: BoxShape.circle),
+                            color: userProvider.getUser.point >= reward.point
+                                ? AppColors.darkColor
+                                : AppColors.mutedColor,
+                            shape: BoxShape.circle),
                         child: Center(
                           child: Text(
                             '${reward.point}',

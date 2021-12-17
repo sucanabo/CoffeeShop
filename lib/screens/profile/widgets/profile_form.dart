@@ -72,7 +72,11 @@ class _ProfileFormState extends State<ProfileForm> {
       'female',
       'other',
     ];
-
+    List<String> listGenderData = [
+      LocaleKeys.gender_male.tr(),
+      LocaleKeys.gender_female.tr(),
+      LocaleKeys.gender_other.tr(),
+    ];
     return Form(
       key: _formKey,
       child: Column(
@@ -109,6 +113,7 @@ class _ProfileFormState extends State<ProfileForm> {
             label: LocaleKeys.gender_text.tr(),
             value: _dropdownGender,
             listItem: listGender,
+            listItemDisplay: listGenderData,
             validator: null,
             onChanged: (value) {
               setState(() {

@@ -6,13 +6,33 @@ import 'package:flutter/material.dart';
 import 'package:coffee_shop/values/color_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
-class SuccessScreen extends StatelessWidget {
+
+class SuccessScreen extends StatefulWidget {
   const SuccessScreen({Key key}) : super(key: key);
+
+  @override
+  State<SuccessScreen> createState() => _SuccessScreenState();
+}
+
+class _SuccessScreenState extends State<SuccessScreen> {
+  AssetImage _image;
   buttonClick(BuildContext context) async {
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     cartProvider.clear();
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => MainBody()), (route) => false);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _image = AssetImage(Res.success);
+  }
+
+  @override
+  void dispose() {
+    _image.evict();
+    super.dispose();
   }
 
   @override
@@ -40,7 +60,7 @@ class SuccessScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Image(
-                      image: AssetImage(Res.success),
+                      image: _image,
                       height: 200.0,
                     ),
                     Text(

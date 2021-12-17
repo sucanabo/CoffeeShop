@@ -29,6 +29,7 @@ class MoreScreenSliverDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
+    final userProvider = Provider.of<AuthProvider>(context, listen: false);
     return Stack(
       children: <Widget>[
         Image.asset(
@@ -90,7 +91,7 @@ class MoreScreenSliverDelegate extends SliverPersistentHeaderDelegate {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('New',
+                      Text(userProvider.getLevelString(),
                           style: TextStyle(
                               color: AppColors.textColor,
                               fontSize: 17,

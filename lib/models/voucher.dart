@@ -86,14 +86,22 @@ class VoucherModel {
     switch (str) {
       case 'order':
         return LocaleKeys.order.tr();
+        break;
+
       case 'product':
         return LocaleKeys.product.tr();
+        break;
+
       case 'category':
         return LocaleKeys.category.tr();
+        break;
+
       case 'shipping':
         return LocaleKeys.shipping_type.tr();
+        break;
+
       default:
-        return '';
+        return str;
     }
   }
 }

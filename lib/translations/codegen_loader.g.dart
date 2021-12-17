@@ -234,7 +234,26 @@ class CodegenLoader extends AssetLoader{
   "product": "Product",
   "category": "Category",
   "shipping_type": "Shipping",
-  "edit": "Edit"
+  "edit": "Edit",
+  "gender_male": "Male",
+  "gender_female": "Female",
+  "gender_other": "Other",
+  "rank_bzone": "Bzone",
+  "rank_silver": "Silver",
+  "rank_gold": "Gold",
+  "rank_platinum": "Platinum",
+  "update_profile_success": "Update profile success.",
+  "update_profile_fail": "Update profile failed. Try again.",
+  "keep_location": "Please keep your location on.",
+  "location_denied": "Location permission is denied.",
+  "location_denied_forever": "Location permission is dined forever",
+  "your_location": "You location",
+  "cate_coffee": "Coffee",
+  "cate_milk_tea": "Milk Tea",
+  "cate_tea": "Tea",
+  "cate_ice_blended": "Ice blended",
+  "are_your_sure": "Are your sure?",
+  "exit_app": "Do you want to exit an App"
 };
 static const Map<String,dynamic> vi_VN = {
   "hi_text": "Xin chào",
@@ -456,7 +475,26 @@ static const Map<String,dynamic> vi_VN = {
   "product": "Sản phẩm",
   "category": "Loại SP",
   "shipping_type": "Vận chuyển",
-  "edit": "Sửa"
+  "edit": "Sửa",
+  "gender_male": "Nam",
+  "gender_female": "Nữ",
+  "gender_other": "Khác",
+  "rank_bzone": "Đồng",
+  "rank_silver": "Bạc",
+  "rank_gold": "Vàng",
+  "rank_platinum": "Bạch Kim",
+  "update_profile_success": "Cập nhật hồ sơ thành công.",
+  "update_profile_fail": "Cập nhật hồ sơ thất bại. Thử lại sau.",
+  "keep_location": "Xin hãy bật định vị.",
+  "location_denied": "Đã từ chối quyền truy cập vị trí",
+  "location_denied_forever": "Quyền truy cập vị trí đã từ chối vĩnh viễn.",
+  "your_location": "Vị trí của bạn",
+  "cate_coffee": "Cà phê",
+  "cate_milk_tea": "Trà sữa",
+  "cate_tea": "Trà",
+  "cate_ice_blended": "Đá xay",
+  "are_your_sure": "Bạn có chắc?",
+  "exit_app": "Bạn muốn rời khỏi ứng dụng"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en_US": en_US, "vi_VN": vi_VN};
 }

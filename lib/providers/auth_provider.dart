@@ -4,6 +4,7 @@ import 'package:coffee_shop/models/user.dart';
 import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
 import 'package:coffee_shop/services/user_service.dart' as sv;
 import 'package:coffee_shop/services/user_service.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/values/api_end_point.dart';
 import 'package:coffee_shop/values/function.dart';
 import 'package:coffee_shop/values/strings.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AuthProvider with ChangeNotifier {
   UserModel _user;
@@ -18,11 +20,11 @@ class AuthProvider with ChangeNotifier {
   bool _addressLoading = true;
 
   Map levelPoint = {
-    'New': 100, //lv0
-    'Bzone': 300, //lv1
-    'Silver': 600, //lv2
-    'Gold': 1000, //lv3
-    'Platinum': 3000 //lv4
+    LocaleKeys.new_text.tr(): 100, //lv0
+    LocaleKeys.rank_bzone.tr(): 300, //lv1
+    LocaleKeys.rank_silver.tr(): 600, //lv2
+    LocaleKeys.rank_gold.tr(): 1000, //lv3
+    LocaleKeys.rank_platinum.tr(): 3000 //lv4
   };
 
   //getter
@@ -90,11 +92,15 @@ class AuthProvider with ChangeNotifier {
     return result;
   }
 
-  Future<void> changePassword(BuildContext context, {String newPwd ,String oldPwd}) async {
-    final ApiResponse response = await sv.changePassword(newPwd: newPwd,oldPwd: oldPwd);
+  Future<void> changePassword(BuildContext context,
+      {String newPwd, String oldPwd}) async {
+    final ApiResponse response =
+        await sv.changePassword(newPwd: newPwd, oldPwd: oldPwd);
     if (response.error == null) {
       Navigator.of(context).pop();
-      showToast('Change password success', toastLength: Toast.LENGTH_LONG);
+      showToast(
+          '${LocaleKeys.change_password.tr()} ${LocaleKeys.change_password.tr().toLowerCase()}',
+          toastLength: Toast.LENGTH_LONG);
       logout(context);
     } else {
       showToast(response.error, toastLength: Toast.LENGTH_LONG);
@@ -152,9 +158,9 @@ class AuthProvider with ChangeNotifier {
       if (user.displayName != null) _user.displayName = user.displayName;
       if (user.email != null) _user.email = user.email;
       if (user.gender != null) _user.gender = user.gender;
-      showToast('Update user succes.');
+      showToast(LocaleKeys.update_profile_success.tr());
     } else {
-      showToast('Update user failded. Try again.',
+      showToast(LocaleKeys.update_profile_fail.tr(),
           toastLength: Toast.LENGTH_LONG);
     }
     notifyListeners();

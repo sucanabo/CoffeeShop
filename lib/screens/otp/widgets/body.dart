@@ -27,12 +27,10 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   bool _loading = false;
   bool _buttonEnable = false;
-  TextEditingController _otpController = TextEditingController();
+  final TextEditingController _otpController = TextEditingController();
   int secondCounter = 0;
   int defaultSecond = 60;
   Timer timer;
-  String _phoneNumber;
-
   @override
   void initState() {
     super.initState();
@@ -72,7 +70,7 @@ class _BodyState extends State<Body> {
         verification: (type) {
           if (type == VerificationType.SUCCESS) {
             print("VerifyRegisterController - verifyOTP - SUCCESS");
-            Navigator.pushNamed(context, NewPasswordScreen.routeName,
+            Navigator.popAndPushNamed(context, NewPasswordScreen.routeName,
                 arguments: widget.user);
           } else {
             print("VerifyRegisterController - verifyOTP - ERROR");
@@ -118,7 +116,8 @@ class _BodyState extends State<Body> {
                             fontSize: getWidth(28.0),
                             fontWeight: FontWeight.w600),
                       ),
-                      Text(LocaleKeys.we_send_code_to.tr(args: [_phoneNumber])),
+                      Text(LocaleKeys.we_send_code_to
+                          .tr(args: [widget.user.phone ?? ''])),
                       SizedBox(height: getHeight(20.0)),
                       Text(
                         LocaleKeys.send_otp_again.tr(

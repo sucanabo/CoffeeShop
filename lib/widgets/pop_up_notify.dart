@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'divider_custom.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class PopUpNotify extends StatelessWidget {
   const PopUpNotify({this.title, this.content, this.actions});
   final String title;
@@ -45,7 +46,16 @@ class PopUpNotify extends StatelessWidget {
               SizedBox(height: getHeight(29)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: actions ??
+                children: List.generate(
+                        actions.length,
+                        (index) => Expanded(
+                              child: Container(
+                                  margin: EdgeInsets.only(
+                                    left: index != 0 ? 5 : 0,
+                                    right: index != actions.length ? 5 : 0,
+                                  ),
+                                  child: actions[index]),
+                            )) ??
                     [
                       PillButton(
                         onPressed: () => Navigator.of(context).pop(),
