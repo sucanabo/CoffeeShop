@@ -1,6 +1,4 @@
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/custom.dart';
-import 'package:flutter/material.dart';
+part of screens;
 
 class TabCategory extends StatelessWidget {
   final TabController controller;

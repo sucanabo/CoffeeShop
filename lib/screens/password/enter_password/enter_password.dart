@@ -1,14 +1,4 @@
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/screens/main_body.dart';
-import 'package:coffee_shop/screens/password/forgot_password/forgot_password_screen.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/rounded_text_field.dart';
-import 'package:coffee_shop/widgets/screen_body.dart';
-import 'package:coffee_shop/widgets/sign_button.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of screens;
 
 class EnterPassword extends StatelessWidget {
   static const String routeName = '/enterPassword';

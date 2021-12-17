@@ -1,9 +1,4 @@
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/screens/address/widgets/header.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import './widgets/body.dart';
+part of screens;
 
 class MoreScreen extends StatelessWidget {
   static String routeName = '/more';
@@ -16,7 +11,7 @@ class MoreScreen extends StatelessWidget {
           slivers: [
             Header(expandHeight: 250, roundedContainerHeight: 50),
             SliverToBoxAdapter(
-              child: Body(),
+              child: MoreBody(),
             )
           ],
         );

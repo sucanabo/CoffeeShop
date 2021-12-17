@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+part of screens;
 
 class Heading extends StatelessWidget {
   final String title;

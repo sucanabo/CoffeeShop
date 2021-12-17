@@ -1,15 +1,4 @@
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/screens/product_detail/widgets/rating_dialog.dart';
-import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
-import 'package:coffee_shop/services/services.dart';
-
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'package:coffee_shop/values/values.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of screens;
 class ActionButton extends StatefulWidget {
   final Icon icon;
   final bool isActive;

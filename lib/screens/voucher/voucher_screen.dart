@@ -1,13 +1,4 @@
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/services/services.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/my_appbar.dart';
-import 'package:coffee_shop/widgets/screen_body.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import './widgets/body.dart';
+part of screens;
 
 class VoucherScreen extends StatefulWidget {
   const VoucherScreen({Key key}) : super(key: key);
@@ -63,6 +54,6 @@ class _VoucherScreenState extends State<VoucherScreen> {
                       ),
                     ),
                   )
-                : Body()));
+                : VoucherBody()));
   }
 }

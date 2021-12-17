@@ -1,10 +1,4 @@
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'widgets/body.dart';
+part of screens;
 
 class SignUpScreen extends StatefulWidget {
   static String routeName = '/sign_up';
@@ -33,7 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               LocaleKeys.sign_up.tr(),
             ),
           ),
-          body: Body()),
+          body: SignUpBody()),
     );
   }
 }

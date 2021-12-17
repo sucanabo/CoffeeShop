@@ -1,19 +1,13 @@
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/screens/product/widgets/product_header.dart';
-import 'package:coffee_shop/screens/product/widgets/tab_category.dart';
-import 'package:coffee_shop/widgets/product.dart';
-import 'package:coffee_shop/widgets/screen_body.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+part of screens;
 
-class Body extends StatefulWidget {
+class ProductBody extends StatefulWidget {
   final Function onRefresh;
-  Body({this.onRefresh});
+  ProductBody({this.onRefresh});
   @override
-  _BodyState createState() => _BodyState();
+  _ProductBodyState createState() => _ProductBodyState();
 }
 
-class _BodyState extends State<Body> with TickerProviderStateMixin {
+class _ProductBodyState extends State<ProductBody> with TickerProviderStateMixin {
   TabController _drinkTabController;
   TabController _foodTabController;
   int _indexTab;

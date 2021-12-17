@@ -1,13 +1,6 @@
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/screens/product_detail/product_detail_screen.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/quantity.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:coffee_shop/providers/provider.dart';
+part of widgets;
 
-import 'package:easy_localization/easy_localization.dart';
+
 class CartItem extends StatefulWidget {
   final CartItemModel item;
   const CartItem({@required this.item});

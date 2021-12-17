@@ -1,11 +1,4 @@
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/screens/main_body.dart';
-import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
-import 'package:coffee_shop/services/services.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+part of screens;
 
 class LoadingScreen extends StatefulWidget {
   static String routeName = '/loading';

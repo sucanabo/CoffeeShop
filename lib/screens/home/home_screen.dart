@@ -1,14 +1,4 @@
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/services/services.dart';
-import 'package:coffee_shop/widgets/loading.dart';
-import 'package:coffee_shop/widgets/my_appbar.dart';
-import 'package:coffee_shop/widgets/screen_body.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import './widgets/body.dart';
-import 'package:coffee_shop/values/values.dart';
+part of screens;
 
 class HomeScreen extends StatefulWidget {
   static String routeName = '/home';
@@ -60,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.all(20.0),
             child: Consumer<ProductProvider>(
               builder: (context, provider, child) =>
-                  provider.isLoading ? Center(child: Loading()) : Body(),
+                  provider.isLoading ? Center(child: Loading()) : HomeBody(),
             )));
   }
 }

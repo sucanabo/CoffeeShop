@@ -1,15 +1,4 @@
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/services/services.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/screen_body.dart';
-import 'package:coffee_shop/widgets/screen_body_loading.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import './widgets/body.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of screens;
 class FavouriteProductScreen extends StatefulWidget {
   static String routeName = '/favourite_product';
   @override
@@ -54,7 +43,7 @@ class _FavouriteProductScreenState extends State<FavouriteProductScreen> {
       ),
       body: Consumer<ProductProvider>(
         builder: (_, products, __) => ScreenBody(
-          child: products.isLoading ? ScreenBodyLoading() : Body(),
+          child: products.isLoading ? ScreenBodyLoading() : FavouriteBody(),
         ),
       ),
     );

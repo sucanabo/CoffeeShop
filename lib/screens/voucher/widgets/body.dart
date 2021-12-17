@@ -1,18 +1,11 @@
-import 'package:coffee_shop/screens/voucher/widgets/accumulate/accumulate_tab.dart';
-import 'package:coffee_shop/screens/voucher/widgets/my_voucher/voucher_tab.dart';
-import 'package:coffee_shop/screens/voucher/widgets/reward/reward_tab.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/custom.dart';
-import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of screens;
 
-class Body extends StatefulWidget {
+class VoucherBody extends StatefulWidget {
   @override
-  _BodyState createState() => _BodyState();
+  _VoucherBodyState createState() => _VoucherBodyState();
 }
 
-class _BodyState extends State<Body> with TickerProviderStateMixin {
+class _VoucherBodyState extends State<VoucherBody> with TickerProviderStateMixin {
   final List<String> tabList = [
     LocaleKeys.accumulate.tr(),
     LocaleKeys.reward.tr(),

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of widgets;
 //Circle Tab Indicator
 class CircleTabIndicator extends Decoration {
   final BoxPainter _painter;

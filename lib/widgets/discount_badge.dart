@@ -1,5 +1,4 @@
-import 'package:coffee_shop/values/values.dart';
-import 'package:flutter/material.dart';
+part of widgets;
 
 class DiscountBadge extends StatelessWidget {
   final String discount;

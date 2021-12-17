@@ -1,7 +1,4 @@
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/screens/address/widgets/address_detail.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:flutter/material.dart';
+part of screens;
 
 class AddressItem extends StatelessWidget {
   final AddressModel address;

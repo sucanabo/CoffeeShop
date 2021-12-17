@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-import './widgets/body.dart';
+part of screens;
 
 class ProfileScreen extends StatefulWidget {
   static String routeName = '/profile';
@@ -12,6 +10,6 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return Body();
+    return ProfileBody();
   }
 }

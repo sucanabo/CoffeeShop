@@ -1,11 +1,4 @@
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/rounded_container.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../order_detail.dart';
+part of screens;
 
 class Transaction extends StatelessWidget {
   const Transaction({this.model});

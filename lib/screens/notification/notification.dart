@@ -1,8 +1,4 @@
-import 'package:coffee_shop/screens/notification/widgets/display_notifications.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/widgets/screen_body.dart';
-import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of screens;
 
 class NotificationScreen extends StatelessWidget {
   static String routeName = '/notification';

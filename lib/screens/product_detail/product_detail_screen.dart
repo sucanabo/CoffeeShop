@@ -1,9 +1,4 @@
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import './widgets/body.dart';
+part of screens;
 
 class ProductDetailScreen extends StatefulWidget {
   static const routeName = '/product-detail';
@@ -34,7 +29,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             backgroundColor: Colors.transparent,
           ),
           extendBodyBehindAppBar: true,
-          body: Body(
+          body: ProductDetailBody(
             product: product,
             cartEdit: cartKey != null,
             cartItem: cartKey != null ? cartItem : null,

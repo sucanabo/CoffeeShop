@@ -1,12 +1,4 @@
-import 'package:coffee_shop/screens/password/enter_password/enter_password.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/rounded_text_field.dart';
-import 'package:coffee_shop/widgets/sign_button.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of screens;
 
 class SignForm extends StatefulWidget {
   SignForm({Key key}) : super(key: key);

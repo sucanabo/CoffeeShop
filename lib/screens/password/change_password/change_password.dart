@@ -1,13 +1,4 @@
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/divider_custom.dart';
-import 'package:coffee_shop/widgets/pill_button.dart';
-import 'package:coffee_shop/widgets/rounded_text_field.dart';
-import 'package:coffee_shop/widgets/screen_body.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of screens;
 class ChangePassword extends StatelessWidget {
   const ChangePassword({Key key}) : super(key: key);
   static const String routeName = '/routeName';

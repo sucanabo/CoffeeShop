@@ -1,15 +1,10 @@
-import 'package:coffee_shop/screens/sign_up/widgets/signup_form.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/screen_body.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-class Body extends StatefulWidget {
+part of screens;
+class SignUpBody extends StatefulWidget {
   @override
-  _BodyState createState() => _BodyState();
+  _SignUpBodyState createState() => _SignUpBodyState();
 }
 
-class _BodyState extends State<Body> {
+class _SignUpBodyState extends State<SignUpBody> {
   bool loading = false;
   @override
   Widget build(BuildContext context) {

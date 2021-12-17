@@ -1,30 +1,16 @@
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/screens/product_detail/widgets/bottom_bar.dart';
-import 'package:coffee_shop/screens/product_detail/widgets/heading.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/message_box.dart';
-import 'package:coffee_shop/widgets/product_extend.dart';
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/widgets/quantity.dart';
-import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:provider/provider.dart';
+part of screens;
 
-import 'action_button.dart';
-import 'package:easy_localization/easy_localization.dart';
-
-class Body extends StatefulWidget {
+class ProductDetailBody extends StatefulWidget {
   final ProductModel product;
   final bool cartEdit;
   final CartItemModel cartItem;
-  const Body({@required this.product, this.cartEdit, this.cartItem});
+  const ProductDetailBody({@required this.product, this.cartEdit, this.cartItem});
 
   @override
-  _BodyState createState() => _BodyState();
+  _ProductDetailBodyState createState() => _ProductDetailBodyState();
 }
 
-class _BodyState extends State<Body> {
+class _ProductDetailBodyState extends State<ProductDetailBody> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Map _productExtend;
   ProductModel _product;

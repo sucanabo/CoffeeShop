@@ -1,7 +1,4 @@
-import 'package:coffee_shop/values/values.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:line_icons/line_icon.dart';
+part of screens;
 
 class MoreTab extends StatelessWidget {
   final String imgPath;

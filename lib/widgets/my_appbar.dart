@@ -1,11 +1,4 @@
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/screens/cart/cart_screen.dart';
-import 'package:coffee_shop/screens/notification/notification.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:line_icons/line_icon.dart';
-import 'package:provider/provider.dart';
+part of widgets;
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color backgroundColor;

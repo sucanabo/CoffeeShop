@@ -1,19 +1,4 @@
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/screens/otp/otp_screen.dart';
-import 'package:coffee_shop/services/services.dart';
-
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/pop_up_notify.dart';
-import 'package:coffee_shop/widgets/rounded_button.dart';
-import 'package:coffee_shop/widgets/rounded_dropdown.dart';
-import 'package:coffee_shop/widgets/rounded_text_field.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of screens;
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key key}) : super(key: key);

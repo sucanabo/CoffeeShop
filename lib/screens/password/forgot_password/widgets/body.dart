@@ -1,25 +1,14 @@
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/services/services.dart';
+part of screens;
 
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/rounded_button.dart';
-import 'package:coffee_shop/widgets/rounded_text_field.dart';
-import 'package:coffee_shop/widgets/screen_body.dart';
-import 'package:coffee_shop/widgets/sign_button.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:easy_localization/easy_localization.dart';
-
-class Body extends StatefulWidget {
-  Body({this.phone});
+class ForgotPasswordBody extends StatefulWidget {
+  ForgotPasswordBody({this.phone});
   final String phone;
 
   @override
-  State<Body> createState() => _BodyState();
+  State<ForgotPasswordBody> createState() => _ForgotPasswordBodyState();
 }
 
-class _BodyState extends State<Body> {
+class _ForgotPasswordBodyState extends State<ForgotPasswordBody> {
   @override
   void initState() {
     super.initState();

@@ -1,5 +1,4 @@
-import 'package:coffee_shop/values/values.dart';
-import 'package:flutter/material.dart';
+part of widgets;
 
 enum RoundedButtonType { normal, outline }
 

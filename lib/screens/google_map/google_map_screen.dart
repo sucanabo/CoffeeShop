@@ -1,19 +1,4 @@
-import 'dart:async';
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/divider_custom.dart';
-import 'package:coffee_shop/widgets/loading.dart';
-import 'package:coffee_shop/widgets/pill_button.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of screens;
 class GoogleMapScreen extends StatefulWidget {
   static String routeName = '/map';
   @override

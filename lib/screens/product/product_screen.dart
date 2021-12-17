@@ -1,16 +1,4 @@
-import 'package:coffee_shop/models/models.dart';
-
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/screens/product/widgets/floating_cart.dart';
-import 'package:coffee_shop/services/services.dart';
-
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/my_appbar.dart';
-import 'package:coffee_shop/widgets/screen_body_loading.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import './widgets/body.dart';
+part of screens;
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({Key key}) : super(key: key);
@@ -63,6 +51,6 @@ class _ProductScreenState extends State<ProductScreen> {
         body: Consumer<ProductProvider>(
             builder: (_, provider, __) => provider.isLoading
                 ? ScreenBodyLoading()
-                : Body(onRefresh: () => retriveData(refresh: true))));
+                : ProductBody(onRefresh: () => retriveData(refresh: true))));
   }
 }

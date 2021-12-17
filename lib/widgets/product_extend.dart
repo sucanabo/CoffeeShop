@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:coffee_shop/values/values.dart';
+part of widgets;
 
 class ProductExtend extends StatefulWidget {
   const ProductExtend({

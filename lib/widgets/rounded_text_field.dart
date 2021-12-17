@@ -1,7 +1,4 @@
-import 'package:coffee_shop/values/values.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
+part of widgets;
 
 // ignore: must_be_immutable
 class RoundedTextField extends StatefulWidget {

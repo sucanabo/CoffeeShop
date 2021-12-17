@@ -1,10 +1,5 @@
 
-import 'dart:io';
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
+part of screens;
 
 class ProfileAvatar extends StatefulWidget {
   final Function onChanged;

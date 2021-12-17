@@ -1,30 +1,16 @@
-import 'dart:async';
-import 'package:coffee_shop/models/models.dart';
-
-import 'package:coffee_shop/screens/password/new_password/new_password_screen.dart';
-import 'package:coffee_shop/services/services.dart';
-
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/pill_button.dart';
-import 'package:coffee_shop/widgets/screen_body.dart';
-import 'package:coffee_shop/widgets/screen_body_loading.dart';
-import 'package:flutter/material.dart';
-
-import 'otp_form.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of screens;
 
 enum OTPType { nomal, register }
 
-class Body extends StatefulWidget {
+class OTPBody extends StatefulWidget {
   final UserModel user;
-  Body({this.user});
+  OTPBody({this.user});
 
   @override
-  _BodyState createState() => _BodyState();
+  _OTPBodyState createState() => _OTPBodyState();
 }
 
-class _BodyState extends State<Body> {
+class _OTPBodyState extends State<OTPBody> {
   bool _loading = false;
   bool _buttonEnable = false;
   final TextEditingController _otpController = TextEditingController();

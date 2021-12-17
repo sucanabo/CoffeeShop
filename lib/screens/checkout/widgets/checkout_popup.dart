@@ -1,9 +1,4 @@
-import 'package:coffee_shop/screens/address/widgets/address_detail.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/widgets/pill_button.dart';
-import 'package:coffee_shop/widgets/pop_up_notify.dart';
-import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of screens;
 class CheckOutPopUp {
   static addressNull(BuildContext context, Function changeAddress) {
     showDialog(

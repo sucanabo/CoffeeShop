@@ -1,8 +1,4 @@
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
-import './widgets/body.dart';
+part of screens;
 
 class OTPScreen extends StatelessWidget {
   static String routeName = '/otp';
@@ -16,6 +12,6 @@ class OTPScreen extends StatelessWidget {
             LocaleKeys.otp_verification.tr(),
           ),
         ),
-        body: Body(user: user));
+        body: OTPBody(user: user));
   }
 }

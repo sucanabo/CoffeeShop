@@ -1,6 +1,4 @@
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/screen_body.dart';
-import 'package:flutter/material.dart';
+part of widgets;
 
 class ScreenBodyLoading extends StatelessWidget {
   final Color indicatorColor;

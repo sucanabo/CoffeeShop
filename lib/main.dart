@@ -1,6 +1,6 @@
 import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/routes.dart';
-import 'package:coffee_shop/screens/loading/loading_screen.dart';
+import 'package:coffee_shop/screens/screens.dart';
 import 'package:coffee_shop/translations/codegen_loader.g.dart';
 import 'package:coffee_shop/untils/languages.dart';
 import 'package:coffee_shop/values/values.dart';

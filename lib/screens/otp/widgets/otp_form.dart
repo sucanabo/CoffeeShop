@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
+part of screens;
 
 class OTPForm extends StatelessWidget {
   OTPForm({this.otpController, this.onComplete,this.onChanged});

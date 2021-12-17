@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+part of widgets;
 
 class AppBarPopupItem {
   final String text;

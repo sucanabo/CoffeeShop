@@ -1,10 +1,4 @@
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/screens/cart/widgets/cart_bottom_sheet.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:provider/provider.dart';
-import './widgets/body.dart';
-import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of screens;
 class CartScreen extends StatefulWidget {
   static String routeName = '/cart';
   const CartScreen({Key key}) : super(key: key);
@@ -22,6 +16,6 @@ class _CartScreenState extends State<CartScreen> {
         appBar: AppBar(
           title: Text(LocaleKeys.cart.tr()),
         ),
-        body: Body());
+        body: AddressBody());
   }
 }

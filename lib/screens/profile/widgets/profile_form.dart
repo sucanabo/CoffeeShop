@@ -1,13 +1,4 @@
-import 'package:coffee_shop/models/models.dart';
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/pill_button.dart';
-import 'package:coffee_shop/widgets/rounded_dropdown.dart';
-import 'package:coffee_shop/widgets/rounded_text_field.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+part of screens;
 
 class ProfileForm extends StatefulWidget {
   ProfileForm({@required this.imgPath});

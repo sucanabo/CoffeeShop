@@ -1,7 +1,4 @@
-import 'package:coffee_shop/values/values.dart';
-import 'package:flutter/material.dart';
-import 'package:line_icons/line_icon.dart';
-import 'package:line_icons/line_icons.dart';
+part of widgets;
 
 class Quantity extends StatefulWidget {
   final int initValue;

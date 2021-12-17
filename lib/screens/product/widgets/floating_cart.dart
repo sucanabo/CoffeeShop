@@ -1,11 +1,4 @@
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/screens/cart/cart_screen.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:line_icons/line_icon.dart';
-import 'package:provider/provider.dart';
+part of screens;
 
 class FloatingCart extends StatefulWidget {
   @override

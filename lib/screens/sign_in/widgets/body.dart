@@ -1,17 +1,11 @@
-import 'package:coffee_shop/screens/sign_in/widgets/sign_in_with.dart';
-import 'package:coffee_shop/screens/sign_up/sign_up_screen.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'signin_form.dart';
+part of screens;
 
-class Body extends StatefulWidget {
+class SignInBody extends StatefulWidget {
   @override
-  State<Body> createState() => _BodyState();
+  State<SignInBody> createState() => _SignInBodyState();
 }
 
-class _BodyState extends State<Body> {
+class _SignInBodyState extends State<SignInBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

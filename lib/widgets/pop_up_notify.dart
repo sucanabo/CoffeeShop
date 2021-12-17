@@ -1,10 +1,4 @@
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/values.dart';
-import 'package:coffee_shop/widgets/pill_button.dart';
-import 'package:flutter/material.dart';
-
-import 'divider_custom.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of widgets;
 
 class PopUpNotify extends StatelessWidget {
   const PopUpNotify({this.title, this.content, this.actions});

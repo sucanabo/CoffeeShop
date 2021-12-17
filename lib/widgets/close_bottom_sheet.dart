@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:line_icons/line_icon.dart';
-import 'package:coffee_shop/values/values.dart';
+part of widgets;
 
 class CloseBottomSheet extends StatelessWidget {
   final BuildContext context;

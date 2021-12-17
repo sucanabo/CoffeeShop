@@ -1,16 +1,6 @@
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/screens/product/see_product_screen.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/widgets/haeding_underline.dart';
-import 'package:coffee_shop/widgets/product.dart';
-import 'package:coffee_shop/widgets/see_all_button.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+part of screens;
 
-import 'home_carousel.dart';
-import 'package:easy_localization/easy_localization.dart';
-
-class Body extends StatelessWidget {
+class HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ProductProvider>(context, listen: false);

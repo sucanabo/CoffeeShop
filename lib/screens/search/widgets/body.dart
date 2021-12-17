@@ -1,10 +1,4 @@
-import 'package:coffee_shop/providers/provider.dart';
-import 'package:coffee_shop/screens/search/widgets/search_bar.dart';
-import 'package:coffee_shop/widgets/product.dart';
-import 'package:coffee_shop/widgets/screen_body.dart';
-import 'package:tiengviet/tiengviet.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+part of screens;
 
 class Body extends StatefulWidget {
   @override

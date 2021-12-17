@@ -1,11 +1,4 @@
-import 'package:coffee_shop/models/models.dart';
-
-import 'package:coffee_shop/screens/notification/notification_detail_screen.dart';
-import 'package:coffee_shop/screens/notification/widgets/notification_item.dart';
-import 'package:coffee_shop/widgets/loading.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:flutter/material.dart';
+part of screens;
 
 class DisplayNotifications extends StatefulWidget {
   @override
