@@ -1,4 +1,3 @@
-import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/screens/address/address_screen.dart';
 import 'package:coffee_shop/screens/contact_us/contact_us_screen.dart';
 import 'package:coffee_shop/screens/favourite_product/favourite_product_screen.dart';
@@ -6,8 +5,10 @@ import 'package:coffee_shop/screens/more/widgets/more_tab.dart';
 import 'package:coffee_shop/screens/order/order_screeen.dart';
 import 'package:coffee_shop/screens/password/change_password/change_password.dart';
 import 'package:coffee_shop/screens/profile/profile_screen.dart';
-import 'package:coffee_shop/services/user_service.dart';
+import 'package:coffee_shop/services/services.dart';
+
 import 'package:coffee_shop/translations/locale_keys.g.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 class Body extends StatelessWidget {

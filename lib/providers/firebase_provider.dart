@@ -1,19 +1,4 @@
-import 'package:coffee_shop/models/api_response.dart';
-import 'package:coffee_shop/models/user.dart';
-import 'package:coffee_shop/providers/auth_provider.dart';
-import 'package:coffee_shop/providers/navigation_provider.dart';
-import 'package:coffee_shop/screens/main_body.dart';
-import 'package:coffee_shop/screens/sign_up/sign_up_screen.dart';
-import 'package:coffee_shop/services/user_service.dart';
-import 'package:coffee_shop/values/function.dart';
-import 'package:coffee_shop/values/strings.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+part of providers;
 
 class FirebaseProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();

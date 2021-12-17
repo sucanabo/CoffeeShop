@@ -1,4 +1,5 @@
-import 'package:coffee_shop/providers/voucher_provider.dart';
+import 'package:coffee_shop/providers/provider.dart';
+
 import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/untils/app_information.dart';
 import 'package:coffee_shop/widgets/haeding_underline.dart';

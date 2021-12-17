@@ -1,8 +1,7 @@
-import 'package:coffee_shop/providers/auth_provider.dart';
-import 'package:coffee_shop/services/user_service.dart';
+import 'package:coffee_shop/providers/provider.dart';
+import 'package:coffee_shop/services/services.dart';
 import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/api_end_point.dart';
-import 'package:coffee_shop/values/function.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/screen_body_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

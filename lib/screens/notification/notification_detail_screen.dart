@@ -1,7 +1,7 @@
-import 'package:coffee_shop/models/notification.dart';
+import 'package:coffee_shop/models/models.dart';
+
 import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/function.dart';
-import 'package:coffee_shop/values/size_config.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';

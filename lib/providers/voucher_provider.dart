@@ -1,8 +1,4 @@
-import 'package:coffee_shop/models/api_response.dart';
-import 'package:coffee_shop/services/voucher_service.dart' as sv;
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of providers;
 
 class VoucherProvider with ChangeNotifier {
   bool _isLoading = true;
@@ -61,7 +57,7 @@ class VoucherProvider with ChangeNotifier {
   }
 
   Future<bool> saveVoucher(int id) async {
-    ApiResponse response = await sv.saveVoucher(id);
+    ApiResponse response = await saveVoucherRequest(id);
     if (response.error == null) {
       final voucher = _vouchers.firstWhere((element) => element.id == id);
       _userVouchers.add(voucher);
@@ -72,9 +68,9 @@ class VoucherProvider with ChangeNotifier {
   }
 
   Future<String> fetchData() async {
-    ApiResponse apiUserVoucher = await sv.getAllUserVoucher();
-    ApiResponse apiVoucher = await sv.getAllVoucher();
-    ApiResponse apiReward = await sv.getAllReward();
+    ApiResponse apiUserVoucher = await getAllUserVoucher();
+    ApiResponse apiVoucher = await getAllVoucher();
+    ApiResponse apiReward = await getAllReward();
     if (apiVoucher.error == null &&
         apiVoucher.error == null &&
         apiReward.error == null) {
@@ -84,6 +80,6 @@ class VoucherProvider with ChangeNotifier {
       notifyListeners();
       return null;
     }
-    return LocaleKeys.fetch_data_fail.tr();
+    return 'Fetch Failed.';
   }
 }

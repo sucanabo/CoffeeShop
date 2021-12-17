@@ -1,5 +1,4 @@
-import 'package:coffee_shop/values/color_theme.dart';
-import 'package:coffee_shop/values/size_config.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:flutter/material.dart';
 
 class DividerCustom extends StatelessWidget {

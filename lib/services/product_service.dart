@@ -1,10 +1,4 @@
-import 'dart:convert';
-
-import 'package:coffee_shop/models/api_response.dart';
-import 'package:coffee_shop/models/product.dart';
-import 'package:coffee_shop/services/user_service.dart';
-import 'package:coffee_shop/values/api_end_point.dart';
-import 'package:http/http.dart' as http;
+part of services;
 
 //Get all products
 Future<ApiResponse> getProducts() async {

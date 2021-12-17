@@ -1,5 +1,4 @@
-import 'package:coffee_shop/res.dart';
-import 'package:coffee_shop/values/color_theme.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 

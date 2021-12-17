@@ -2,11 +2,11 @@
 //
 //     final locationSuggestion = locationSuggestionFromJson(jsonString);
 
-import 'dart:convert';
+part of models;
 
-List<TomtomLocationSuggestion> locationSuggestionFromJson(String str) => List<TomtomLocationSuggestion>.from(json.decode(str).map((x) => TomtomLocationSuggestion.fromJson(x)));
+List<TomtomLocationSuggestion> vmlocationSuggestionFromJson(String str) => List<TomtomLocationSuggestion>.from(json.decode(str).map((x) => TomtomLocationSuggestion.fromJson(x)));
 
-String locationSuggestionToJson(List<TomtomLocationSuggestion> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String vmlocationSuggestionToJson(List<TomtomLocationSuggestion> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class TomtomLocationSuggestion {
     TomtomLocationSuggestion({
@@ -173,10 +173,10 @@ class DataSources {
         this.geometry,
     });
 
-    final Geometry geometry;
+    final TTGeometry geometry;
 
     factory DataSources.fromJson(Map<String, dynamic> json) => DataSources(
-        geometry: json["geometry"] == null ? null : Geometry.fromJson(json["geometry"]),
+        geometry: json["geometry"] == null ? null : TTGeometry.fromJson(json["geometry"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -184,14 +184,14 @@ class DataSources {
     };
 }
 
-class Geometry {
-    Geometry({
+class TTGeometry {
+    TTGeometry({
         this.id,
     });
 
     final String id;
 
-    factory Geometry.fromJson(Map<String, dynamic> json) => Geometry(
+    factory TTGeometry.fromJson(Map<String, dynamic> json) => TTGeometry(
         id: json["id"] == null ? null : json["id"],
     );
 

@@ -1,25 +1,18 @@
-import 'package:coffee_shop/models/address.dart';
-import 'package:coffee_shop/models/cart_item.dart';
-import 'package:coffee_shop/models/tomtom_routes.dart';
-import 'package:coffee_shop/models/voucher.dart';
-import 'package:coffee_shop/providers/auth_provider.dart';
-import 'package:coffee_shop/providers/cart_provider.dart';
-import 'package:coffee_shop/res.dart';
+import 'package:coffee_shop/models/models.dart';
+import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/screens/address/address_screen.dart';
 import 'package:coffee_shop/screens/checkout/widgets/checkout_choose_voucher.dart';
 import 'package:coffee_shop/screens/checkout/widgets/checkout_popup.dart';
 import 'package:coffee_shop/screens/success.dart';
-import 'package:coffee_shop/services/location_service.dart';
-import 'package:coffee_shop/services/order_service.dart';
+import 'package:coffee_shop/services/services.dart';
 import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/color_theme.dart';
-import 'package:coffee_shop/values/function.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/message_box.dart';
 import 'package:coffee_shop/widgets/pill_button.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class CheckoutScreen extends StatefulWidget {
   static String routeName = '/checkout';

@@ -1,13 +1,6 @@
+part of services;
+
 //Get all voucher of user
-import 'dart:convert';
-
-import 'package:coffee_shop/values/api_end_point.dart';
-import 'package:coffee_shop/models/api_response.dart';
-import 'package:coffee_shop/models/reward.dart';
-import 'package:coffee_shop/models/voucher.dart';
-import 'package:coffee_shop/services/user_service.dart';
-import 'package:http/http.dart' as http;
-
 Future<ApiResponse> getAllUserVoucher() async {
   ApiResponse apiResponse = ApiResponse();
   try {
@@ -69,7 +62,7 @@ Future<ApiResponse> getAllVoucher() async {
   return apiResponse;
 }
 
-Future<ApiResponse> saveVoucher(int voucherId) async {
+Future<ApiResponse> saveVoucherRequest(int voucherId) async {
   ApiResponse apiResponse = ApiResponse();
   try {
     String token = await getToken();
@@ -97,35 +90,6 @@ Future<ApiResponse> saveVoucher(int voucherId) async {
     }
   } catch (e) {
     apiResponse.error = serverError;
-  }
-  return apiResponse;
-}
-
-Future<ApiResponse> getAllReward() async {
-  ApiResponse apiResponse = ApiResponse();
-  try {
-    String token = await getToken();
-    final response = await http.get(Uri.parse(rewardsURL), headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token'
-    });
-    switch (response.statusCode) {
-      case 200:
-        apiResponse.data = jsonDecode(response.body)['rewards']
-            .map((v) => RewardModel.fromJson(v))
-            .toList();
-        apiResponse.data as List<dynamic>;
-        break;
-      case 401:
-        apiResponse.error = unauthorized;
-        break;
-      default:
-        apiResponse.error = somethingWentWrong;
-        break;
-    }
-  } catch (e) {
-    apiResponse.error = serverError;
-    print('error reward');
   }
   return apiResponse;
 }

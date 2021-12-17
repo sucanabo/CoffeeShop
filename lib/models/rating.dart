@@ -1,3 +1,4 @@
+part of models;
 class RatingModel {
   int star;
   String review;

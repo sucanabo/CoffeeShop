@@ -1,6 +1,6 @@
-import 'package:coffee_shop/models/address.dart';
+import 'package:coffee_shop/models/models.dart';
 import 'package:coffee_shop/screens/address/widgets/address_detail.dart';
-import 'package:coffee_shop/values/color_theme.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:flutter/material.dart';
 
 class AddressItem extends StatelessWidget {

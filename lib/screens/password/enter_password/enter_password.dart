@@ -1,12 +1,8 @@
-import 'package:coffee_shop/providers/auth_provider.dart';
-import 'package:coffee_shop/providers/navigation_provider.dart';
-import 'package:coffee_shop/res.dart';
+import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/screens/main_body.dart';
 import 'package:coffee_shop/screens/password/forgot_password/forgot_password_screen.dart';
 import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/color_theme.dart';
-import 'package:coffee_shop/values/size_config.dart';
-import 'package:coffee_shop/values/validate.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/rounded_text_field.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:coffee_shop/widgets/sign_button.dart';

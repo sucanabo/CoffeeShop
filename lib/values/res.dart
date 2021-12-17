@@ -1,3 +1,4 @@
+part of values;
 class Res {
   //icons
   static const String ic_phone = 'assets/icons/ic_phone.svg';

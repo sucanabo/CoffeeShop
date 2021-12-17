@@ -1,4 +1,4 @@
-import 'package:coffee_shop/providers/product_provider.dart';
+import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/screens/search/widgets/search_bar.dart';
 import 'package:coffee_shop/widgets/product.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';

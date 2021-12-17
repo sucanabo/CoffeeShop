@@ -1,3 +1,4 @@
+part of models;
 class NotificationViewModel {
   final String imgPath;
   final String title;

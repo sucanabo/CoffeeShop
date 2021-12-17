@@ -1,11 +1,11 @@
 import 'dart:async';
+import 'package:coffee_shop/models/models.dart';
 
-import 'package:coffee_shop/models/user.dart';
 import 'package:coffee_shop/screens/password/new_password/new_password_screen.dart';
-import 'package:coffee_shop/services/firebase_auth.dart';
+import 'package:coffee_shop/services/services.dart';
+
 import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/color_theme.dart';
-import 'package:coffee_shop/values/size_config.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/pill_button.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:coffee_shop/widgets/screen_body_loading.dart';

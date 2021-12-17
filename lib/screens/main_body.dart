@@ -1,8 +1,6 @@
-import 'package:coffee_shop/providers/navigation_provider.dart';
-import 'package:coffee_shop/providers/notification_provider.dart';
-import 'package:coffee_shop/res.dart';
+import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/screens/notification/notification_detail_screen.dart';
-import 'package:coffee_shop/values/color_theme.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

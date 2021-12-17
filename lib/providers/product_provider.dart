@@ -1,6 +1,4 @@
-import 'package:coffee_shop/models/product.dart';
-import 'package:coffee_shop/models/rating.dart';
-import 'package:flutter/cupertino.dart';
+part of providers;
 
 class ProductProvider with ChangeNotifier {
   List<dynamic> _productList = [];

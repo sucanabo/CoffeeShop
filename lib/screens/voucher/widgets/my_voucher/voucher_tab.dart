@@ -1,6 +1,6 @@
-import 'package:coffee_shop/providers/voucher_provider.dart';
+import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/color_theme.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/haeding_underline.dart';
 import 'package:coffee_shop/widgets/voucher.dart';
 import 'package:flutter/material.dart';

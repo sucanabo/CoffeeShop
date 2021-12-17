@@ -1,6 +1,5 @@
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
 
+part of values;
 class Validate {
   static String passwordValidate(String pwd) {
     if (pwd.isEmpty || pwd == null || pwd == '') {

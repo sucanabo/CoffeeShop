@@ -1,7 +1,6 @@
-import 'package:coffee_shop/providers/auth_provider.dart';
+import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/color_theme.dart';
-import 'package:coffee_shop/values/size_config.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';

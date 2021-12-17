@@ -1,3 +1,4 @@
+part of models;
 class RewardModel {
   int id;
   int point;

@@ -1,9 +1,6 @@
-import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/screens/password/enter_password/enter_password.dart';
 import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/function.dart';
-import 'package:coffee_shop/values/size_config.dart';
-import 'package:coffee_shop/values/validate.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/rounded_text_field.dart';
 import 'package:coffee_shop/widgets/sign_button.dart';
 import 'package:flutter/cupertino.dart';

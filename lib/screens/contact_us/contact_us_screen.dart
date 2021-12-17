@@ -1,8 +1,7 @@
-import 'package:coffee_shop/res.dart';
 import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/untils/app_information.dart';
 import 'package:coffee_shop/untils/url_laucher.dart';
-import 'package:coffee_shop/values/color_theme.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/divider_custom.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:flutter/material.dart';

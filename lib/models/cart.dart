@@ -1,4 +1,4 @@
-import 'package:coffee_shop/models/cart_item.dart';
+part of models;
 class CartModel {
   final List<CartItemModel> items;
   final double subTotal;

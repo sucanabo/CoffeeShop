@@ -1,6 +1,6 @@
-import 'package:coffee_shop/providers/auth_provider.dart';
+import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/validate.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/divider_custom.dart';
 import 'package:coffee_shop/widgets/pill_button.dart';
 import 'package:coffee_shop/widgets/rounded_text_field.dart';

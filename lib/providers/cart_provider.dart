@@ -1,8 +1,4 @@
-import 'package:coffee_shop/models/cart_item.dart';
-import 'package:coffee_shop/models/product.dart';
-import 'package:coffee_shop/values/function.dart';
-import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
+part of providers;
 
 class CartProvider with ChangeNotifier {
   Map<String, CartItemModel> _items = {};

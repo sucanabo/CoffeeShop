@@ -1,7 +1,5 @@
+part of values;
 //----------STRINGS----------
-import 'package:coffee_shop/untils/app_information.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 const baseURL = '${AppInformation.baseURL}/api';
 //auth
 const loginURL = baseURL + '/login';

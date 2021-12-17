@@ -1,18 +1,4 @@
-import 'package:coffee_shop/models/address.dart';
-import 'package:coffee_shop/models/api_response.dart';
-import 'package:coffee_shop/models/user.dart';
-import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
-import 'package:coffee_shop/services/user_service.dart' as sv;
-import 'package:coffee_shop/services/user_service.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/api_end_point.dart';
-import 'package:coffee_shop/values/function.dart';
-import 'package:coffee_shop/values/strings.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of providers;
 
 class AuthProvider with ChangeNotifier {
   UserModel _user;
@@ -51,7 +37,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<String> fetAddresses() async {
-    ApiResponse response = await sv.getUserAddresses();
+    ApiResponse response = await getUserAddresses();
     if (response.error == null) {
       setAddresses(response.data);
       notifyListeners();
@@ -63,7 +49,7 @@ class AuthProvider with ChangeNotifier {
   Future<int> updateAddress(BuildContext context,
       {AddressModel address, int id}) async {
     int result = -1;
-    ApiResponse response = await sv.updateAddress(address: address, id: id);
+    ApiResponse response = await updateAddressRequest(address: address, id: id);
     if (response.error == null) {
       int index = _addresses
           .indexOf(_addresses.firstWhere((element) => element.id == id));
@@ -95,7 +81,7 @@ class AuthProvider with ChangeNotifier {
   Future<void> changePassword(BuildContext context,
       {String newPwd, String oldPwd}) async {
     final ApiResponse response =
-        await sv.changePassword(newPwd: newPwd, oldPwd: oldPwd);
+        await changePasswordRequest(newPwd: newPwd, oldPwd: oldPwd);
     if (response.error == null) {
       Navigator.of(context).pop();
       showToast(
@@ -110,7 +96,7 @@ class AuthProvider with ChangeNotifier {
   Future<int> createAddress(BuildContext context,
       {AddressModel address}) async {
     int result = -1;
-    ApiResponse response = await sv.createAddress(address: address);
+    ApiResponse response = await createAddressRequest(address: address);
     if (response.error == null) {
       _addresses.add(AddressModel(
           id: response.data,
@@ -138,7 +124,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<String> deleteAddress(int id) async {
-    ApiResponse response = await sv.deleteAddress(id);
+    ApiResponse response = await deleteAddressRequest(id);
     if (response.error == null) {
       _addresses.removeWhere((element) => element.id == id);
       notifyListeners();
@@ -148,7 +134,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   updateUser(UserModel user) async {
-    ApiResponse response = await sv.updateUser(
+    ApiResponse response = await updateUserRequest(
         image: user.image,
         displayName: user.displayName,
         email: user.email,
@@ -193,7 +179,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<String> login({String phone, String password}) async {
-    ApiResponse response = await sv.loginPhone(phone, password);
+    ApiResponse response = await loginPhone(phone, password);
     if (response.error == null) {
       SharedPreferences pref = await SharedPreferences.getInstance();
       final UserModel user = response.data as UserModel;
@@ -207,7 +193,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<bool> signup({UserModel user, String password}) async {
-    ApiResponse response = await sv.register(
+    ApiResponse response = await register(
         displayName: user.displayName,
         email: user.email,
         phone: user.phone,

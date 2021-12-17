@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../values/color_theme.dart';
 
+part of values;
 ThemeData theme() {
   return ThemeData(
     fontFamily: 'Quicksand',

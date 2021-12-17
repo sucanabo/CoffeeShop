@@ -1,10 +1,8 @@
-import 'package:coffee_shop/models/product.dart';
-import 'package:coffee_shop/providers/cart_provider.dart';
+import 'package:coffee_shop/models/models.dart';
+import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/screens/product_detail/product_detail_screen.dart';
 import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/color_theme.dart';
-import 'package:coffee_shop/values/function.dart';
-import 'package:coffee_shop/values/size_config.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/discount_badge.dart';
 import 'package:coffee_shop/widgets/rounded_container.dart';
 import 'package:flutter/material.dart';

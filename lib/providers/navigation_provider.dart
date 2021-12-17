@@ -1,13 +1,4 @@
-import 'package:coffee_shop/screens/home/home_screen.dart';
-import 'package:coffee_shop/screens/more/more_screen.dart';
-import 'package:coffee_shop/screens/product/product_screen.dart';
-import 'package:coffee_shop/screens/voucher/voucher_screen.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/color_theme.dart';
-import 'package:coffee_shop/widgets/pop_up_notify.dart';
-import 'package:coffee_shop/widgets/rounded_button.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+part of providers;
 
 class NavigationProvider with ChangeNotifier {
   int _curentIndex = 0;

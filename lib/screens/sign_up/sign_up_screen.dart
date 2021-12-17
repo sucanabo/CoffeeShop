@@ -1,4 +1,4 @@
-import 'package:coffee_shop/providers/firebase_provider.dart';
+import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

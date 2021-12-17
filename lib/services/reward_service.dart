@@ -1,18 +1,16 @@
 part of services;
-
-//get all category
-Future<ApiResponse> getCategories() async {
+Future<ApiResponse> getAllReward() async {
   ApiResponse apiResponse = ApiResponse();
   try {
     String token = await getToken();
-    final response = await http.get(Uri.parse(categoriesURL), headers: {
+    final response = await http.get(Uri.parse(rewardsURL), headers: {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token'
     });
     switch (response.statusCode) {
       case 200:
-        apiResponse.data = jsonDecode(response.body)['categories']
-            .map((c) => CategoryModel.fromJson(c))
+        apiResponse.data = jsonDecode(response.body)['rewards']
+            .map((v) => RewardModel.fromJson(v))
             .toList();
         apiResponse.data as List<dynamic>;
         break;
@@ -25,7 +23,7 @@ Future<ApiResponse> getCategories() async {
     }
   } catch (e) {
     apiResponse.error = serverError;
+    print('error reward');
   }
-
   return apiResponse;
 }

@@ -1,5 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+part of providers;
 
 class LanguageProvider extends ChangeNotifier {
   Locale _locale;

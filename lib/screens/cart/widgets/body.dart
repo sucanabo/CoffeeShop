@@ -1,12 +1,9 @@
-import 'package:coffee_shop/models/cart_item.dart';
-import 'package:coffee_shop/providers/cart_provider.dart';
-import 'package:coffee_shop/providers/navigation_provider.dart';
-import 'package:coffee_shop/res.dart';
+import 'package:coffee_shop/models/models.dart';
+import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/screens/product/product_screen.dart';
 import 'package:coffee_shop/screens/product_detail/product_detail_screen.dart';
 import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/color_theme.dart';
-import 'package:coffee_shop/values/size_config.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/cart_item.dart';
 import 'package:coffee_shop/widgets/hint.dart';
 import 'package:coffee_shop/widgets/pill_button.dart';

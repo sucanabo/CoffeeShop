@@ -1,3 +1,4 @@
+part of values;
 const String appName = 'Kofeeholic';
 
 //pref key

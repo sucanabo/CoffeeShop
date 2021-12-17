@@ -1,4 +1,5 @@
-import 'package:coffee_shop/models/notification.dart';
+import 'package:coffee_shop/models/models.dart';
+
 import 'package:coffee_shop/screens/notification/notification_detail_screen.dart';
 import 'package:coffee_shop/screens/notification/widgets/notification_item.dart';
 import 'package:coffee_shop/widgets/loading.dart';

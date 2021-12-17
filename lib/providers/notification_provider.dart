@@ -1,11 +1,4 @@
-import 'dart:io';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:rxdart/rxdart.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of providers;
 class FirebaseNotifications {
   FirebaseMessaging _messaging;
   BuildContext myContext;

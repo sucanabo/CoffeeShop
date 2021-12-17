@@ -2,7 +2,7 @@
 //
 //     final tomtomRoutes = tomtomRoutesFromJson(jsonString);
 
-import 'dart:convert';
+part of models;
 
 TomtomRoutes tomtomRoutesFromJson(String str) => TomtomRoutes.fromJson(json.decode(str));
 

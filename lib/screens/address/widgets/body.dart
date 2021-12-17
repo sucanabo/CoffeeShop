@@ -1,10 +1,9 @@
-import 'package:coffee_shop/providers/auth_provider.dart';
+import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/screens/address/widgets/address_detail.dart';
 import 'package:coffee_shop/screens/address/widgets/address_item.dart';
 import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/color_theme.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
-
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:provider/provider.dart';

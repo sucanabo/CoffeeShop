@@ -1,15 +1,10 @@
-import 'package:coffee_shop/models/transaction.dart';
-import 'package:coffee_shop/res.dart';
-import 'package:coffee_shop/values/color_theme.dart';
-import 'package:coffee_shop/values/size_config.dart';
-import 'package:coffee_shop/values/styles.dart';
+import 'package:coffee_shop/models/models.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/rounded_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:coffee_shop/values/function.dart';
-
 import '../order_detail.dart';
 
 class Transaction extends StatelessWidget {

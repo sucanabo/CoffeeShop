@@ -1,6 +1,4 @@
-import 'package:coffee_shop/models/product.dart';
-import 'package:flutter/material.dart';
-
+part of models;
 class CartItemModel {
   final String key;
   final ProductModel product;

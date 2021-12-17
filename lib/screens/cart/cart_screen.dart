@@ -1,4 +1,4 @@
-import 'package:coffee_shop/providers/cart_provider.dart';
+import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/screens/cart/widgets/cart_bottom_sheet.dart';
 import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:provider/provider.dart';

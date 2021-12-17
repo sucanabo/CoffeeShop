@@ -1,9 +1,9 @@
-import 'dart:convert';
+part of models;
 
-VietmapLocationSuggestion locationSuggestionFromJson(String str) =>
+VietmapLocationSuggestion ttlocationSuggestionFromJson(String str) =>
     VietmapLocationSuggestion.fromJson(json.decode(str));
 
-String locationSuggestionToJson(VietmapLocationSuggestion data) =>
+String ttlocationSuggestionToJson(VietmapLocationSuggestion data) =>
     json.encode(data.toJson());
 
 class VietmapLocationSuggestion {
@@ -16,7 +16,7 @@ class VietmapLocationSuggestion {
   });
 
   final String type;
-  final Geometry geometry;
+  final VMGeometry geometry;
   final Properties properties;
   final List<double> bbox;
   final String id;
@@ -26,7 +26,7 @@ class VietmapLocationSuggestion {
         type: json["type"] == null ? null : json["type"],
         geometry: json["geometry"] == null
             ? null
-            : Geometry.fromJson(json["geometry"]),
+            : VMGeometry.fromJson(json["geometry"]),
         properties: json["properties"] == null
             ? null
             : Properties.fromJson(json["properties"]),
@@ -45,8 +45,8 @@ class VietmapLocationSuggestion {
       };
 }
 
-class Geometry {
-  Geometry({
+class VMGeometry {
+  VMGeometry({
     this.type,
     this.coordinates,
   });
@@ -54,7 +54,7 @@ class Geometry {
   final String type;
   final List<double> coordinates;
 
-  factory Geometry.fromJson(Map<String, dynamic> json) => Geometry(
+  factory VMGeometry.fromJson(Map<String, dynamic> json) => VMGeometry(
         type: json["type"] == null ? null : json["type"],
         coordinates: json["coordinates"] == null
             ? null

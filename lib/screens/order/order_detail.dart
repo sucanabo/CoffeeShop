@@ -1,17 +1,8 @@
-import 'package:coffee_shop/models/api_response.dart';
-import 'package:coffee_shop/models/product.dart';
-import 'package:coffee_shop/models/transaction.dart';
-import 'package:coffee_shop/providers/category_provider.dart';
-import 'package:coffee_shop/providers/product_provider.dart';
-import 'package:coffee_shop/services/category_service.dart';
-import 'package:coffee_shop/services/product_service.dart';
-import 'package:coffee_shop/services/user_service.dart';
+import 'package:coffee_shop/models/models.dart';
+import 'package:coffee_shop/providers/provider.dart';
+import 'package:coffee_shop/services/services.dart';
 import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/api_end_point.dart';
-import 'package:coffee_shop/values/color_theme.dart';
-import 'package:coffee_shop/values/function.dart';
-import 'package:coffee_shop/values/size_config.dart';
-import 'package:coffee_shop/values/styles.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:coffee_shop/widgets/divider_custom.dart';
 import 'package:coffee_shop/widgets/loading.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
@@ -186,7 +177,7 @@ class _OrderDetailState extends State<OrderDetail> {
       return productProvider.getProductById(id);
     }
 
-    String getAddOn(int productId, ItemDetail itemDetail) {
+    String getAddOn(int productId, TransactionItemDetail itemDetail) {
       final ProductModel product = getProduct(productId);
 
       String addOnStr = '';

@@ -1,4 +1,4 @@
-import 'package:coffee_shop/res.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AppInformation {

@@ -1,14 +1,4 @@
-import 'dart:convert';
-
-import 'package:coffee_shop/models/api_response.dart';
-import 'package:coffee_shop/models/cart_item.dart';
-import 'package:coffee_shop/models/order_request.dart';
-import 'package:coffee_shop/models/transaction.dart';
-import 'package:coffee_shop/services/user_service.dart';
-import 'package:coffee_shop/values/api_end_point.dart';
-import 'package:coffee_shop/values/function.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:http/http.dart' as http;
+part of services;
 
 Future<ApiResponse> createOrder(
     {int addressId,

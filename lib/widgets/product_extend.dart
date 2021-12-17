@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:coffee_shop/values/color_theme.dart';
-import 'package:coffee_shop/values/function.dart';
+import 'package:coffee_shop/values/values.dart';
 
 class ProductExtend extends StatefulWidget {
   const ProductExtend({

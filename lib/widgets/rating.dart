@@ -1,4 +1,4 @@
-import 'package:coffee_shop/values/size_config.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:flutter/material.dart';
 
 class Rating extends StatefulWidget {

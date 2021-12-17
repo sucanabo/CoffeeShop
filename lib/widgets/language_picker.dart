@@ -1,4 +1,4 @@
-import 'package:coffee_shop/providers/language_provider.dart';
+import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/untils/languages.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

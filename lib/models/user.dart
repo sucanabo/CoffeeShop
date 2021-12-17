@@ -1,3 +1,4 @@
+part of models;
 class UserModel {
   int id;
   String displayName;

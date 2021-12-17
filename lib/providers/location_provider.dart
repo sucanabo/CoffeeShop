@@ -1,12 +1,4 @@
-import 'package:coffee_shop/services/location_service.dart';
-import 'package:coffee_shop/translations/locale_keys.g.dart';
-import 'package:coffee_shop/values/function.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:easy_localization/easy_localization.dart';
+part of providers;
 
 class LocationProvider with ChangeNotifier {
   final geolocatorService = GeolocatorService();

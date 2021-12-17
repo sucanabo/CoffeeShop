@@ -1,4 +1,4 @@
-import 'package:coffee_shop/models/rating.dart';
+part of models;
 
 class ProductModel {
   int id;

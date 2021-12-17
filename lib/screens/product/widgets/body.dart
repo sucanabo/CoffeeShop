@@ -1,5 +1,4 @@
-import 'package:coffee_shop/providers/category_provider.dart';
-import 'package:coffee_shop/providers/product_provider.dart';
+import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/screens/product/widgets/product_header.dart';
 import 'package:coffee_shop/screens/product/widgets/tab_category.dart';
 import 'package:coffee_shop/widgets/product.dart';

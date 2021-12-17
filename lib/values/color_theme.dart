@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of values;
 
 class AppColors {
   static Color redColor = Colors.red[500];

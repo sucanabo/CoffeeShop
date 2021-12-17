@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-
+part of providers;
 class CategoryProvider with ChangeNotifier {
   List<dynamic> _categoryList = [];
 

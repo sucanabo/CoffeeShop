@@ -1,7 +1,5 @@
-import 'package:coffee_shop/values/color_theme.dart';
-import 'package:flutter/material.dart';
-import 'size_config.dart';
 
+part of values;
 class AppStyles{
   static const double textSize14 = 14;
   static const double textSize15 = 15;

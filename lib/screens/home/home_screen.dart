@@ -1,18 +1,14 @@
-import 'package:coffee_shop/models/api_response.dart';
-import 'package:coffee_shop/providers/category_provider.dart';
-import 'package:coffee_shop/providers/product_provider.dart';
-import 'package:coffee_shop/services/category_service.dart';
-import 'package:coffee_shop/services/product_service.dart';
-import 'package:coffee_shop/services/user_service.dart';
+import 'package:coffee_shop/models/models.dart';
+import 'package:coffee_shop/providers/provider.dart';
+import 'package:coffee_shop/services/services.dart';
 import 'package:coffee_shop/widgets/loading.dart';
 import 'package:coffee_shop/widgets/my_appbar.dart';
 import 'package:coffee_shop/widgets/screen_body.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import './widgets/body.dart';
-import '../../values/api_end_point.dart';
+import 'package:coffee_shop/values/values.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = '/home';

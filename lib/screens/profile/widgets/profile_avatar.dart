@@ -1,10 +1,7 @@
 
 import 'dart:io';
-
-import 'package:coffee_shop/providers/auth_provider.dart';
-import 'package:coffee_shop/res.dart';
-import 'package:coffee_shop/values/color_theme.dart';
-import 'package:coffee_shop/values/function.dart';
+import 'package:coffee_shop/providers/provider.dart';
+import 'package:coffee_shop/values/values.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';

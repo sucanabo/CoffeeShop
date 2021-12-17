@@ -1,23 +1,4 @@
-import 'dart:convert';
-
-import 'package:coffee_shop/models/address.dart';
-import 'package:coffee_shop/models/api_response.dart';
-import 'package:coffee_shop/models/user.dart';
-import 'package:coffee_shop/providers/auth_provider.dart';
-import 'package:coffee_shop/providers/cart_provider.dart';
-import 'package:coffee_shop/providers/category_provider.dart';
-import 'package:coffee_shop/providers/firebase_provider.dart';
-import 'package:coffee_shop/providers/navigation_provider.dart';
-import 'package:coffee_shop/providers/product_provider.dart';
-import 'package:coffee_shop/providers/voucher_provider.dart';
-import 'package:coffee_shop/screens/sign_in/sign_in_screen.dart';
-import 'package:coffee_shop/values/api_end_point.dart';
-import 'package:coffee_shop/values/strings.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+part of services;
 
 //checkphone
 Future<bool> isPhoneExisted(String phone) async {
@@ -175,7 +156,7 @@ Future<ApiResponse> getUserInformation() async {
   return apiResponse;
 }
 
-Future<ApiResponse> updateUser(
+Future<ApiResponse> updateUserRequest(
     {String email,
     String password,
     String displayName,
@@ -211,7 +192,7 @@ Future<ApiResponse> updateUser(
   return apiResponse;
 }
 
-Future<ApiResponse> changePassword({String oldPwd, String newPwd}) async {
+Future<ApiResponse> changePasswordRequest({String oldPwd, String newPwd}) async {
   ApiResponse apiResponse = ApiResponse();
   try {
     String token = await getToken();
@@ -243,7 +224,7 @@ Future<ApiResponse> changePassword({String oldPwd, String newPwd}) async {
 }
 
 //crate address
-Future<ApiResponse> createAddress({AddressModel address}) async {
+Future<ApiResponse> createAddressRequest({AddressModel address}) async {
   ApiResponse apiResponse = ApiResponse();
   try {
     print(address.toJson());
@@ -274,7 +255,7 @@ Future<ApiResponse> createAddress({AddressModel address}) async {
 }
 
 //update address
-Future<ApiResponse> updateAddress({AddressModel address, int id}) async {
+Future<ApiResponse> updateAddressRequest({AddressModel address, int id}) async {
   ApiResponse apiResponse = ApiResponse();
   try {
     String token = await getToken();
@@ -310,7 +291,7 @@ Future<ApiResponse> updateAddress({AddressModel address, int id}) async {
 }
 
 //delete user address
-Future<ApiResponse> deleteAddress(int id) async {
+Future<ApiResponse> deleteAddressRequest(int id) async {
   ApiResponse apiResponse = ApiResponse();
   print('$addressesURL/$id/delete');
   try {

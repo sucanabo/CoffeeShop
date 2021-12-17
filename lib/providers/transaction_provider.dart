@@ -1,5 +1,4 @@
-import 'package:coffee_shop/models/transaction.dart';
-import 'package:flutter/cupertino.dart';
+part of providers;
 
 class TransactionProvider with ChangeNotifier {
   List<TransactionModel> _transactions = [];
