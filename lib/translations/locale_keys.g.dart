@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
-part of translations;
+
 abstract class  LocaleKeys {
   static const hi_text = 'hi_text';
   static const update_success = 'update_success';
@@ -229,5 +229,13 @@ abstract class  LocaleKeys {
   static const cate_ice_blended = 'cate_ice_blended';
   static const are_your_sure = 'are_your_sure';
   static const exit_app = 'exit_app';
+  static const dont_have_enough_point = 'dont_have_enough_point';
+  static const reward_move_to_voucher = 'reward_move_to_voucher';
+  static const server_error = 'server_error';
+  static const unauthorized = 'unauthorized';
+  static const some_thing_went_wrong = 'some_thing_went_wrong';
+  static const verify_complete = 'verify_complete';
+  static const total_point = 'total_point';
+  static const current_point = 'current_point';
 
 }

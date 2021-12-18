@@ -2,7 +2,9 @@
 
 // ignore_for_file: prefer_single_quotes
 
-part of translations;
+import 'dart:ui';
+
+import 'package:easy_localization/easy_localization.dart' show AssetLoader;
 
 class CodegenLoader extends AssetLoader{
   const CodegenLoader();
@@ -251,7 +253,15 @@ class CodegenLoader extends AssetLoader{
   "cate_tea": "Tea",
   "cate_ice_blended": "Ice blended",
   "are_your_sure": "Are your sure?",
-  "exit_app": "Do you want to exit an App"
+  "exit_app": "Do you want to exit an App",
+  "dont_have_enough_point": "You dont't have enough point to get reward.",
+  "reward_move_to_voucher": "Reward has been moved to your voucher.",
+  "server_error": "Server Error.",
+  "unauthorized": "Unauthorized.",
+  "some_thing_went_wrong": "Some thing went wrong.",
+  "verify_complete": "Verification completed.",
+  "total_point": "Total point: ",
+  "current_point": "Current point: "
 };
 static const Map<String,dynamic> vi_VN = {
   "hi_text": "Xin chào",
@@ -492,7 +502,15 @@ static const Map<String,dynamic> vi_VN = {
   "cate_tea": "Trà",
   "cate_ice_blended": "Đá xay",
   "are_your_sure": "Bạn có chắc?",
-  "exit_app": "Bạn muốn rời khỏi ứng dụng"
+  "exit_app": "Bạn muốn rời khỏi ứng dụng",
+  "dont_have_enough_point": "Bạn chưa đủ điểm để đổi phần quà này.",
+  "reward_move_to_voucher": "Phần quà đã được chuyển vào Voucher của bạn.",
+  "server_error": "Lỗi hệ thống.",
+  "unauthorized": "Không có quyền truy cập.",
+  "some_thing_went_wrong": "Có gì đã không ổn xảy ra.",
+  "verify_complete": "Xác thực thành công.",
+  "total_point": "Điểm tổng: ",
+  "current_point": "Điểm hiện tại: "
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en_US": en_US, "vi_VN": vi_VN};
 }

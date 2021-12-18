@@ -38,38 +38,74 @@ class AccumulateInfoCard extends StatelessWidget {
                         bottomRight: Radius.circular(16.0)),
                     gradient: AppColors.primaryGradientColor),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
-                      '${user.displayName}',
-                      style: TextStyle(
-                          fontSize: 24.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${user.displayName}',
+                          style: TextStyle(
+                              fontSize: 24.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(width: 5.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.eco_outlined,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              userProvider.getLevelString(),
+                              style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                     SizedBox(height: 5.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.eco_outlined,
-                          color: Colors.white,
-                        ),
                         Text(
-                          userProvider.getLevelString(),
+                          LocaleKeys.current_point.tr(),
                           style: TextStyle(
-                              fontSize: 16.0,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600),
+                            color: AppColors.whiteColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
+                        Text('${user.point} ${LocaleKeys.point.tr()}',
+                            style: TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600)),
                       ],
                     ),
-                    SizedBox(height: 5.0),
-                    Text('${user.point} ${LocaleKeys.point.tr()}',
-                        style: TextStyle(
-                            fontSize: 18.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600))
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          LocaleKeys.total_point.tr(),
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text('${user.totalPoint} ${LocaleKeys.point.tr()}',
+                            style: TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600)),
+                      ],
+                    ),
                   ],
                 ),
               )

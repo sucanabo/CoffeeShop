@@ -154,7 +154,7 @@ class AuthProvider with ChangeNotifier {
 
   int caculateNextLevel() {
     for (var pts in levelPoint.values) {
-      if (pts > _user.point) return pts - _user.point;
+      if (pts > _user.totalPoint) return pts - _user.totalPoint;
     }
     return 0;
   }
@@ -166,7 +166,7 @@ class AuthProvider with ChangeNotifier {
       if (flag == true) {
         return oldKey;
       }
-      if (_user.point <= levelPoint[key]) {
+      if (_user.totalPoint <= levelPoint[key]) {
         if (isNext == true) {
           flag = true;
         } else {

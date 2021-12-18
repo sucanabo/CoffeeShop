@@ -83,31 +83,31 @@ class _ForgotPasswordBodyState extends State<ForgotPasswordBody> {
             SizedBox(height: getHeight(40)),
             SignButton(text: LocaleKeys.sign_in.tr(), onSubmit: () {}),
             SizedBox(height: getHeight(40)),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(LocaleKeys.not_receive_email.tr()),
-                TextButton(
-                  onPressed: () {
-                    // Navigator.pushNamed(context, SignUpScreen.routeName);
-                  },
-                  style: TextButton.styleFrom(
-                      alignment: Alignment.topCenter, padding: EdgeInsets.zero),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(LocaleKeys.send_otp.tr(),
-                            style:
-                                TextStyle(color: AppColors.primaryMediumColor)),
-                        Icon(
-                          Icons.chevron_right_rounded,
-                          color: AppColors.primaryMediumColor,
-                        )
-                      ]),
-                ),
-              ],
-            ),
+            // Column(
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Text(LocaleKeys.not_receive_email.tr()),
+            //     TextButton(
+            //       onPressed: () {
+            //         // Navigator.pushNamed(context, SignUpScreen.routeName);
+            //       },
+            //       style: TextButton.styleFrom(
+            //           alignment: Alignment.topCenter, padding: EdgeInsets.zero),
+            //       child: Row(
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children: [
+            //             Text(LocaleKeys.send_otp.tr(),
+            //                 style:
+            //                     TextStyle(color: AppColors.primaryMediumColor)),
+            //             Icon(
+            //               Icons.chevron_right_rounded,
+            //               color: AppColors.primaryMediumColor,
+            //             )
+            //           ]),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

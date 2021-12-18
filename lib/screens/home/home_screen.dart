@@ -9,6 +9,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
 //Get all product and category
   Future<void> retriveData() async {
     ProductProvider productProvider =

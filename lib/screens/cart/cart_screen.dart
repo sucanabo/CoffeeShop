@@ -16,6 +16,6 @@ class _CartScreenState extends State<CartScreen> {
         appBar: AppBar(
           title: Text(LocaleKeys.cart.tr()),
         ),
-        body: AddressBody());
+        body: CartBody());
   }
 }

@@ -3,8 +3,8 @@ library widgets;
 import 'package:coffee_shop/models/models.dart';
 import 'package:coffee_shop/providers/provider.dart';
 import 'package:coffee_shop/screens/screens.dart';
-import 'package:coffee_shop/translations/translations.dart';
-
+import 'package:coffee_shop/services/services.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:coffee_shop/untils/untils.dart';
 import 'package:coffee_shop/values/values.dart';
 import 'package:easy_localization/easy_localization.dart';

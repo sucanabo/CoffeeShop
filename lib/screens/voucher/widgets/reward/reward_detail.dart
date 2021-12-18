@@ -1,4 +1,5 @@
 part of screens;
+
 class RewardDetail extends StatelessWidget {
   final RewardModel reward;
   RewardDetail({this.reward});

@@ -1,7 +1,10 @@
 part of widgets;
 
 Widget openBottomSheet(
-    {@required context, @required Widget child, rewardPoint}) {
+    {@required context,
+    @required Widget child,
+    rewardPoint,
+    Function onPressed}) {
   return DraggableScrollableSheet(
     initialChildSize: 0.956,
     maxChildSize: 0.956,
@@ -27,13 +30,13 @@ Widget openBottomSheet(
         Align(
             alignment: Alignment.topRight,
             child: CloseBottomSheet(context: context)),
-        if (rewardPoint != null) _buildRewardBottom(rewardPoint)
+        if (rewardPoint != null) _buildRewardBottom(rewardPoint, onPressed)
       ]),
     ),
   );
 }
 
-Align _buildRewardBottom(rewardPoint) {
+Align _buildRewardBottom(rewardPoint, Function onPressed) {
   return Align(
       alignment: Alignment.bottomCenter - Alignment(0, 0.05),
       child: Container(
@@ -62,7 +65,7 @@ Align _buildRewardBottom(rewardPoint) {
             SizedBox(
               width: SizeConfig.screenWidth * 0.3,
               child: PillButton(
-                onPressed: () {},
+                onPressed: onPressed,
                 child: Text(
                   LocaleKeys.redeem.tr(),
                   style: TextStyle(color: AppColors.primaryColor),

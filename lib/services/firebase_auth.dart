@@ -19,10 +19,10 @@ class FireBaseAuthService {
       phoneNumber: phoneNumber,
       timeout: timeout,
       verificationCompleted: (PhoneAuthCredential credential) async {
-        showToast('Verification completed.',toastLength: Toast.LENGTH_LONG);
+        showToast(LocaleKeys.verify_complete.tr(),toastLength: Toast.LENGTH_LONG);
       },
       verificationFailed: (FirebaseAuthException e) {
-        showToast(e.message ?? "The provided phone number is not valid.",toastLength: Toast.LENGTH_LONG);
+        showToast(e.message ?? LocaleKeys.phone_invalid.tr(),toastLength: Toast.LENGTH_LONG);
         verificationFailed();
       },
       codeSent: (String verificationId, int resendToken) async {

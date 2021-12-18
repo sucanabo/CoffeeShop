@@ -5,6 +5,62 @@ class RewardWidget extends StatelessWidget {
   final RewardModel reward;
   const RewardWidget({@required this.reward, this.isLarge = false});
 
+  Future showSheet(BuildContext context, size) {
+    return showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (context) => openBottomSheet(
+            onPressed: () => _redeemRewardPressed(context),
+            rewardPoint: reward.point,
+            context: context,
+            child: RewardDetail(reward: reward)));
+  }
+
+  _redeemRewardPressed(BuildContext context) async {
+    setLoading(context, loading: true);
+    final userProvider = Provider.of<AuthProvider>(context, listen: false);
+    final voucherProvider =
+        Provider.of<VoucherProvider>(context, listen: false);
+
+    if (userProvider.getUser.point < reward.point) {
+      showDialog(
+          context: context,
+          builder: (context) => PopUpNotify(
+                title: LocaleKeys.opps.tr().toUpperCase() + '!!!',
+                content: Text(LocaleKeys.dont_have_enough_point.tr()),
+                actions: [
+                  RoundedButton(
+                    title: LocaleKeys.ok.tr(),
+                    onPressed: () => Navigator.pop(context),
+                  )
+                ],
+              ));
+      return;
+    }
+    final bool result = await voucherProvider.redeemReward(reward.id);
+    if (result) {
+      ApiResponse response = await getUserInformation();
+      if (response.error == null) {
+        userProvider.setUser(response.data);
+        showDialog(
+            context: context,
+            builder: (context) => PopUpNotify(
+                  title: LocaleKeys.success.tr().toUpperCase() + '!!!',
+                  content: Text(LocaleKeys.reward_move_to_voucher.tr()),
+                  actions: [
+                    RoundedButton(
+                      title: LocaleKeys.ok.tr(),
+                      onPressed: () => Navigator.pop(context),
+                    )
+                  ],
+                ));
+      }
+    }
+
+    setLoading(context, loading: false);
+  }
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<AuthProvider>(context, listen: false);
@@ -172,16 +228,5 @@ class RewardWidget extends StatelessWidget {
         ),
       );
     }
-  }
-
-  Future showSheet(BuildContext context, size) {
-    return showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (context) => openBottomSheet(
-            rewardPoint: reward.point,
-            context: context,
-            child: RewardDetail(reward: reward)));
   }
 }

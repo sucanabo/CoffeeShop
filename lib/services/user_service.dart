@@ -192,7 +192,8 @@ Future<ApiResponse> updateUserRequest(
   return apiResponse;
 }
 
-Future<ApiResponse> changePasswordRequest({String oldPwd, String newPwd}) async {
+Future<ApiResponse> changePasswordRequest(
+    {String oldPwd, String newPwd}) async {
   ApiResponse apiResponse = ApiResponse();
   try {
     String token = await getToken();
@@ -401,7 +402,7 @@ Future<void> logout(BuildContext context) async {
   productProvider.setLoading(true);
   productProvider.setProductList([]);
   //user
-  authProvider.setUser(UserModel());
+
   authProvider.setAddressLoading(true);
   authProvider.setAddresses([]);
   //share pref
@@ -416,10 +417,10 @@ Future<void> logout(BuildContext context) async {
     pref.setBool(PrefKey.FACEBOOK_SIGN_IN, false);
   }
   return await pref.remove('token').then((value) {
-    Navigator.pushAndRemoveUntil(
-        context,
+    Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => SignInScreen()),
         (route) => false);
+    authProvider.setUser(UserModel());
     navigationProvider.clear();
   });
 }

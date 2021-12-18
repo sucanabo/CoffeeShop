@@ -237,5 +237,13 @@
   "cate_tea": "Tea",
   "cate_ice_blended": "Ice blended",
   "are_your_sure": "Are your sure?",
-  "exit_app": "Do you want to exit an App"
+  "exit_app": "Do you want to exit an App",
+  "dont_have_enough_point": "You dont't have enough point to get reward.",
+  "reward_move_to_voucher": "Reward has been moved to your voucher.",
+  "server_error": "Server Error.",
+  "unauthorized": "Unauthorized.",
+  "some_thing_went_wrong": "Some thing went wrong.",
+  "verify_complete": "Verification completed.",
+  "total_point": "Total point: ",
+  "current_point": "Current point: "
 }

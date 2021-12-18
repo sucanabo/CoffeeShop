@@ -2,7 +2,7 @@ library models;
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:coffee_shop/translations/translations.dart';
+import 'package:coffee_shop/translations/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'dart:convert';
 

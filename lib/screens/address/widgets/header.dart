@@ -21,7 +21,6 @@ class MoreScreenSliverDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    final userProvider = Provider.of<AuthProvider>(context, listen: false);
     return Stack(
       children: <Widget>[
         Image.asset(
@@ -47,6 +46,7 @@ class MoreScreenSliverDelegate extends SliverPersistentHeaderDelegate {
           left: MediaQuery.of(context).size.width / 2 - 50,
           child: Consumer<AuthProvider>(builder: (context, provider, child) {
             final UserModel user = provider.getUser;
+            if (user.id == null) return Container();
             return Column(
               children: [
                 Container(
@@ -83,7 +83,7 @@ class MoreScreenSliverDelegate extends SliverPersistentHeaderDelegate {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(userProvider.getLevelString(),
+                      Text(provider.getLevelString(),
                           style: TextStyle(
                               color: AppColors.textColor,
                               fontSize: 17,

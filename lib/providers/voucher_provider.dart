@@ -67,6 +67,15 @@ class VoucherProvider with ChangeNotifier {
     return false;
   }
 
+  Future<bool> redeemReward(int id) async {
+    ApiResponse response = await redeemRewardRequest(id);
+    if (response.error == null) {
+      fetchData();
+      return true;
+    }
+    return false;
+  }
+
   Future<String> fetchData() async {
     ApiResponse apiUserVoucher = await getAllUserVoucher();
     ApiResponse apiVoucher = await getAllVoucher();

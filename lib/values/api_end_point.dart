@@ -1,4 +1,5 @@
 part of values;
+
 //----------STRINGS----------
 const baseURL = '${AppInformation.baseURL}/api';
 //auth
@@ -40,6 +41,6 @@ String tomtomDistance(LatLng latlong1, LatLng latlong2) {
 }
 
 //----------ERROR----------
-const serverError = 'Server Error.';
-const unauthorized = 'Unauthorized.';
-const somethingWentWrong = 'Some thing went wrong, try again!';
+String serverError = LocaleKeys.server_error.tr();
+String unauthorized = LocaleKeys.unauthorized.tr();
+String somethingWentWrong = LocaleKeys.some_thing_went_wrong.tr();
