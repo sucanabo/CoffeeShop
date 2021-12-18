@@ -237,5 +237,6 @@ abstract class  LocaleKeys {
   static const verify_complete = 'verify_complete';
   static const total_point = 'total_point';
   static const current_point = 'current_point';
+  static const resend_again_in = 'resend_again_in';
 
 }

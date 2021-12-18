@@ -131,7 +131,7 @@ class CodegenLoader extends AssetLoader{
   "forgot_password": "Forgot password",
   "phone_invalid": "Phone provided invalid",
   "hint_please_checkmail": "Request has been send your email. Please check mail and enter new password.",
-  "hint_please_check_spam": "Please check inbox or spam:",
+  "hint_please_check_spam": "Please check inbox or spam",
   "resend_email": "Resend email",
   "sign_up": "Sign up",
   "sign_in": "Sign in",
@@ -261,7 +261,8 @@ class CodegenLoader extends AssetLoader{
   "some_thing_went_wrong": "Some thing went wrong.",
   "verify_complete": "Verification completed.",
   "total_point": "Total point: ",
-  "current_point": "Current point: "
+  "current_point": "Current point: ",
+  "resend_again_in": "Resend again in "
 };
 static const Map<String,dynamic> vi_VN = {
   "hi_text": "Xin chào",
@@ -380,7 +381,7 @@ static const Map<String,dynamic> vi_VN = {
   "forgot_password": "Quên mật khẩu",
   "phone_invalid": "Số điện thoại không hợp lệ",
   "hint_please_checkmail": "Yêu cầu đã được gửi đến email của bạn. Xin hãy kiểm tra và nhập lại mật khẩu mới.",
-  "hint_please_check_spam": "Xin hãy kiểm tra hộp tin nhắn hoặc spam:",
+  "hint_please_check_spam": "Xin hãy kiểm tra hộp tin nhắn hoặc spam",
   "resend_email": "Gửi mail lại",
   "sign_up": "Đăng ký",
   "sign_in": "Đăng nhập",
@@ -510,7 +511,8 @@ static const Map<String,dynamic> vi_VN = {
   "some_thing_went_wrong": "Có gì đã không ổn xảy ra.",
   "verify_complete": "Xác thực thành công.",
   "total_point": "Điểm tổng: ",
-  "current_point": "Điểm hiện tại: "
+  "current_point": "Điểm hiện tại: ",
+  "resend_again_in": "Gửi lại trong "
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en_US": en_US, "vi_VN": vi_VN};
 }

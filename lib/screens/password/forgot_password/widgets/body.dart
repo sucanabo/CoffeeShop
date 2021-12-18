@@ -9,6 +9,7 @@ class ForgotPasswordBody extends StatefulWidget {
 }
 
 class _ForgotPasswordBodyState extends State<ForgotPasswordBody> {
+  int startTimmer = 30;
   @override
   void initState() {
     super.initState();
@@ -18,7 +19,23 @@ class _ForgotPasswordBodyState extends State<ForgotPasswordBody> {
             toastLength: Toast.LENGTH_LONG);
   }
 
+  _startTimmer() {
+    const onSec = Duration(seconds: 1);
+    Timer timer = Timer.periodic(onSec, (timer) {
+      if (startTimmer == 0) {
+        setState(() {
+          timer.cancel();
+        });
+      } else {
+        setState(() {
+          startTimmer--;
+        });
+      }
+    });
+  }
+
   _sendMail(String phone) async {
+    _startTimmer();
     ApiResponse res = await sendMailReset(phone: phone);
     showToast(res.data, toastLength: Toast.LENGTH_LONG);
   }
@@ -41,9 +58,26 @@ class _ForgotPasswordBodyState extends State<ForgotPasswordBody> {
               Text(
                 LocaleKeys.hint_please_checkmail.tr(),
                 textAlign: TextAlign.center,
-              )
+              ),
+              SizedBox(height: SizeConfig.screenHeigh * 0.05),
+              if (startTimmer != 0)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(LocaleKeys.resend_again_in.tr(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 16.0)),
+                    Text(
+                      '00:$startTimmer',
+                      style: TextStyle(
+                          color: AppColors.redColor,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16.0),
+                    )
+                  ],
+                )
             ]),
-            SizedBox(height: SizeConfig.screenHeigh * 0.1),
+            SizedBox(height: SizeConfig.screenHeigh * 0.05),
             ForgotPassForm(),
             SizedBox(
               height: getHeight(40.0),
@@ -62,7 +96,7 @@ class _ForgotPasswordBodyState extends State<ForgotPasswordBody> {
                       SizedBox(
                         height: 10.0,
                       ),
-                      Text(hiddenEmail('sucanabo@gmail.com'))
+                      //Text(hiddenEmail('sucanabo@gmail.com'))
                     ],
                   ),
                 ),
@@ -72,7 +106,7 @@ class _ForgotPasswordBodyState extends State<ForgotPasswordBody> {
                     child: RoundedButton.outline(
                       title: LocaleKeys.resend_email.tr(),
                       fontSize: 14.0,
-                      onPressed: () => _sendMail,
+                      onPressed: startTimmer != 0 ? null : () => _sendMail,
                       color: AppColors.primaryColor,
                       textColor: AppColors.primaryColor,
                     ),

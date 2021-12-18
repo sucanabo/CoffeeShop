@@ -115,7 +115,7 @@
   "forgot_password": "Forgot password",
   "phone_invalid": "Phone provided invalid",
   "hint_please_checkmail": "Request has been send your email. Please check mail and enter new password.",
-  "hint_please_check_spam": "Please check inbox or spam:",
+  "hint_please_check_spam": "Please check inbox or spam",
   "resend_email": "Resend email",
   "sign_up": "Sign up",
   "sign_in": "Sign in",
@@ -245,5 +245,6 @@
   "some_thing_went_wrong": "Some thing went wrong.",
   "verify_complete": "Verification completed.",
   "total_point": "Total point: ",
-  "current_point": "Current point: "
+  "current_point": "Current point: ",
+  "resend_again_in": "Resend again in "
 }
