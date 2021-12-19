@@ -81,7 +81,7 @@ class Transaction extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '${model.status}'.capitalize(),
+                      '${model.status.tr()}'.capitalize(),
                       style: TextStyle(
                           fontSize: AppStyles.textSize14,
                           fontWeight: FontWeight.w500),

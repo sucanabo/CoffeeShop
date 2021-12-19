@@ -87,7 +87,6 @@
   "pending": "Peding",
   "cancelled": "Cancelled",
   "packing": "Packing",
-  "shipping_status": "Shipping",
   "success": "Success",
   "result_args": {
     "other": "{} results",
@@ -246,5 +245,7 @@
   "verify_complete": "Verification completed.",
   "total_point": "Total point: ",
   "current_point": "Current point: ",
-  "resend_again_in": "Resend again in "
+  "resend_again_in": "Resend again in ",
+  "shipping_cost": "Shipping",
+  "momo_wallet": "Momo wallet"
 }

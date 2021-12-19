@@ -207,7 +207,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
           Future<bool> success = provider.saveVoucher(this.widget.voucher.id);
           // ignore: unrelated_type_equality_checks
           if (success == false) {
-            showMess(context: context, text: LocaleKeys.save_voucher_fail.tr());
+            showToast(LocaleKeys.save_voucher_fail.tr());
             this.setState(() {
               this.isSaved = false;
             });

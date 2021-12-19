@@ -51,10 +51,10 @@ class _RatinDialogState extends State<RatingDialog> {
         Provider.of<ProductProvider>(context, listen: false)
             .setProductRating(productId: widget.productId, rating: newRating);
         Navigator.pop(widget.dialogContext);
-        showMess(
-            context: widget.pageContext, text: LocaleKeys.thank_for_rating.tr());
+        showToast(
+            LocaleKeys.thank_for_rating.tr());
       } else {
-        showMess(context: widget.pageContext, text: '${response.error}');
+        showToast('${response.error}');
       }
     }
   }

@@ -34,10 +34,10 @@ String convertVND(double price) {
   return NumberFormat.currency(locale: "vi", symbol: 'đ').format(price);
 }
 
-//show SnackBar Message
-void showMess({@required BuildContext context, @required String text}) {
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
-}
+// //show SnackBar Message
+// void showMess({@required BuildContext context, @required String text}) {
+//   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
+// }
 
 //Capital String
 extension StringExtension on String {
@@ -86,9 +86,9 @@ Widget greeting(String userName) {
 
 //copy clipboard
 void coppyClipBoard(String text, context) {
-  Clipboard.setData(ClipboardData(text: text)).then((value) => showMess(
-      text: LocaleKeys.copied_into_clipboard.tr(args: [text]),
-      context: context));
+  Clipboard.setData(ClipboardData(text: text)).then((value) => showToast(
+      LocaleKeys.copied_into_clipboard.tr(args: [text]),
+      toastLength: Toast.LENGTH_LONG));
 }
 
 //show Toast

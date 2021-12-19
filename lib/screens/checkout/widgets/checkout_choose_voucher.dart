@@ -34,7 +34,7 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
     if (result == null) {
       getVouchers();
     } else {
-      showMess(context: context, text: LocaleKeys.fetch_data_fail.tr());
+      showToast(LocaleKeys.fetch_data_fail.tr());
     }
     _vouchersProvider.setLoading(false);
   }
@@ -339,15 +339,11 @@ class _ChooseVoucherState extends State<ChooseVoucher> {
 
   void setDiscountVoucher(voucher) {
     if (voucher == _discountSelected) {
-      print('trung');
       setState(() {
         _discountSelected = null;
       });
       return;
-    } else {
-      print('khong trung');
     }
-    print('tiep tuc');
     if (_discountSelected != null) {
       if (_discountSelected.id == voucher.id) {
         setState(() {

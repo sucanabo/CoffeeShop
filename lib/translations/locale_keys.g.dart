@@ -83,7 +83,6 @@ abstract class  LocaleKeys {
   static const pending = 'pending';
   static const cancelled = 'cancelled';
   static const packing = 'packing';
-  static const shipping_status = 'shipping_status';
   static const success = 'success';
   static const result_args = 'result_args';
   static const no_more_result = 'no_more_result';
@@ -238,5 +237,7 @@ abstract class  LocaleKeys {
   static const total_point = 'total_point';
   static const current_point = 'current_point';
   static const resend_again_in = 'resend_again_in';
+  static const shipping_cost = 'shipping_cost';
+  static const momo_wallet = 'momo_wallet';
 
 }

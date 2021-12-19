@@ -58,11 +58,11 @@ class _AddressDetailState extends State<AddressDetail> {
                   (route) => false)
             });
       } else {
-        showMess(context: context, text: result);
+        showToast(result);
       }
     } else {
       Navigator.popUntil(context, ModalRoute.withName(AddressScreen.routeName));
-      showMess(context: context, text: LocaleKeys.delete_success.tr());
+      showToast(LocaleKeys.delete_success.tr());
     }
     setState(() {
       _loading = false;

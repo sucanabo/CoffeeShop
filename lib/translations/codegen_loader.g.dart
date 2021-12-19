@@ -103,7 +103,6 @@ class CodegenLoader extends AssetLoader{
   "pending": "Peding",
   "cancelled": "Cancelled",
   "packing": "Packing",
-  "shipping_status": "Shipping",
   "success": "Success",
   "result_args": {
     "other": "{} results",
@@ -262,7 +261,9 @@ class CodegenLoader extends AssetLoader{
   "verify_complete": "Verification completed.",
   "total_point": "Total point: ",
   "current_point": "Current point: ",
-  "resend_again_in": "Resend again in "
+  "resend_again_in": "Resend again in ",
+  "shipping_cost": "Shipping",
+  "momo_wallet": "Momo wallet"
 };
 static const Map<String,dynamic> vi_VN = {
   "hi_text": "Xin chào",
@@ -313,7 +314,7 @@ static const Map<String,dynamic> vi_VN = {
   "sumary": "Tổng tiền",
   "place_order": "Đặt hàng",
   "no_shipping_address": "Không có địa chỉ giao hàng",
-  "shipping": "Phí vận chuyển",
+  "shipping": "Đang vận chuyển",
   "voucher_discount": "Voucher giảm giá",
   "shipping_discount": "Phí vận chuyển giảm",
   "order_total": "Số tiền cần trả",
@@ -353,7 +354,6 @@ static const Map<String,dynamic> vi_VN = {
   "pending": "Chờ duyệt",
   "cancelled": "Đã hủy",
   "packing": "Đang gói hàng",
-  "shipping_status": "Đang vận chuyển",
   "success": "Thành công",
   "result_args": {
     "other": "{} kết quả",
@@ -512,7 +512,9 @@ static const Map<String,dynamic> vi_VN = {
   "verify_complete": "Xác thực thành công.",
   "total_point": "Điểm tổng: ",
   "current_point": "Điểm hiện tại: ",
-  "resend_again_in": "Gửi lại trong "
+  "resend_again_in": "Gửi lại trong ",
+  "shipping_cost": "Phí vận chuyển",
+  "momo_wallet": "Ví Momo"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en_US": en_US, "vi_VN": vi_VN};
 }

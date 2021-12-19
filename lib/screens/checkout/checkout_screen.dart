@@ -281,17 +281,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Mo Mo Wallet',
+                            LocaleKeys.momo_wallet.tr(),
                             style: TextStyle(fontSize: 16.0),
                           ),
                           SizedBox(height: 5.0),
-                          Text(
-                            '(84) 837.695.292',
-                            style: TextStyle(
-                                fontSize: 13.0,
-                                color: Colors.grey[800],
-                                letterSpacing: 1.05),
-                          ),
+                          if (_address != null)
+                            Text(
+                              '(84) ${_address.receiverPhone ?? ''}',
+                              style: TextStyle(
+                                  fontSize: 13.0,
+                                  color: Colors.grey[800],
+                                  letterSpacing: 1.05),
+                            ),
                         ],
                       ),
                     ))
@@ -407,7 +408,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       ]),
       TableRow(children: [
         Text(
-          LocaleKeys.shipping.tr(),
+          LocaleKeys.shipping_cost.tr(),
           style: TextStyle(),
         ),
         Text(

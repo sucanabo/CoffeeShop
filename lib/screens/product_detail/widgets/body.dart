@@ -4,7 +4,8 @@ class ProductDetailBody extends StatefulWidget {
   final ProductModel product;
   final bool cartEdit;
   final CartItemModel cartItem;
-  const ProductDetailBody({@required this.product, this.cartEdit, this.cartItem});
+  const ProductDetailBody(
+      {@required this.product, this.cartEdit, this.cartItem});
 
   @override
   _ProductDetailBodyState createState() => _ProductDetailBodyState();
@@ -80,7 +81,8 @@ class _ProductDetailBodyState extends State<ProductDetailBody> {
         price: _totalPrice,
         productExtend: _productExtend);
     Provider.of<CartProvider>(context, listen: false).editItem(instance);
-    showMess(context: context, text: 'Edit item success.');
+    showToast(
+        '${LocaleKeys.edit_product.tr()} ${LocaleKeys.success.tr().toLowerCase()}');
   }
 
   @override

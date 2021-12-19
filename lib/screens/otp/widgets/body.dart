@@ -27,7 +27,7 @@ class _OTPBodyState extends State<OTPBody> {
   @override
   void dispose() {
     timer.cancel();
-    _otpController.dispose();
+    if (!mounted) _otpController.dispose();
     super.dispose();
   }
 
@@ -37,7 +37,6 @@ class _OTPBodyState extends State<OTPBody> {
     });
     String convertPhone =
         widget.user.phone.toString().trim().replaceRange(0, 1, '+84');
-    print(convertPhone);
     FireBaseAuthService.sendOTP(
       phoneNumber: convertPhone,
       verificationFailed: () {},

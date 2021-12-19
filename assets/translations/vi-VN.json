@@ -47,7 +47,7 @@
   "sumary": "Tổng tiền",
   "place_order": "Đặt hàng",
   "no_shipping_address": "Không có địa chỉ giao hàng",
-  "shipping": "Phí vận chuyển",
+  "shipping": "Đang vận chuyển",
   "voucher_discount": "Voucher giảm giá",
   "shipping_discount": "Phí vận chuyển giảm",
   "order_total": "Số tiền cần trả",
@@ -87,7 +87,6 @@
   "pending": "Chờ duyệt",
   "cancelled": "Đã hủy",
   "packing": "Đang gói hàng",
-  "shipping_status": "Đang vận chuyển",
   "success": "Thành công",
   "result_args": {
     "other": "{} kết quả",
@@ -246,5 +245,7 @@
   "verify_complete": "Xác thực thành công.",
   "total_point": "Điểm tổng: ",
   "current_point": "Điểm hiện tại: ",
-  "resend_again_in": "Gửi lại trong "
+  "resend_again_in": "Gửi lại trong ",
+  "shipping_cost": "Phí vận chuyển",
+  "momo_wallet": "Ví Momo"
 }

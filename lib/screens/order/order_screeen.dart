@@ -13,11 +13,19 @@ class _OrderScreenState extends State<OrderScreen>
   TabController filterTabController;
   List<String> transactionStatus = [
     '',
-    'pending'.tr(),
-    'cancelled'.tr(),
-    'packing'.tr(),
-    'shipping'.tr(),
-    'success'.tr(),
+    'pending',
+    'cancelled',
+    'packing',
+    'shipping',
+    'success',
+  ];
+  List<String> transactionStatusDisplay = [
+    '',
+    LocaleKeys.pending.tr(),
+    LocaleKeys.cancelled.tr(),
+    LocaleKeys.packing.tr(),
+    LocaleKeys.shipping.tr(),
+    LocaleKeys.success.tr(),
   ];
   int tabSelected = 0;
   int page = 1;
@@ -109,8 +117,8 @@ class _OrderScreenState extends State<OrderScreen>
               },
               indicator: const BoxDecoration(),
               unselectedLabelColor: AppColors.blackColor.withOpacity(0.6),
-              tabs: List.generate(transactionStatus.length,
-                  (index) => _buidTab(transactionStatus[index], index)),
+              tabs: List.generate(transactionStatusDisplay.length,
+                  (index) => _buidTab(transactionStatusDisplay[index], index)),
             ),
           ),
           SizedBox(height: getHeight(20.0)),

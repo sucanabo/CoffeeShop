@@ -21,7 +21,7 @@ class _ForgotPasswordBodyState extends State<ForgotPasswordBody> {
 
   _startTimmer() {
     const onSec = Duration(seconds: 1);
-    Timer timer = Timer.periodic(onSec, (timer) {
+    Timer.periodic(onSec, (timer) {
       if (startTimmer == 0) {
         setState(() {
           timer.cancel();

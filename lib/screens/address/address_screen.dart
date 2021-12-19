@@ -18,7 +18,7 @@ class _AddressScreenState extends State<AddressScreen> {
       if (result == unauthorized) {
         logout(context);
       } else {
-        showMess(context: context, text: result);
+        showToast(result);
       }
     }
     setState(() {
