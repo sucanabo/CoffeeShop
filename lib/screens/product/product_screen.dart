@@ -14,13 +14,14 @@ class _ProductScreenState extends State<ProductScreen> {
         Provider.of<ProductProvider>(context, listen: false);
     CategoryProvider categoryProvider =
         Provider.of<CategoryProvider>(context, listen: false);
+
     if (!refresh)
       return;
     else {
       productProvider.setLoading(true);
     }
 
-    if (productProvider.isLoading == true && refresh) {
+    if (productProvider.isLoading && refresh) {
       ApiResponse productResponse = await getProducts();
       ApiResponse categoryResponse = await getCategories();
 

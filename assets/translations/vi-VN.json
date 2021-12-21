@@ -92,7 +92,8 @@
     "other": "{} kết quả",
     "many": "{} kết quả",
     "zero": "Không có kết quả nào",
-    "one": "{} kết quả"
+    "one": "{} kết quả",
+    "two": "{} kết quả"
   },
   "no_more_result": "Không còn kết quả nào nữa",
   "all": "Tất cả",
@@ -247,5 +248,6 @@
   "current_point": "Điểm hiện tại: ",
   "resend_again_in": "Gửi lại trong ",
   "shipping_cost": "Phí vận chuyển",
-  "momo_wallet": "Ví Momo"
+  "momo_wallet": "Ví Momo",
+  "cash": "tiền mặt"
 }

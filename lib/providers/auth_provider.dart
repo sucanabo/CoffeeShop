@@ -184,7 +184,6 @@ class AuthProvider with ChangeNotifier {
       SharedPreferences pref = await SharedPreferences.getInstance();
       final UserModel user = response.data as UserModel;
       setUser(user);
-
       pref.setString(PrefKey.TOKEN, user.token ?? '');
       pref.setInt(PrefKey.ID, user.id ?? 0);
       return null;

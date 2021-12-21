@@ -28,9 +28,7 @@ Future<ApiResponse> loginPhone(String phone, String password) async {
     print(response.statusCode);
     switch (response.statusCode) {
       case 200:
-        print(response.body);
         apiResponse.data = UserModel.fromJson(jsonDecode(response.body));
-        print(apiResponse.data);
         break;
       case 422:
         final errors = jsonDecode(response.body)['errors'];

@@ -7,7 +7,8 @@ class ProductBody extends StatefulWidget {
   _ProductBodyState createState() => _ProductBodyState();
 }
 
-class _ProductBodyState extends State<ProductBody> with TickerProviderStateMixin {
+class _ProductBodyState extends State<ProductBody>
+    with TickerProviderStateMixin {
   TabController _drinkTabController;
   TabController _foodTabController;
   int _indexTab;
@@ -37,6 +38,7 @@ class _ProductBodyState extends State<ProductBody> with TickerProviderStateMixin
     _drinkTabController = TabController(vsync: this, length: _drinkCate.length);
     _foodTabController = TabController(vsync: this, length: _foodCate.length);
   }
+
   void setTabActive() {}
   @override
   Widget build(BuildContext context) {

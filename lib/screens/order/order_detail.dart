@@ -1,4 +1,5 @@
 part of screens;
+
 class OrderDetail extends StatefulWidget {
   const OrderDetail({@required this.model});
   final TransactionModel model;
@@ -83,7 +84,7 @@ class _OrderDetailState extends State<OrderDetail> {
                       _buildRow(
                           isLarge: true,
                           textLeft: LocaleKeys.payment_by.tr(),
-                          textRight: '${widget.model.type.capitalize()}'),
+                          textRight: '${widget.model.type.tr().capitalize()}'),
                       DividerCustom(
                         height: 40.0,
                       ),
@@ -91,7 +92,7 @@ class _OrderDetailState extends State<OrderDetail> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            flex: 3,
+                            flex: 4,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -114,7 +115,7 @@ class _OrderDetailState extends State<OrderDetail> {
                             ),
                           ),
                           Expanded(
-                            flex: 7,
+                            flex: 6,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -237,7 +238,6 @@ class _OrderDetailState extends State<OrderDetail> {
                         )
                       ],
                     )))
-        : Text(
-            LocaleKeys.can_load_order_item.tr());
+        : Text(LocaleKeys.can_load_order_item.tr());
   }
 }

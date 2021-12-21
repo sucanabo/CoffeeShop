@@ -73,7 +73,7 @@ class Transaction extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${convertVND(double.parse(model.order.grandtotal))} (${model.type})',
+                  '${convertVND(double.parse(model.order.grandtotal))}',
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: AppStyles.textSize14),

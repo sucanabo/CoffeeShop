@@ -239,5 +239,6 @@ abstract class  LocaleKeys {
   static const resend_again_in = 'resend_again_in';
   static const shipping_cost = 'shipping_cost';
   static const momo_wallet = 'momo_wallet';
+  static const cash = 'cash';
 
 }

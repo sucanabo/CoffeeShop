@@ -14,8 +14,7 @@ class EnterPassword extends StatelessWidget {
         ? Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => MainBody()),
             (route) => false)
-        : ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('$result')));
+        : showToast('$result');
 
     naviProvider.setLoading(false);
   }

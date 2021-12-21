@@ -108,7 +108,8 @@ class CodegenLoader extends AssetLoader{
     "other": "{} results",
     "many": "{} results",
     "zero": "No result",
-    "one": "{} result"
+    "one": "{} result",
+    "two": "{} results"
   },
   "no_more_result": "No more result",
   "all": "All",
@@ -263,7 +264,8 @@ class CodegenLoader extends AssetLoader{
   "current_point": "Current point: ",
   "resend_again_in": "Resend again in ",
   "shipping_cost": "Shipping",
-  "momo_wallet": "Momo wallet"
+  "momo_wallet": "Momo wallet",
+  "cash": "cash"
 };
 static const Map<String,dynamic> vi_VN = {
   "hi_text": "Xin chào",
@@ -359,7 +361,8 @@ static const Map<String,dynamic> vi_VN = {
     "other": "{} kết quả",
     "many": "{} kết quả",
     "zero": "Không có kết quả nào",
-    "one": "{} kết quả"
+    "one": "{} kết quả",
+    "two": "{} kết quả"
   },
   "no_more_result": "Không còn kết quả nào nữa",
   "all": "Tất cả",
@@ -514,7 +517,8 @@ static const Map<String,dynamic> vi_VN = {
   "current_point": "Điểm hiện tại: ",
   "resend_again_in": "Gửi lại trong ",
   "shipping_cost": "Phí vận chuyển",
-  "momo_wallet": "Ví Momo"
+  "momo_wallet": "Ví Momo",
+  "cash": "tiền mặt"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en_US": en_US, "vi_VN": vi_VN};
 }
